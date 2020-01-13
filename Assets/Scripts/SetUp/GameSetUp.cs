@@ -38,6 +38,7 @@ public class GameSetUp : MonoBehaviour
     public void Start()
     {
         SetUpBattle();
+        SetUpCamera();
     }
 
     private void SetUpBattle()
@@ -45,7 +46,7 @@ public class GameSetUp : MonoBehaviour
         GameObject mapGameObject = SetUpMap();
         GameObject playerTeamGameObject = SetUpPlayerTeam();
         GameObject enemyTeamGameObject = SetUpEnemyTeam();
-        GameObject uiGameObject = SetUpUI();
+        // GameObject uiGameObject = SetUpUI();
 
         GameObject battleGameObject = Instantiate(battlePrefab, Vector3.zero, Quaternion.identity);
         battleGameObject.name = "Dev Battle";
@@ -60,7 +61,7 @@ public class GameSetUp : MonoBehaviour
         enemyTeamGameObject.transform.SetParent(battleGameObject.transform);
         battle.enemyTeam = enemyTeamGameObject.GetComponent<Team>();
 
-        uiGameObject.transform.SetParent(battleGameObject.transform);
+        // uiGameObject.transform.SetParent(battleGameObject.transform);
     }
 
     private GameObject SetUpMap()
@@ -120,6 +121,12 @@ public class GameSetUp : MonoBehaviour
         }
 
         return mapGameObject;
+    }
+
+    public void SetUpCamera()
+    {
+        float orthoSize = this.map.spriteRenderer.bounds.size.x * Screen.height / Screen.width * 0.5f;
+        Camera.main.orthographicSize = orthoSize;
     }
 
 

@@ -14,6 +14,7 @@ namespace Tactics.Models
         public Character currentSelectedCharacter;
         public List<Tile> playerStartTiles = new List<Tile>();
         public List<Tile> enemyStartTiles = new List<Tile>();
+        public SpriteRenderer spriteRenderer;
 
         /*-------------------------------------------------
         *                     Setters
