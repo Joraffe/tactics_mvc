@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0c83f4fe59d9941e9bc84ca8bf5ce0fc
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playerGradientMaterial: {fileID: 2100000, guid: f673440e2355b4cd5a868def040259d9,
+      type: 2}
+  - enemyGradientMaterial: {fileID: 2100000, guid: a867592d4a7d64f1f860ea7891076402,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
