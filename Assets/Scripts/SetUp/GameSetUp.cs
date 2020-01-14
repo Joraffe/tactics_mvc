@@ -125,7 +125,8 @@ public class GameSetUp : MonoBehaviour
 
     public void SetUpCamera()
     {
-        float orthoSize = this.map.spriteRenderer.bounds.size.x * Screen.height / Screen.width * 0.5f;
+        // float orthoSize = this.map.spriteRenderer.bounds.size.x * Screen.height / Screen.width * 0.5f;
+        float orthoSize = this.map.spriteRenderer.bounds.size.y * 0.5f;
         Camera.main.orthographicSize = orthoSize;
     }
 
