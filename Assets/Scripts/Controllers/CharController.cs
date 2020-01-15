@@ -94,6 +94,7 @@ namespace Tactics.Controllers
         private void ClickCharacter(Character character)
         {
             RaiseClickCharacterMapEvent(character);
+            CameraController.instance.followTransform = this.transform;
         }
 
         private void ResolveMovementForCharacter(Character character)

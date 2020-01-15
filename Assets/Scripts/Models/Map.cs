@@ -7,9 +7,9 @@ namespace Tactics.Models
     public class Map : MonoBehaviour
     {
         public static int xMinSize = 0;
-        public static int xMaxSize = 7;
+        public static int xMaxSize = 9;
         public static int yMinSize = 0;
-        public static int yMaxSize = 7;
+        public static int yMaxSize = 6;
         public Tile[,] tiles = new Tile[xMaxSize,yMaxSize];
         public Character currentSelectedCharacter;
         public List<Tile> playerStartTiles = new List<Tile>();
