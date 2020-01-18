@@ -94,6 +94,8 @@ MonoBehaviour:
     type: 2}
   undoCharacterMovement: {fileID: 11400000, guid: 13993b38746594f2295fffb25127414c,
     type: 2}
+  showCharacterUI: {fileID: 11400000, guid: ced85575d0a754febbb23f4345498ef4, type: 2}
+  hideCharacterUI: {fileID: 11400000, guid: 3b79b012c99f14b24a9b34bcdc620030, type: 2}
   completeTeamMemberAction: {fileID: 11400000, guid: c2214f4101bd94c84ab7824af30b20aa,
     type: 2}
   map: {fileID: 3756900671443878609}

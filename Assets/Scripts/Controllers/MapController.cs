@@ -31,6 +31,9 @@ namespace Tactics.Controllers
         public CharacterEvent clearCharacterCombat;
         public CharacterEvent undoCharacterMovement;
 
+        public UIEvent showCharacterUI;
+        public UIEvent hideCharacterUI;
+
         public TeamEvent completeTeamMemberAction;
 
         public Map map;
@@ -46,7 +49,10 @@ namespace Tactics.Controllers
                 ClearAllTiles();
                 ShowInteractiveTilesForCharacter(mapEventData.character);
                 PreviewSelectOverlayForTile(mapEventData.character.currentTile, TileInteractType.Movement);
+                ShowCharacterUI(mapEventData.character);
                 this.map.SetCurrentSelectedCharacter(mapEventData.character);
+                // TODO: change this into a proper CameraEvent
+                CameraController.instance.followTransform = mapEventData.character.transform;
             }
             // if we click the same character and they're previewing...
             else if (this.map.currentSelectedCharacter == mapEventData.character
@@ -62,6 +68,9 @@ namespace Tactics.Controllers
             {
                 ClearAllTiles();
                 ResetCurrentSelectedCharacter();
+                HideCharacterUI();
+                // TODO: change this into a proper CameraEvent
+                CameraController.instance.followTransform = null;
             }
             // if we click an enemy character that's on an active combat tile...
             else if (this.map.currentSelectedCharacter.isOpposition(mapEventData.character)
@@ -79,7 +88,7 @@ namespace Tactics.Controllers
             else if (this.map.currentSelectedCharacter.isAlly(mapEventData.character))
             {
                 // TO DO: Handle assist skills
-
+                ShowCharacterUI(mapEventData.character);
                 // Otherwise, do nothing!!!
             }
         }
@@ -103,6 +112,9 @@ namespace Tactics.Controllers
         {
             ClearAllTiles();
             ResetCurrentSelectedCharacter();
+            HideCharacterUI();
+            // TODO: change this into a proper CameraEvent
+            CameraController.instance.followTransform = null;
         }
 
         public void OnTileSelected(MapEventData mapEventData)
@@ -425,6 +437,17 @@ namespace Tactics.Controllers
             }
         }
 
+        private void ShowCharacterUI(Character character)
+        {
+            RaiseShowCharacterUIEvent(character);
+        }
+
+        private void HideCharacterUI()
+        {
+            RaiseHideCharacterUIEvent();
+        }
+
+
         /*-------------------------------------------------
         *              Trigger Helpers
         --------------------------------------------------*/
@@ -578,6 +601,21 @@ namespace Tactics.Controllers
             tileEventData.tile = tile;
 
             this.clearDangerOverlay.Raise(tileEventData);
+        }
+
+        private void RaiseShowCharacterUIEvent(Character character)
+        {
+            UIEventData uiEventData = new UIEventData();
+            uiEventData.character = character;
+
+            this.showCharacterUI.Raise(uiEventData);
+        }
+
+        private void RaiseHideCharacterUIEvent()
+        {
+            UIEventData uiEventData = new UIEventData();
+
+            this.hideCharacterUI.Raise(uiEventData);
         }
 
     }

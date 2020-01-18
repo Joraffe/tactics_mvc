@@ -140,6 +140,7 @@ MonoBehaviour:
   selectedCombatTile: {fileID: 0}
   team: {fileID: 0}
   acted: 0
+  characterSprite: {fileID: 0}
   spriteRenderer: {fileID: 1476551450612469152}
   characterTransform: {fileID: 4727301575220888923}
   greyscaleMaterial: {fileID: 2100000, guid: b2904bea1dffd4ff196e30d896019cc2, type: 2}
@@ -157,6 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickCharacter: {fileID: 11400000, guid: 211d5467468914ed6ba7e933046f9b0f, type: 2}
+  showCharacterUI: {fileID: 11400000, guid: ced85575d0a754febbb23f4345498ef4, type: 2}
   occupyTileOnMap: {fileID: 11400000, guid: a5571c702ed474c0092bccccae412fd3, type: 2}
   unoccupyTileOnMap: {fileID: 11400000, guid: 01439c8ddc1f74b06a5c4f7d8dcd0f2c, type: 2}
   character: {fileID: 3903249821562269643}

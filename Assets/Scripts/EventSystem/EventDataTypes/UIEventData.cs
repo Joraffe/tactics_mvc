@@ -7,5 +7,6 @@ namespace Tactics.Events
     {
         public Footer footer;
         public Button button;
+        public Character character;
     }
 }

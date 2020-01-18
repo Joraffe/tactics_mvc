@@ -11,7 +11,6 @@ namespace Tactics.Controllers
     public class CharController : MonoBehaviour
     {
         public MapEvent clickCharacter;
-
         public MapEvent occupyTileOnMap;
         public MapEvent unoccupyTileOnMap;
 
@@ -94,7 +93,6 @@ namespace Tactics.Controllers
         private void ClickCharacter(Character character)
         {
             RaiseClickCharacterMapEvent(character);
-            CameraController.instance.followTransform = this.transform;
         }
 
         private void ResolveMovementForCharacter(Character character)
@@ -132,7 +130,7 @@ namespace Tactics.Controllers
             MapEventData clickCharacterData = new MapEventData();
             clickCharacterData.character = character;
 
-            clickCharacter.Raise(clickCharacterData);
+            this.clickCharacter.Raise(clickCharacterData);
         }
 
         private void RaiseOccupyTileMapEvent(Character character, Tile tile)
@@ -141,7 +139,7 @@ namespace Tactics.Controllers
             mapEventData.character = character;
             mapEventData.tile = tile;
 
-            occupyTileOnMap.Raise(mapEventData);
+            this.occupyTileOnMap.Raise(mapEventData);
         }
 
         private void RaiseUnoccupyTileMapEvent(Tile tile)
@@ -149,7 +147,7 @@ namespace Tactics.Controllers
             MapEventData mapEventData = new MapEventData();
             mapEventData.tile = tile;
 
-            unoccupyTileOnMap.Raise(mapEventData);
+            this.unoccupyTileOnMap.Raise(mapEventData);
         }
 
     }

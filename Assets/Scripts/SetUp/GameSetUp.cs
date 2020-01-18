@@ -163,8 +163,8 @@ public class GameSetUp : MonoBehaviour
         this.map.playerStartTiles.Add(tile);
         tile.occupant = joebineCharacter;
         joebineCharacterGameObject.name = "Joebine";
-        joebineCharacterGameObject.GetComponent<SpriteRenderer>().sprite = joebineSprite;
         joebineCharacter.characterName = "Joebine";
+        joebineCharacter.SetSprite(joebineSprite);
         joebineCharacter.currentTile = tile;
         joebineCharacter.originTile = tile;
         joebineCharacter.team = playerTeam;
@@ -182,8 +182,8 @@ public class GameSetUp : MonoBehaviour
         this.map.playerStartTiles.Add(tile);
         tile.occupant = caeCharacter;
         caeCharacterGameObject.name = "Cae";
-        caeCharacterGameObject.GetComponent<SpriteRenderer>().sprite = caeSprite;
         caeCharacter.characterName = "Cae";
+        caeCharacter.SetSprite(caeSprite);
         caeCharacter.currentTile = tile;
         caeCharacter.originTile = tile;
         caeCharacter.team = playerTeam;
@@ -211,8 +211,8 @@ public class GameSetUp : MonoBehaviour
 
         enemyCharacterATile.occupant = enemyCharacterA;
         enemyCharacterGameObjectA.name = "Enemy A";
-        enemyCharacterGameObjectA.GetComponent<SpriteRenderer>().sprite = enemySprite;
         enemyCharacterA.name = "Enemy A";
+        enemyCharacterA.SetSprite(enemySprite);
         enemyCharacterA.currentTile = enemyCharacterATile;
         enemyCharacterA.originTile = enemyCharacterATile;
         enemyCharacterA.movementRange = 2;
@@ -231,8 +231,8 @@ public class GameSetUp : MonoBehaviour
 
         enemyCharacterBTile.occupant = enemyCharacterB;
         enemyCharacterGameObjectB.name = "Enemy B";
-        enemyCharacterGameObjectB.GetComponent<SpriteRenderer>().sprite = enemySprite;
         enemyCharacterB.name = "Enemy B";
+        enemyCharacterB.SetSprite(enemySprite);
         enemyCharacterB.currentTile = enemyCharacterBTile;
         enemyCharacterB.originTile = enemyCharacterBTile;
         enemyCharacterB.movementRange = 2;

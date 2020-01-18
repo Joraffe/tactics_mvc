@@ -31,6 +31,7 @@ namespace Tactics.Models
         public Team team;
         public bool acted;
 
+        public Sprite characterSprite;
         public SpriteRenderer spriteRenderer;
         public Transform characterTransform;
         public Material greyscaleMaterial;
@@ -134,6 +135,12 @@ namespace Tactics.Models
         public void SetSpriteMaterialDefault()
         {
             this.spriteRenderer.material = this.defaultMaterial;
+        }
+
+        public void SetSprite(Sprite sprite)
+        {
+            this.spriteRenderer.sprite = sprite;
+            this.characterSprite = sprite;
         }
 
         /*-------------------------------------------------
