@@ -26,6 +26,7 @@ public class GameSetUp : MonoBehaviour
     public Sprite joebineSprite;
     public Sprite caeSprite;
     public Sprite enemySprite;
+    public Sprite enemySpriteB;
 
 
     // Tile Sprites
@@ -232,7 +233,7 @@ public class GameSetUp : MonoBehaviour
         enemyCharacterBTile.occupant = enemyCharacterB;
         enemyCharacterGameObjectB.name = "Enemy B";
         enemyCharacterB.name = "Enemy B";
-        enemyCharacterB.SetSprite(enemySprite);
+        enemyCharacterB.SetSprite(enemySpriteB);
         enemyCharacterB.currentTile = enemyCharacterBTile;
         enemyCharacterB.originTile = enemyCharacterBTile;
         enemyCharacterB.movementRange = 2;
