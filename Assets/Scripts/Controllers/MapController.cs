@@ -220,6 +220,7 @@ namespace Tactics.Controllers
             {
                 ClearAllTiles();
                 ResetCurrentSelectedCharacter();
+                HideCharacterUI();
                 return;
             }
 
