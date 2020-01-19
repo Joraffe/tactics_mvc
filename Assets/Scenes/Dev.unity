@@ -274,6 +274,7 @@ MonoBehaviour:
   VolcanicSprite: {fileID: 21300000, guid: 1331b3001c6e2481ca30d289642bceba, type: 3}
   OceanicSprite: {fileID: 21300000, guid: db5a64f9da83a461eaa0ac779d6122ff, type: 3}
   IndustrialSprite: {fileID: 21300000, guid: e5db0149ff00c419ca3deebfa2ae1d9b, type: 3}
+  NeutralSprite: {fileID: 21300000, guid: 05f1d06f1acf6457f917fbefd9b800df, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,6 +368,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1588196744}
   - component: {fileID: 1588196743}
+  - component: {fileID: 1588196745}
+  - component: {fileID: 1588196746}
   m_Layer: 0
   m_Name: CameraRig
   m_TagString: Untagged
@@ -407,6 +410,64 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1588196745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588196742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8b3d8a4c70c4b0a8d2dd632c545f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 270891ea027814dc5b9c5ade8ee4dfed, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1588196743}
+        m_MethodName: OnFocusCamera
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Tactics.Events.UnityCameraEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1588196746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588196742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8b3d8a4c70c4b0a8d2dd632c545f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 6f5ce2ebb3b4949e7a8e58db6f815467, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1588196743}
+        m_MethodName: OnResetCamera
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Tactics.Events.UnityCameraEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1001 &2445104997365429513
 PrefabInstance:
   m_ObjectHideFlags: 0
