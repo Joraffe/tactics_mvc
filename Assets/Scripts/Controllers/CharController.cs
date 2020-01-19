@@ -99,7 +99,6 @@ namespace Tactics.Controllers
         {
 
             Vector3 targetPathTilePosition = character.pathTargetTile.GetTransformPosition();
-
             Vector3 targetTilePosition = character.targetTile.GetTransformPosition();
 
             // First move to the current targetPathTile

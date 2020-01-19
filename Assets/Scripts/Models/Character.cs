@@ -46,7 +46,7 @@ namespace Tactics.Models
             this.characterTransform.position = Vector3.MoveTowards(
                 this.characterTransform.position,
                 destination,
-                100f * Time.deltaTime
+                Time.deltaTime * 10f
             );
         }
 
@@ -76,10 +76,10 @@ namespace Tactics.Models
 
         public void SetPreviewCharacterMovementState(Path tilePath, Tile targetTile)
         {
+            this.tilePath = tilePath;
+            this.pathTargetTile = this.isPreviewing ? tilePath.RemoveFromHead() : tilePath.RemoveFromTail();
             this.isPreviewing = true;
             this.isMoving = true;
-            this.tilePath = tilePath;
-            this.pathTargetTile = tilePath.RemoveFromTail();
             this.targetTile = targetTile;
         }
 

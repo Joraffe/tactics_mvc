@@ -33,7 +33,11 @@ namespace Tactics.Controllers
             if (this.followTransform != null)
             {
                 Vector3 cameraPosition = new Vector3(followTransform.position.x, followTransform.position.y, -10);
-                this.transform.position = Vector3.Lerp(this.transform.position, cameraPosition, Time.deltaTime * movementTime);;
+                this.transform.position = Vector3.Lerp(
+                    this.transform.position,
+                    cameraPosition,
+                    Time.deltaTime * movementTime
+                );
             }
             else
             {
