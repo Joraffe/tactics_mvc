@@ -7,6 +7,7 @@ namespace Tactics.Models
 {
     public class TerraTypes
     {
+        public const string Neutral = "Neutral";
         public const string Desert = "Desert";
         public const string Swamp = "Swamp";
         public const string Forest = "Forest";

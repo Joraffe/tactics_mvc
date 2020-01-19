@@ -14,6 +14,7 @@ namespace Tactics.SetUp
         public Sprite VolcanicSprite;
         public Sprite OceanicSprite;
         public Sprite IndustrialSprite;
+        public Sprite NeutralSprite;
 
         public void SetDesertTerra(Terra terra)
         {
@@ -49,6 +50,12 @@ namespace Tactics.SetUp
         {
             terra.sprite = this.IndustrialSprite;
             terra.type = TerraTypes.Industrial;
+        }
+
+        public void SetNeutralTerra(Terra terra)
+        {
+            terra.sprite = this.NeutralSprite;
+            terra.type = TerraTypes.Neutral;
         }
 
         public void SetUpDevTerra(int yPosition, Terra terra)

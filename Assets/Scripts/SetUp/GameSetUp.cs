@@ -108,7 +108,8 @@ namespace Tactics.SetUp
 
                     GameObject terraGameObject = tileGameObject.transform.Find("Terra").gameObject;
                     Terra terra = terraGameObject.GetComponent<Terra>();
-                    this.terraSetUp.SetUpDevTerra(y, terra);
+                    // this.terraSetUp.SetUpDevTerra(y, terra);
+                    this.terraSetUp.SetNeutralTerra(terra);
                     terraGameObject.name = $"{terra.type} Terra {tile.GetCoordinates()}";
                     tileGameObject.GetComponent<SpriteRenderer>().sprite = terra.sprite;
                     tile.terra = terra;

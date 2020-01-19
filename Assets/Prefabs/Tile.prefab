@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -500689105
   m_SortingLayer: -1
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -282,6 +282,7 @@ MonoBehaviour:
   showTerraUI: {fileID: 11400000, guid: 4091fff67e66e4f35a13acbc3480ccc6, type: 2}
   hideTerraUI: {fileID: 11400000, guid: 99650c0931835439d8dcc0f11214bbd0, type: 2}
   tile: {fileID: 8166856726616220454}
+  mouseOverlapColliders: []
 --- !u!114 &9005643126542449421
 MonoBehaviour:
   m_ObjectHideFlags: 0
