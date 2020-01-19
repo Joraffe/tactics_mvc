@@ -27,6 +27,8 @@ namespace Tactics.Controllers
         public TileEvent clearDangerOverlay;
         public TileEvent showActionOverlay;
         public TileEvent clearActionOverlay;
+        public TileEvent showTerraformOverlay;
+        public TileEvent clearTerraformOverlay;
 
         public CharacterEvent previewCharacterMovement;
         public CharacterEvent previewCharacterCombat;
@@ -118,6 +120,7 @@ namespace Tactics.Controllers
             ResetCurrentSelectedCharacter();
             HideCharacterUI();
             ResetCamera();
+            ClearPreviousTerraForm();
         }
 
         public void OnTileSelected(MapEventData mapEventData)
@@ -163,6 +166,20 @@ namespace Tactics.Controllers
         public void OnHidePlayerDangerZone(MapEventData mapEventData)
         {
             ClearDangerOverlayForAllTiles();
+        }
+
+        public void OnShowFormaArea(MapEventData mapEventData)
+        {
+            if (this.map.terraformingTiles.Count > 0)
+            {
+                ClearPreviousTerraForm();
+            }
+            
+
+            foreach (FormaTile formaTile in mapEventData.formaTiles)
+            {
+                PreviewTerraForm(formaTile);
+            }
         }
 
 
@@ -462,6 +479,25 @@ namespace Tactics.Controllers
             RaiseResetCameraEvent();
         }
 
+        private void PreviewTerraForm(FormaTile formaTile)
+        {
+            Tile characterTile = this.map.GetCurrentSelectedCharacter().currentTile;
+            int terraformTileXPos = characterTile.XPosition + formaTile.relativeX;
+            int terraformTileYPos = characterTile.YPosition + formaTile.relativeY;
+
+            Tile terraformTile = this.map.tiles[terraformTileXPos, terraformTileYPos];
+            this.map.AddTerraformingTile(terraformTile);
+            RaiseShowTerraformOverlayTileEvent(terraformTile, formaTile.terraType);
+        }
+
+        private void ClearPreviousTerraForm()
+        {
+            foreach (Tile terraformTile in this.map.terraformingTiles)
+            {
+                RaiseClearTerraformOverlayTileEvent(terraformTile);
+            }
+        }
+
 
         /*-------------------------------------------------
         *              Trigger Helpers
@@ -633,6 +669,23 @@ namespace Tactics.Controllers
             tileEventData.tile = tile;
 
             this.clearActionOverlay.Raise(tileEventData);
+        }
+
+        private void RaiseShowTerraformOverlayTileEvent(Tile tile, string terraformOverlayImage)
+        {
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+            tileEventData.terraformOverlayImage = terraformOverlayImage;
+
+            this.showTerraformOverlay.Raise(tileEventData);
+        }
+
+        private void RaiseClearTerraformOverlayTileEvent(Tile tile)
+        {
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+
+            this.clearTerraformOverlay.Raise(tileEventData);
         }
 
         private void RaiseShowCharacterUIEvent(Character character)

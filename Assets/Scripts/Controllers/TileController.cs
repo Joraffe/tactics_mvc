@@ -209,6 +209,24 @@ namespace Tactics.Controllers
             }
         }
 
+        public void OnShowTerraformOverlay(TileEventData tileEventData)
+        {
+            if (this.tile == tileEventData.tile)
+            {
+                Tile tileToShow = tileEventData.tile;
+                tileToShow.SetTerraformOverlayImage(tileEventData.terraformOverlayImage);
+            }
+        }
+
+        public void OnClearTerraformOverlay(TileEventData tileEventData)
+        {
+            if (this.tile == tileEventData.tile)
+            {
+                Tile tileToClear = tileEventData.tile;
+                tileToClear.ClearTerraformOverlayImage();
+            }
+        }
+
 
         /*-------------------------------------------------
         *                     Helpers

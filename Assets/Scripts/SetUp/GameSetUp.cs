@@ -106,6 +106,9 @@ namespace Tactics.SetUp
                     GameObject actionOverlayGameObject = tileGameObject.transform.Find("ActionOverlay").gameObject;
                     tile.actionOverlay = actionOverlayGameObject.GetComponent<ActionOverlay>();
 
+                    GameObject terraformOverlayGameObject = tileGameObject.transform.Find("TerraformOverlay").gameObject;
+                    tile.terraformOverlay = terraformOverlayGameObject.GetComponent<TerraformOverlay>();
+
                     GameObject terraGameObject = tileGameObject.transform.Find("Terra").gameObject;
                     Terra terra = terraGameObject.GetComponent<Terra>();
                     // this.terraSetUp.SetUpDevTerra(y, terra);

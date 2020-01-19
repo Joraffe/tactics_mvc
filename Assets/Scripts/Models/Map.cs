@@ -12,6 +12,7 @@ namespace Tactics.Models
         public static int yMaxSize = 6;
         public Tile[,] tiles = new Tile[xMaxSize,yMaxSize];
         public Character currentSelectedCharacter;
+        public List<Tile> terraformingTiles = new List<Tile>();
         public List<Tile> playerStartTiles = new List<Tile>();
         public List<Tile> enemyStartTiles = new List<Tile>();
         public SpriteRenderer spriteRenderer;
@@ -29,9 +30,24 @@ namespace Tactics.Models
             this.currentSelectedCharacter = null;
         }
 
+        public void AddTerraformingTile(Tile tile)
+        {
+            this.terraformingTiles.Add(tile);
+        }
+
+        public void ClearTerraformingTiles()
+        {
+            this.terraformingTiles.Clear();
+        }
+
         /*-------------------------------------------------
         *                     Getters
         --------------------------------------------------*/
+        public Character GetCurrentSelectedCharacter()
+        {
+            return this.currentSelectedCharacter;
+        }
+
         public List<Tile> GetAdjacentTilesForTile(Tile tile, int adjacencyRange)
         {
             List<Tile> adjacentTiles = new List<Tile>();

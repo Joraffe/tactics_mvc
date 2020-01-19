@@ -36,6 +36,7 @@ namespace Tactics.Models
         public SelectOverlay selectOverlay;
         public DangerOverlay dangerOverlay;
         public ActionOverlay actionOverlay;
+        public TerraformOverlay terraformOverlay;
 
         public Terra terra;  // Stores What type of tile this is
 
@@ -248,6 +249,16 @@ namespace Tactics.Models
         public void ClearActionOverlayImage()
         {
             this.actionOverlay.ClearSprite();
+        }
+
+        public void SetTerraformOverlayImage(string terraformOverlayImageKey)
+        {
+            this.terraformOverlay.SetSprite(terraformOverlayImageKey);
+        }
+
+        public void ClearTerraformOverlayImage()
+        {
+            this.terraformOverlay.ClearSprite();
         }
 
     }

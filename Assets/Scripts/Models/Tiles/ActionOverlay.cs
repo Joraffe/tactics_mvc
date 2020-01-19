@@ -10,7 +10,7 @@ namespace Tactics.Models
         public Sprite movementSprite;
         public Sprite combatSprite;
         public Sprite arrangeSprite;
-        public Sprite terraformSprite;
+        public Sprite swampTerraformSprite;
 
         private Dictionary<string, Sprite> actionOverlayMap;
 
@@ -20,7 +20,6 @@ namespace Tactics.Models
                 { "movement", movementSprite },
                 { "combat", combatSprite },
                 { "arrange", arrangeSprite },
-                { "terraform",  terraformSprite}
             };
         }
 
