@@ -36,6 +36,9 @@ namespace Tactics.Controllers
         public UIEvent showCharacterUI;
         public UIEvent hideCharacterUI;
 
+        public CameraEvent focusCamera;
+        public CameraEvent resetCamera;
+
         public TeamEvent completeTeamMemberAction;
 
         public Map map;
@@ -53,8 +56,7 @@ namespace Tactics.Controllers
                 PreviewSelectOverlayForTile(mapEventData.character.currentTile, TileInteractType.Movement);
                 ShowCharacterUI(mapEventData.character);
                 this.map.SetCurrentSelectedCharacter(mapEventData.character);
-                // TODO: change this into a proper CameraEvent
-                CameraController.instance.followTransform = mapEventData.character.transform;
+                FocusCameraOnCharacter(mapEventData.character);
             }
             // if we click the same character and they're previewing...
             else if (this.map.currentSelectedCharacter == mapEventData.character
@@ -71,8 +73,7 @@ namespace Tactics.Controllers
                 ClearAllTiles();
                 ResetCurrentSelectedCharacter();
                 HideCharacterUI();
-                // TODO: change this into a proper CameraEvent
-                CameraController.instance.followTransform = null;
+                ResetCamera();
             }
             // if we click an enemy character that's on an active combat tile...
             else if (this.map.currentSelectedCharacter.isOpposition(mapEventData.character)
@@ -115,8 +116,7 @@ namespace Tactics.Controllers
             ClearAllTiles();
             ResetCurrentSelectedCharacter();
             HideCharacterUI();
-            // TODO: change this into a proper CameraEvent
-            CameraController.instance.followTransform = null;
+            ResetCamera();
         }
 
         public void OnTileSelected(MapEventData mapEventData)
@@ -130,8 +130,6 @@ namespace Tactics.Controllers
             {
                 PreviewSelectCombatTile(selectedTile);
             }
-
-            // ShowTerraUI(selectedTile.terra);
         }
 
         public void OnShowPlayerArrangementTiles(MapEventData mapEventData)
@@ -453,6 +451,16 @@ namespace Tactics.Controllers
             RaiseHideCharacterUIEvent();
         }
 
+        private void FocusCameraOnCharacter(Character character)
+        {
+            RaiseFocusCameraEvent(character);
+        }
+
+        private void ResetCamera()
+        {
+            RaiseResetCameraEvent();
+        }
+
 
         /*-------------------------------------------------
         *              Trigger Helpers
@@ -639,6 +647,21 @@ namespace Tactics.Controllers
             UIEventData uiEventData = new UIEventData();
 
             this.hideCharacterUI.Raise(uiEventData);
+        }
+
+        private void RaiseFocusCameraEvent(Character character)
+        {
+            CameraEventData cameraEventData = new CameraEventData();
+            cameraEventData.transform = character.transform;
+
+            this.focusCamera.Raise(cameraEventData);
+        }
+
+        private void RaiseResetCameraEvent()
+        {
+            CameraEventData cameraEventData = new CameraEventData();
+
+            this.resetCamera.Raise(cameraEventData);
         }
 
     }

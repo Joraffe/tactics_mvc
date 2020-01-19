@@ -98,8 +98,8 @@ MonoBehaviour:
     type: 2}
   showCharacterUI: {fileID: 11400000, guid: ced85575d0a754febbb23f4345498ef4, type: 2}
   hideCharacterUI: {fileID: 11400000, guid: 3b79b012c99f14b24a9b34bcdc620030, type: 2}
-  showTerraUI: {fileID: 11400000, guid: 4091fff67e66e4f35a13acbc3480ccc6, type: 2}
-  hideTerraUI: {fileID: 11400000, guid: 99650c0931835439d8dcc0f11214bbd0, type: 2}
+  focusCamera: {fileID: 11400000, guid: 270891ea027814dc5b9c5ade8ee4dfed, type: 2}
+  resetCamera: {fileID: 11400000, guid: 6f5ce2ebb3b4949e7a8e58db6f815467, type: 2}
   completeTeamMemberAction: {fileID: 11400000, guid: c2214f4101bd94c84ab7824af30b20aa,
     type: 2}
   map: {fileID: 3756900671443878609}
