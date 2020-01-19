@@ -65,6 +65,7 @@ namespace Tactics.Controllers
                 ClearAllTiles();
                 this.map.ClearCurrentSelectedCharacter();
                 CompleteTeamMemberAction(mapEventData.character);
+                HideCharacterUI();
             }
             // if we click the same character and they're not previewing...
             else if (this.map.currentSelectedCharacter == mapEventData.character
@@ -208,7 +209,6 @@ namespace Tactics.Controllers
                 Tile associatedMovementTile = selectedTile.associatedMovementTiles.First();
                 PreviewSelectMovementForCharacter(selectedCharacter, associatedMovementTile);
             }
-
         }
 
         private void PreviewSelectMovementTile(Tile selectedTile)
@@ -289,15 +289,15 @@ namespace Tactics.Controllers
         {
             List<Tile> allMovementTiles = BFS.GetAllMovementTilesForCharacter(character, this.map);
             List<Tile> validMovementTiles = BFS.FilterMovementTilesOutsideOfCharacterMovementRange(allMovementTiles, character, this.map);
-            HashSet<Tile> combatTiles = BFS.GetCombatTilesForCharacterMovementTiles(character, validMovementTiles, this.map);
-            foreach (Tile combatTile in combatTiles)
-            {
-                if (combatTile.isCombatableForCharacter(character))
-                {
-                    RaiseCombatTileEvent(combatTile);
-                    RaiseShowActionOverlayTileEvent(combatTile, "combat");
-                }
-            }
+            // HashSet<Tile> combatTiles = BFS.GetCombatTilesForCharacterMovementTiles(character, validMovementTiles, this.map);
+            // foreach (Tile combatTile in combatTiles)
+            // {
+            //     if (combatTile.isCombatableForCharacter(character))
+            //     {
+            //         RaiseCombatTileEvent(combatTile);
+            //         RaiseShowActionOverlayTileEvent(combatTile, "combat");
+            //     }
+            // }
 
             foreach (Tile movementTile in validMovementTiles)
             {
