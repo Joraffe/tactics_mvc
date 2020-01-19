@@ -4,36 +4,33 @@ using Tactics.Events;
 using Tactics.Models;
 using UnityEngine;
 
-
 namespace Tactics.Controllers
 {
-    public class CharacterUIController : MonoBehaviour
+    public class TerraUIController : MonoBehaviour
     {
-        public CharacterUI characterUI;
+        public TerraUI terraUI;
 
         /*-------------------------------------------------
         *                  Event Handlers
         --------------------------------------------------*/
-        public void OnUpdateCharacter(UIEventData uiEventData)
+        public void OnUpdateTerra(UIEventData uiEventData)
         {
-            UpdateCharacter(uiEventData.character);
+            UpdateTerra(uiEventData.terra);
         }
 
 
         /*-------------------------------------------------
         *                     Helpers
         --------------------------------------------------*/
-        private void UpdateCharacter(Character character)
+        private void UpdateTerra(Terra terra)
         {
-            this.characterUI.SetCharacter(character);
-            this.characterUI.SetPortraitSprite(character.characterSprite);
-            this.characterUI.SetDetailsName(character.name);
+            this.terraUI.SetTerra(terra);
+            this.terraUI.SetImageSprite(terra.sprite);
+            this.terraUI.SetName(terra.type);
         }
-
 
         /*-------------------------------------------------
         *              Trigger Helpers
         --------------------------------------------------*/
     }
 }
-

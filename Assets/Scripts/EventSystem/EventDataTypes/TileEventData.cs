@@ -14,5 +14,6 @@ namespace Tactics.Events
         public string pathOverlayImage;
         public string selectOverlayType;
         public string dangerOverlayImage;
+        public string actionOverlayImage;
     }
 }

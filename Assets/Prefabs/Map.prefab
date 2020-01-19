@@ -86,6 +86,8 @@ MonoBehaviour:
   clearSelectOverlay: {fileID: 11400000, guid: d1e18ba27b2e54ac1940605f19709d2d, type: 2}
   showDangerOverlay: {fileID: 11400000, guid: 144f845f3c3b74751900b24764cabded, type: 2}
   clearDangerOverlay: {fileID: 11400000, guid: 52b8b7369117b4fba9744f2a81fce8c6, type: 2}
+  showActionOverlay: {fileID: 11400000, guid: 99cba2ee8fa5a43e8b97de0d3959a64c, type: 2}
+  clearActionOverlay: {fileID: 11400000, guid: 3cc8ae9353fac45f08c19c435f765ef5, type: 2}
   previewCharacterMovement: {fileID: 11400000, guid: 66fdb79b4f0bb41e78a9986894b4c12d,
     type: 2}
   previewCharacterCombat: {fileID: 11400000, guid: fcc168478650540c7825b3e7e151714a,
@@ -96,6 +98,8 @@ MonoBehaviour:
     type: 2}
   showCharacterUI: {fileID: 11400000, guid: ced85575d0a754febbb23f4345498ef4, type: 2}
   hideCharacterUI: {fileID: 11400000, guid: 3b79b012c99f14b24a9b34bcdc620030, type: 2}
+  showTerraUI: {fileID: 11400000, guid: 4091fff67e66e4f35a13acbc3480ccc6, type: 2}
+  hideTerraUI: {fileID: 11400000, guid: 99650c0931835439d8dcc0f11214bbd0, type: 2}
   completeTeamMemberAction: {fileID: 11400000, guid: c2214f4101bd94c84ab7824af30b20aa,
     type: 2}
   map: {fileID: 3756900671443878609}

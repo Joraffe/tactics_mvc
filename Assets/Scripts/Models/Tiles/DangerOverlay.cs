@@ -29,7 +29,7 @@ namespace Tactics.Models
 
         public void Start()
         {
-            dangerOverlayMap = new Dictionary<string, Sprite>{
+            this.dangerOverlayMap = new Dictionary<string, Sprite>{
                 { "0000", dangerBox },
                 { "1111", dangerNoBorder },
 

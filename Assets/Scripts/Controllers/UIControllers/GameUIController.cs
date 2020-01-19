@@ -10,6 +10,7 @@ namespace Tactics.Controllers
     public class GameUIController : MonoBehaviour
     {
         public UIEvent updateCharacterUI;
+        public UIEvent updateTerraUI;
         public GameUI gameUI;
 
 
@@ -26,6 +27,17 @@ namespace Tactics.Controllers
         public void OnHideCharacterUI(UIEventData uiEventData)
         {
             HideCharacterUI();
+        }
+
+        public void OnShowTerraUI(UIEventData uiEventData)
+        {
+            ShowTerraUI();
+            UpdateTerraUI(uiEventData.terra);
+        }
+
+        public void OnHideTerraUI(UIEventData uiEventData)
+        {
+            HideTerraUI();
         }
 
         /*-------------------------------------------------
@@ -55,16 +67,47 @@ namespace Tactics.Controllers
             }
         }
 
+        private void ShowTerraUI()
+        {
+            if (!this.gameUI.terraUIGameObject.activeSelf)
+            {
+                this.gameUI.terraUIGameObject.SetActive(true);
+            }
+        }
+
+        private void HideTerraUI()
+        {
+            if (this.gameUI.terraUIGameObject.activeSelf)
+            {
+                this.gameUI.terraUIGameObject.SetActive(false);
+            }
+        }
+
+        private void UpdateTerraUI(Terra terra)
+        {
+            if (this.gameUI.GetTerraUI().terra != terra)
+            {
+                RaiseUpdateTerraUIEvent(terra);
+            }
+        }
+
         /*-------------------------------------------------
         *              Trigger Helpers
         --------------------------------------------------*/
-
         private void RaiseUpdateCharacterUIEvent(Character character)
         {
             UIEventData uiEventData = new UIEventData();
             uiEventData.character = character;
 
             this.updateCharacterUI.Raise(uiEventData);
+        }
+
+        private void RaiseUpdateTerraUIEvent(Terra terra)
+        {
+            UIEventData uiEventData = new UIEventData();
+            uiEventData.terra = terra;
+
+            this.updateTerraUI.Raise(uiEventData);
         }
     }
 }

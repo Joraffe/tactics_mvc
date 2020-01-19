@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 2083778560468978728}
   - component: {fileID: 2047696506040579184}
   - component: {fileID: 7151382536072449228}
+  - component: {fileID: 1995930075224648674}
+  - component: {fileID: 6724784865329592949}
   m_Layer: 5
   m_Name: GameUI
   m_TagString: Untagged
@@ -117,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateCharacterUI: {fileID: 11400000, guid: c573a4475ff214ae88330b10fa03fe7d, type: 2}
+  updateTerraUI: {fileID: 11400000, guid: 6a8bbc79532b34cb9ae1093ab8a092ec, type: 2}
   gameUI: {fileID: 2083778560468978728}
 --- !u!114 &2083778560468978728
 MonoBehaviour:
@@ -131,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterUIGameObject: {fileID: 2445104997563186665}
-  terrainUIGameObject: {fileID: 2445104996087310670}
+  terraUIGameObject: {fileID: 2445104996087310670}
 --- !u!114 &2047696506040579184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +182,64 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3282110062442554466}
         m_MethodName: OnHideCharacterUI
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Tactics.Events.UnityUIEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &1995930075224648674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2445104996186053573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bbea2dbde549436891e04bdbbab52cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 4091fff67e66e4f35a13acbc3480ccc6, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3282110062442554466}
+        m_MethodName: OnShowTerraUI
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Tactics.Events.UnityUIEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &6724784865329592949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2445104996186053573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bbea2dbde549436891e04bdbbab52cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 99650c0931835439d8dcc0f11214bbd0, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3282110062442554466}
+        m_MethodName: OnHideTerraUI
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -336,7 +397,7 @@ PrefabInstance:
     - target: {fileID: 6388930033722116163, guid: 3236ceaeab23641ee87c31121234326a,
         type: 3}
       propertyPath: m_Name
-      value: TerrainUI
+      value: TerraUI
       objectReference: {fileID: 0}
     - target: {fileID: 6388930033722116163, guid: 3236ceaeab23641ee87c31121234326a,
         type: 3}

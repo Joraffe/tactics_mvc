@@ -26,7 +26,7 @@ namespace Tactics.Models
     {
         public string terrainType;
 
-        public int moveCost;
+        public int moveCost = 1;
 
         public int XPosition;  // X position on the map
         public int YPosition;  // Y position on the map
@@ -34,8 +34,11 @@ namespace Tactics.Models
         public Character occupant;  // What is currently occupying this tile
         public PathOverlay pathOverlay;
         public SelectOverlay selectOverlay;
-
         public DangerOverlay dangerOverlay;
+        public ActionOverlay actionOverlay;
+
+        public Terra terra;  // Stores What type of tile this is
+
         public bool active;  // If the tile has some kind of "active" state; i.e.
                              // If the player can select it to move, or selct to target
         public string activeState;  // What type of active state is it (move/combat)
@@ -87,10 +90,10 @@ namespace Tactics.Models
         {
             // Note: we pass in character to account for character move type later
 
-            if (this.terrainType == TileTerrainType.Rock)
-            {
-                return false;
-            }
+            // if (this.terra.type == TerraTypes.Oceanic)
+            // {
+            //     return false;
+            // }
 
             // This is a "normal" tile
             return true;
@@ -98,10 +101,10 @@ namespace Tactics.Models
 
         public bool isCombatableTerrain(Character character)
         {
-            if (this.terrainType == TileTerrainType.Rock)
-            {
-                return false;
-            }
+            // if (this.terra.type == TerraTypes.Oceanic)
+            // {
+            //     return false;
+            // }
 
             return true;
         }
@@ -139,38 +142,34 @@ namespace Tactics.Models
 
         public void SetActiveMovement()
         {
-            this.ChangeTileColor(Color.blue);
             this.active = true;
             this.activeState = TileInteractType.Movement;
         }
 
         public void SetActiveCombat()
         {
-            this.ChangeTileColor(Color.red);
             this.active = true;
             this.activeState = TileInteractType.Combat;
         }
 
         public void SetActiveArrangement()
         {
-            this.ChangeTileColor(Color.green);
             this.active = true;
             this.activeState = TileInteractType.Arrangement;
         }
 
         public void ClearActiveArrangement()
         {
-            this.ChangeTileColor(Color.white);
             this.active = false;
             this.activeState = "";
         }
 
         public void ClearTile()
         {
-            this.ChangeTileColor(Color.white);
             this.ClearPathOverlayImage();
             this.ClearSelectOverlayImage();
             this.ClearAssociatedMovementTiles();
+            this.ClearActionOverlayImage();
             this.active = false;
             this.activeState = "";
         }
@@ -239,6 +238,16 @@ namespace Tactics.Models
         public void ClearDangerOverlayImage()
         {
             this.dangerOverlay.ClearSprite();
+        }
+
+        public void SetActionOverlayImage(string actionOverlayImageKey)
+        {
+            this.actionOverlay.SetSprite(actionOverlayImageKey);
+        }
+
+        public void ClearActionOverlayImage()
+        {
+            this.actionOverlay.ClearSprite();
         }
 
     }

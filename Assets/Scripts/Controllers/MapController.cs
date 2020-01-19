@@ -25,6 +25,8 @@ namespace Tactics.Controllers
         public TileEvent clearSelectOverlay;
         public TileEvent showDangerOverlay;
         public TileEvent clearDangerOverlay;
+        public TileEvent showActionOverlay;
+        public TileEvent clearActionOverlay;
 
         public CharacterEvent previewCharacterMovement;
         public CharacterEvent previewCharacterCombat;
@@ -128,6 +130,8 @@ namespace Tactics.Controllers
             {
                 PreviewSelectCombatTile(selectedTile);
             }
+
+            // ShowTerraUI(selectedTile.terra);
         }
 
         public void OnShowPlayerArrangementTiles(MapEventData mapEventData)
@@ -293,6 +297,7 @@ namespace Tactics.Controllers
                 if (combatTile.isCombatableForCharacter(character))
                 {
                     RaiseCombatTileEvent(combatTile);
+                    RaiseShowActionOverlayTileEvent(combatTile, "combat");
                 }
             }
 
@@ -301,6 +306,7 @@ namespace Tactics.Controllers
                 if (movementTile.isMoveableForCharacter(character))
                 {
                     RaiseMovementTileEvent(movementTile);
+                    RaiseShowActionOverlayTileEvent(movementTile, "movement");
                 }
             }
         }
@@ -601,6 +607,23 @@ namespace Tactics.Controllers
             tileEventData.tile = tile;
 
             this.clearDangerOverlay.Raise(tileEventData);
+        }
+
+        private void RaiseShowActionOverlayTileEvent(Tile tile, string actionOverlayImage)
+        {
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+            tileEventData.actionOverlayImage = actionOverlayImage;
+
+            this.showActionOverlay.Raise(tileEventData);
+        }
+
+        private void RaiseClearActionOverlayTileEvent(Tile tile)
+        {
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+
+            this.clearActionOverlay.Raise(tileEventData);
         }
 
         private void RaiseShowCharacterUIEvent(Character character)

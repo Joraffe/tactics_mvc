@@ -13,11 +13,19 @@ namespace Tactics.Controllers
         public MapEvent clearTilesOnMap;
         public VoidEvent resetTilesOnMap;
 
+        public UIEvent showTerraUI;
+        public UIEvent hideTerraUI;
+
         public Tile tile;
+        public Collider2D[] mouseOverlapColliders;
 
         /*-------------------------------------------------
         *                  Event Handlers
         --------------------------------------------------*/
+        public void Start()
+        {
+            this.mouseOverlapColliders = new Collider2D[2];   
+        }
         public void OnMouseDown()
         {
             if (this.tile.active && !this.tile.occupant) {
@@ -26,8 +34,44 @@ namespace Tactics.Controllers
             else if (!this.tile.occupant) {
                 ResetTilesOnMap();
             }
-            
         }
+
+        public void HandleMouseHover()
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            int numColliders = Physics2D.OverlapPointNonAlloc(mousePosition, this.mouseOverlapColliders);
+            if (numColliders == 0)
+            {
+                HideTerraUI();
+                return;
+            }
+            
+            foreach (Collider2D collider in mouseOverlapColliders)
+            {
+                GameObject colliderGameObject = collider.gameObject;
+                if (colliderGameObject.tag == "Tile")
+                {
+                    Terra colliderTerra = colliderGameObject.GetComponent<Tile>().terra;
+                    ShowTerraUI(colliderTerra);
+                    break;
+                }
+            }
+        }
+
+        public void Update()
+        {
+            HandleMouseHover();
+        }
+
+        // public void OnMouseEnter()
+        // {
+        //     ShowTerraUI(this.tile.terra);
+        // }
+
+        // public void OnMouseExit()
+        // {
+        //     HideTerraUI();
+        // }
 
         public void OnSetMovementTile(TileEventData tileEventData)
         {
@@ -147,6 +191,24 @@ namespace Tactics.Controllers
             }
         }
 
+        public void OnShowActionOverlay(TileEventData tileEventData)
+        {
+            if (this.tile == tileEventData.tile)
+            {
+                Tile tileToShow = tileEventData.tile;
+                tileToShow.SetActionOverlayImage(tileEventData.actionOverlayImage);
+            }
+        }
+
+        public void OnClearActionOverlay(TileEventData tileEventData)
+        {
+            if (this.tile == tileEventData.tile)
+            {
+                Tile tileToClear = tileEventData.tile;
+                tileToClear.ClearActionOverlayImage();
+            }
+        }
+
 
         /*-------------------------------------------------
         *                     Helpers
@@ -164,6 +226,16 @@ namespace Tactics.Controllers
         private void ResetTilesOnMap()
         {
             RaiseResetTilesMapEvent();
+        }
+
+        private void ShowTerraUI(Terra terra)
+        {
+            RaiseShowTerraUIEvent(terra);
+        }
+
+        private void HideTerraUI()
+        {
+            RaiseHideTerraUIEvent();
         }
 
 
@@ -188,6 +260,21 @@ namespace Tactics.Controllers
         private void RaiseResetTilesMapEvent()
         {
             resetTilesOnMap.Raise();
+        }
+
+        private void RaiseShowTerraUIEvent(Terra terra)
+        {
+            UIEventData uiEventData = new UIEventData();
+            uiEventData.terra = terra;
+
+            this.showTerraUI.Raise(uiEventData);
+        }
+
+        private void RaiseHideTerraUIEvent()
+        {
+            UIEventData uIEventData = new UIEventData();
+
+            this.hideTerraUI.Raise(uIEventData);
         }
 
     }

@@ -12,8 +12,11 @@ GameObject:
   - component: {fileID: 6388930033722116175}
   - component: {fileID: 6388930033722116174}
   - component: {fileID: 6388930033722116173}
+  - component: {fileID: 6652669006142355446}
+  - component: {fileID: 4113925579154978151}
+  - component: {fileID: 6030112014759412481}
   m_Layer: 5
-  m_Name: TerrainUI
+  m_Name: TerraUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,6 +102,63 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &6652669006142355446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6388930033722116163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d405103083b64d19ad5303ae04e3f66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageGameObject: {fileID: 6388930035813187545}
+  nameGameObject: {fileID: 6388930035613804991}
+  terra: {fileID: 0}
+--- !u!114 &4113925579154978151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6388930033722116163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b9533caaf0f74749b8ffd7c9ce9d941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terraUI: {fileID: 6652669006142355446}
+--- !u!114 &6030112014759412481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6388930033722116163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bbea2dbde549436891e04bdbbab52cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 6a8bbc79532b34cb9ae1093ab8a092ec, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4113925579154978151}
+        m_MethodName: OnUpdateTerra
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Tactics.Events.UnityUIEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &6388930034963039317
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +171,7 @@ GameObject:
   - component: {fileID: 6388930034963039312}
   - component: {fileID: 6388930034963039319}
   m_Layer: 5
-  m_Name: TilePanel
+  m_Name: TerraPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,7 +248,7 @@ GameObject:
   - component: {fileID: 6388930035613804986}
   - component: {fileID: 6388930035613804985}
   m_Layer: 5
-  m_Name: TileName
+  m_Name: TerraName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,7 +301,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Grass
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -310,13 +370,13 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 6388930035613804985}
-    characterCount: 5
+    characterCount: 0
     spriteCount: 0
     spaceCount: 0
-    wordCount: 1
+    wordCount: 0
     linkCount: 0
-    lineCount: 1
-    pageCount: 1
+    lineCount: 0
+    pageCount: 0
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
@@ -345,7 +405,7 @@ GameObject:
   - component: {fileID: 6388930035813187556}
   - component: {fileID: 6388930035813187547}
   m_Layer: 5
-  m_Name: TileImage
+  m_Name: TerraImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
