@@ -32,7 +32,7 @@ namespace Tactics.Controllers
         public void OnShowTerraUI(UIEventData uiEventData)
         {
             ShowTerraUI();
-            UpdateTerraUI(uiEventData.terra, uiEventData.terraformOverlay);
+            UpdateTerraUI(uiEventData.terra);
         }
 
         public void OnHideTerraUI(UIEventData uiEventData)
@@ -83,12 +83,12 @@ namespace Tactics.Controllers
             }
         }
 
-        private void UpdateTerraUI(Terra terra, TerraformOverlay terraformOverlay)
+        private void UpdateTerraUI(Terra terra)
         {
-            if (this.gameUI.GetTerraUI().currentTerraType != terra.type ||
-                this.gameUI.GetTerraUI().currentTerraType != terraformOverlay.currentTerraType)
+
+            if (this.gameUI.GetTerraUI().currentTerraType != terra.type)
             {
-                RaiseUpdateTerraUIEvent(terra, terraformOverlay);
+                RaiseUpdateTerraUIEvent(terra);
             }
         }
 
@@ -103,11 +103,10 @@ namespace Tactics.Controllers
             this.updateCharacterUI.Raise(uiEventData);
         }
 
-        private void RaiseUpdateTerraUIEvent(Terra terra, TerraformOverlay terraformOverlay)
+        private void RaiseUpdateTerraUIEvent(Terra terra)
         {
             UIEventData uiEventData = new UIEventData();
             uiEventData.terra = terra;
-            uiEventData.terraformOverlay = terraformOverlay;
 
             this.updateTerraUI.Raise(uiEventData);
         }

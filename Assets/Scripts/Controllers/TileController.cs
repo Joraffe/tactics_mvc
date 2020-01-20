@@ -52,8 +52,8 @@ namespace Tactics.Controllers
                 if (colliderGameObject.tag == "Tile")
                 {
                     Terra colliderTerra = colliderGameObject.GetComponent<Tile>().terra;
-                    TerraformOverlay terraformOverlay = colliderGameObject.GetComponent<Tile>().terraformOverlay;
-                    ShowTerraUI(colliderTerra, terraformOverlay);
+                    // TerraformOverlay terraformOverlay = colliderGameObject.GetComponent<Tile>().terraformOverlay;
+                    ShowTerraUI(colliderTerra);
                     break;
                 }
             }
@@ -202,9 +202,9 @@ namespace Tactics.Controllers
             RaiseResetTilesMapEvent();
         }
 
-        private void ShowTerraUI(Terra terra, TerraformOverlay terraformOverlay)
+        private void ShowTerraUI(Terra terra)
         {
-            RaiseShowTerraUIEvent(terra, terraformOverlay);
+            RaiseShowTerraUIEvent(terra);
         }
 
         private void HideTerraUI()
@@ -236,11 +236,10 @@ namespace Tactics.Controllers
             resetTilesOnMap.Raise();
         }
 
-        private void RaiseShowTerraUIEvent(Terra terra, TerraformOverlay terraformOverlay)
+        private void RaiseShowTerraUIEvent(Terra terra)
         {
             UIEventData uiEventData = new UIEventData();
             uiEventData.terra = terra;
-            uiEventData.terraformOverlay = terraformOverlay;
 
             this.showTerraUI.Raise(uiEventData);
         }

@@ -298,7 +298,7 @@ namespace Tactics.Controllers
                 if (movementTile.isMoveableForCharacter(character))
                 {
                     RaiseMovementTileEvent(movementTile);
-                    RaiseShowMoveOverlayTileEvent(movementTile, "move");
+                    RaiseShowOverlayTileEvent(movementTile, "move", TileOverlayTypes.Move);
                 }
             }
         }
@@ -324,7 +324,7 @@ namespace Tactics.Controllers
             {
                 Tile currentTile = current.tile;
                 string pathOverlayImage = current.GetImage();
-                RaisePreviewPathOverlayTileEvent(currentTile, pathOverlayImage);
+                RaiseShowOverlayTileEvent(currentTile, pathOverlayImage, TileOverlayTypes.Path);
                 if (current.next == null) {
                     reachedHead = true;
                 } else
@@ -346,7 +346,7 @@ namespace Tactics.Controllers
             while (!reachedHead)
             {
                 Tile currentTile = current.tile;
-                RaiseClearPathOverlayTileEvent(currentTile);
+                RaiseClearOverlayTileEvent(currentTile, TileOverlayTypes.Path);
                 if (current.next == null) {
                     reachedHead = true;
                 } else
@@ -360,12 +360,12 @@ namespace Tactics.Controllers
 
         private void PreviewSelectOverlayForTile(Tile tile, string selectOverlayType)
         {
-            RaisePreviewSelectOverlayTileEvent(tile, selectOverlayType);
+            RaiseShowOverlayTileEvent(tile, selectOverlayType, TileOverlayTypes.Select);
         }
 
         private void ClearPreviousSelectOverlay(Tile tile)
         {
-            RaiseClearSelectOverlayTileEvent(tile);
+            RaiseClearOverlayTileEvent(tile, TileOverlayTypes.Select);
         }
 
         private void PreviewCharacterMovement(Character selectedCharacter, Path currentTilePath, Tile startTile, Tile selectedTile)
@@ -404,7 +404,7 @@ namespace Tactics.Controllers
         {
             foreach (Tile tile in this.map.tiles)
             {
-                RaiseClearDangerOverlayTileEvent(tile);
+                RaiseClearOverlayTileEvent(tile, TileOverlayTypes.Danger);
             }
         }
 
@@ -431,7 +431,7 @@ namespace Tactics.Controllers
             foreach (Tile enemyTile in allEnemyCombatTiles)
             {
                 string dangerOverlayImage = this.map.GetDangerOverlayImageForTile(enemyTile);
-                RaiseShowDangerOverlayTileEvent(enemyTile, dangerOverlayImage);
+                RaiseShowOverlayTileEvent(enemyTile, dangerOverlayImage, TileOverlayTypes.Danger);
             }
         }
 
@@ -515,41 +515,21 @@ namespace Tactics.Controllers
             this.clearCharacterCombat.Raise(clearCharacterCombatData);
         }
 
-        private void RaisePreviewPathOverlayTileEvent(Tile tile, string pathOverlayImageKey)
+        private void RaiseShowOverlayTileEvent(Tile tile, string overlayImageKey, string overlayType)
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
-            tileEventData.overlayImageKey = pathOverlayImageKey;
-            tileEventData.overlayType = TileOverlayTypes.Path;
-
+            tileEventData.overlayImageKey = overlayImageKey;
+            tileEventData.overlayType = overlayType;
 
             this.showOverlay.Raise(tileEventData);
         }
 
-        private void RaiseClearPathOverlayTileEvent(Tile tile)
+        private void RaiseClearOverlayTileEvent(Tile tile, string overlayType)
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
-            tileEventData.overlayType = TileOverlayTypes.Path;
-
-            this.clearOverlay.Raise(tileEventData);
-        }
-
-        private void RaisePreviewSelectOverlayTileEvent(Tile tile, string selectOverlayType)
-        {
-            TileEventData tileEventData = new TileEventData();
-            tileEventData.tile = tile;
-            tileEventData.overlayImageKey = selectOverlayType;
-            tileEventData.overlayType = TileOverlayTypes.Select;
-
-            this.showOverlay.Raise(tileEventData);
-        }
-
-        private void RaiseClearSelectOverlayTileEvent(Tile tile)
-        {
-            TileEventData tileEventData = new TileEventData();
-            tileEventData.tile = tile;
-            tileEventData.overlayType = TileOverlayTypes.Select;
+            tileEventData.overlayType = overlayType;
 
             this.clearOverlay.Raise(tileEventData);
         }
@@ -603,45 +583,6 @@ namespace Tactics.Controllers
 
             this.clearArrangementTile.Raise(tileEventData);
         }
-
-        private void RaiseShowDangerOverlayTileEvent(Tile tile, string dangerOverlayImage)
-        {
-            TileEventData tileEventData = new TileEventData();
-            tileEventData.tile = tile;
-            tileEventData.overlayType = dangerOverlayImage;
-            tileEventData.overlayType = TileOverlayTypes.Danger;
-
-            this.showOverlay.Raise(tileEventData);
-        }
-
-        private void RaiseClearDangerOverlayTileEvent(Tile tile)
-        {
-            TileEventData tileEventData = new TileEventData();
-            tileEventData.tile = tile;
-            tileEventData.overlayType = TileOverlayTypes.Danger;
-
-            this.clearOverlay.Raise(tileEventData);
-        }
-
-        private void RaiseShowMoveOverlayTileEvent(Tile tile, string overlayImageKey)
-        {
-            TileEventData tileEventData = new TileEventData();
-            tileEventData.tile = tile;
-            tileEventData.overlayImageKey = overlayImageKey;
-            tileEventData.overlayType = TileOverlayTypes.Move;
-
-            this.showOverlay.Raise(tileEventData);
-        }
-
-        private void RaiseClearMoveOverlayTileEvent(Tile tile)
-        {
-            TileEventData tileEventData = new TileEventData();
-            tileEventData.tile = tile;
-            tileEventData.overlayType = TileOverlayTypes.Move;
-
-            this.clearOverlay.Raise(tileEventData);
-        }
-
         private void RaiseShowCharacterUIEvent(Character character)
         {
             UIEventData uiEventData = new UIEventData();

@@ -193,5 +193,13 @@ namespace Tactics.Models
         {
             return tile.YPosition - adjacencyRange >= yMinSize;
         }
+
+        public bool isCoordinatesWithinMap(int XPosition, int YPosition)
+        {
+            bool withinXBounds = (xMinSize <= XPosition) && (XPosition <= xMaxSize);
+            bool withinYBounds = (yMinSize <= YPosition) && (YPosition <= yMaxSize);
+
+            return withinXBounds && withinYBounds;
+        }
     }
 }

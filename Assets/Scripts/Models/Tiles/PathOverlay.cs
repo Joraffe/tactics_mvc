@@ -5,10 +5,8 @@ using UnityEngine;
 
 namespace Tactics.Models {
 
-    public class PathOverlay : MonoBehaviour
+    public class PathOverlay : BaseOverlay
     {
-        public SpriteRenderer spriteRenderer;
-
         public Sprite arrowLeft;
         public Sprite arrowRight;
         public Sprite arrowUp;
@@ -26,11 +24,9 @@ namespace Tactics.Models {
         public Sprite midHorizontal;
         public Sprite midVertical;
 
-        private Dictionary<string, Sprite> pathOverlayMap;
-
-        public void Awake()
+        protected override Dictionary<string, Sprite> GetOverlaySpriteMap()
         {
-            pathOverlayMap = new Dictionary<string, Sprite>{
+            return new Dictionary<string, Sprite>{
                 { "arrow_left", arrowLeft },
                 { "arrow_right", arrowRight },
                 { "arrow_up", arrowUp },
@@ -50,14 +46,9 @@ namespace Tactics.Models {
             };
         }
 
-        public void SetSprite(string spriteKey)
+        public override string GetOverlayType()
         {
-            this.spriteRenderer.sprite = this.pathOverlayMap[spriteKey];
-        }
-
-        public void ClearSprite()
-        {
-            this.spriteRenderer.sprite = null;
+            return TileOverlayTypes.Path;
         }
     }
 }

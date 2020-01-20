@@ -5,37 +5,20 @@ using UnityEngine;
 
 namespace Tactics.Models
 {
-    public class TerraformOverlay : MonoBehaviour
+    public class TerraformOverlay : BaseOverlay
     {
-        public SpriteRenderer spriteRenderer;
         public Sprite swampTerraform;
-        public string currentTerraType;
 
-        private Dictionary<string, Sprite> terraformOverlayMap;
-
-        public void Awake()
+        protected override Dictionary<string, Sprite> GetOverlaySpriteMap()
         {
-            this.terraformOverlayMap = new Dictionary<string, Sprite>{
+            return new Dictionary<string, Sprite>{
                 { TerraTypes.Swamp, swampTerraform }
             };
         }
 
-        public void SetSprite(string spriteKey)
+        public override string GetOverlayType()
         {
-            this.currentTerraType = spriteKey;
-            this.spriteRenderer.sprite = this.terraformOverlayMap[spriteKey];
-        }
-
-        public void ClearSprite()
-        {
-            this.currentTerraType = "";
-            this.spriteRenderer.sprite = null;
-        }
-
-        public Sprite GetCurrentSprite()
-        {
-            return this.spriteRenderer.sprite;
+            return TileOverlayTypes.Terraform;
         }
     }
 }
-

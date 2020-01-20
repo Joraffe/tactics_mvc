@@ -22,6 +22,7 @@ namespace Tactics.Models
         public const string Arrange = "arrange";
         public const string Terraform = "terraform";
         public const string Danger = "danger";
+        public const string All = "all";
     }
 
     public class Tile : MonoBehaviour
@@ -181,12 +182,9 @@ namespace Tactics.Models
 
         public void ClearTile()
         {
-            this.ClearPathOverlayImage();
-            this.ClearSelectOverlayImage();
-            this.ClearAssociatedMovementTiles();
-            this.ClearMoveOverlayImage();
-            this.ClearTerraformOverlayImage();
-            this.ClearActiveState();
+            ClearOverlay(TileOverlayTypes.All);
+            ClearAssociatedMovementTiles();
+            ClearActiveState();
         }
 
         public Vector3 GetTransformPosition()
@@ -204,32 +202,6 @@ namespace Tactics.Models
             this.occupant = null;
         }
 
-        public void SetPathOverlayImage(string pathOverlayImageKey)
-        {
-            this.pathOverlay.SetSprite(pathOverlayImageKey);
-        }
-
-        public void ClearPathOverlayImage()
-        {
-            if (this.pathOverlay)
-            {
-                this.pathOverlay.ClearSprite();
-            }
-        }
-
-        public void SetSelectOverlayImage(string selectOverlayType)
-        {
-            this.selectOverlay.SetSelectedSprite(selectOverlayType);
-        }
-
-        public void ClearSelectOverlayImage()
-        {
-            if (this.selectOverlay)
-            {
-                this.selectOverlay.ClearSprite();
-            }
-        }
-
         public void ClearAssociatedMovementTiles()
         {
             this.associatedMovementTiles.Clear();
@@ -245,67 +217,28 @@ namespace Tactics.Models
             this.isShowingDanger = false;
         }
 
-        public void SetDangerOverlayImage(string dangerOverlayImageKey)
-        {
-            this.dangerOverlay.SetSprite(dangerOverlayImageKey);
-        }
-
-        public void ClearDangerOverlayImage()
-        {
-            this.dangerOverlay.ClearSprite();
-        }
-
-        // public void SetActionOverlayImage(string actionOverlayImageKey)
-        // {
-        //     this.actionOverlay.SetSprite(actionOverlayImageKey);
-        // }
-
-        // public void ClearActionOverlayImage()
-        // {
-        //     this.actionOverlay.ClearSprite();
-        // }
-        public void SetMoveOverlayImage(string overlayImageKey)
-        {
-            this.moveOverlay.SetSprite(overlayImageKey);
-        }
-
-        public void ClearMoveOverlayImage()
-        {
-            this.moveOverlay.ClearSprite();
-        }
-
-        public void SetTerraformOverlayImage(string terraformOverlayImageKey)
-        {
-            this.terraformOverlay.SetSprite(terraformOverlayImageKey);
-        }
-
-        public void ClearTerraformOverlayImage()
-        {
-            this.terraformOverlay.ClearSprite();
-        }
-
         public void ShowOverlay(string overlayImageKey, string overlayType)
         {
             switch (overlayType)
             {
                 case TileOverlayTypes.Path:
-                    SetPathOverlayImage(overlayImageKey);
+                    this.pathOverlay.SetSprite(overlayImageKey);
                     break;
                 case TileOverlayTypes.Select:
-                    SetSelectOverlayImage(overlayImageKey);
+                    this.selectOverlay.SetSprite(overlayImageKey);
                     break;
                 case TileOverlayTypes.Danger:
-                    SetDangerOverlayImage(overlayImageKey);
+                    this.dangerOverlay.SetSprite(overlayImageKey);
                     break;
                 case TileOverlayTypes.Move:
-                    SetMoveOverlayImage(overlayImageKey);
+                    this.moveOverlay.SetSprite(overlayImageKey);
                     break;
                 case TileOverlayTypes.Arrange:
                     Debug.Log("revisit Arrange.ShowOverlay pls");
                     // SetActionOverlayImage(overlayImageKey);
                     break;
                 case TileOverlayTypes.Terraform:
-                    SetTerraformOverlayImage(overlayImageKey);
+                    this.terraformOverlay.SetSprite(overlayImageKey);
                     break;
 
                 default:
@@ -319,25 +252,31 @@ namespace Tactics.Models
             switch (overlayType)
             {
                 case TileOverlayTypes.Path:
-                    ClearPathOverlayImage();
+                    this.pathOverlay.ClearSprite();
                     break;
                 case TileOverlayTypes.Select:
-                    ClearSelectOverlayImage();
+                    this.selectOverlay.ClearSprite();
                     break;
                 case TileOverlayTypes.Danger:
-                    ClearDangerOverlayImage();
+                    this.dangerOverlay.ClearSprite();
                     break;
                 case TileOverlayTypes.Move:
-                    ClearMoveOverlayImage();
+                    this.moveOverlay.ClearSprite();
                     break;
                 case TileOverlayTypes.Arrange:
                     Debug.Log("revisit Arrange.ClearOverlay pls");
                     // ClearActionOverlayImage();
                     break;
                 case TileOverlayTypes.Terraform:
-                    ClearTerraformOverlayImage();
+                    this.terraformOverlay.ClearSprite();
                     break;
-
+                case TileOverlayTypes.All:
+                    this.pathOverlay.ClearSprite();
+                    this.selectOverlay.ClearSprite();
+                    this.dangerOverlay.ClearSprite();
+                    this.moveOverlay.ClearSprite();
+                    this.terraformOverlay.ClearSprite();
+                    break;
                 default:
                     return;
             }

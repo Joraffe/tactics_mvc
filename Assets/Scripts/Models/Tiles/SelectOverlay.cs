@@ -4,30 +4,30 @@ using UnityEngine;
 
 namespace Tactics.Models
 {
-    public class SelectOverlay : MonoBehaviour
+    public class SelectOverlayTypes
     {
-        public SpriteRenderer spriteRenderer;
+        public const string Movement = "movement";
+        public const string Combat = "combat";
+    }
+
+    public class SelectOverlay : BaseOverlay
+    {
+        // Sprite List
         public Sprite selectedMovement;
         public Sprite selectedCombat;
 
-        public void SetSelectedSprite(string selectOverlayType)
+        protected override Dictionary<string, Sprite> GetOverlaySpriteMap()
         {
-            if (selectOverlayType == TileInteractType.Movement)
-            {
-                this.spriteRenderer.sprite = selectedMovement;
-            }
-            else if (selectOverlayType == TileInteractType.Combat)
-            {
-                this.spriteRenderer.sprite = selectedCombat;
-            }
-
+            return new Dictionary<string, Sprite>{
+                { SelectOverlayTypes.Movement, selectedMovement },
+                { SelectOverlayTypes.Combat, selectedCombat }
+            };
         }
 
-        public void ClearSprite()
+        public override string GetOverlayType()
         {
-            this.spriteRenderer.sprite = null;
+            return TileOverlayTypes.Select;
         }
-
     }
 
 }

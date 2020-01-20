@@ -4,30 +4,20 @@ using UnityEngine;
 
 namespace Tactics.Models
 {
-        public class MoveOverlay : MonoBehaviour
+        public class MoveOverlay : BaseOverlay
         {
-            public SpriteRenderer spriteRenderer;
             public Sprite moveSprite;
 
-            public Dictionary<string, Sprite> moveOverlapMap;
-
-            public void Awake()
+            protected override Dictionary<string, Sprite> GetOverlaySpriteMap()
             {
-                this.moveOverlapMap = new Dictionary<string, Sprite>{
+                return new Dictionary<string, Sprite>{
                     { "move", moveSprite }
                 };
             }
 
-            public void SetSprite(string spriteKey)
+            public override string GetOverlayType()
             {
-                this.spriteRenderer.sprite = this.moveOverlapMap[spriteKey];
-            }
-
-            public void ClearSprite()
-            {
-                this.spriteRenderer.sprite = null;
+                return TileOverlayTypes.Move;
             }
         }
 }
-
-

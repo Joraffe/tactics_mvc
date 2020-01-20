@@ -4,10 +4,8 @@ using UnityEngine;
 
 namespace Tactics.Models
 {
-    public class DangerOverlay : MonoBehaviour
+    public class DangerOverlay : BaseOverlay
     {
-        public SpriteRenderer spriteRenderer;
-
         public Sprite dangerBox;
         public Sprite dangerRight;
         public Sprite dangerLeft;
@@ -25,11 +23,9 @@ namespace Tactics.Models
         public Sprite dangerLeftRightUp;
         public Sprite dangerRightUpDown;
 
-        private Dictionary<string, Sprite> dangerOverlayMap;
-
-        public void Awake()
+        protected override Dictionary<string, Sprite> GetOverlaySpriteMap()
         {
-            this.dangerOverlayMap = new Dictionary<string, Sprite>{
+            return new Dictionary<string, Sprite>{
                 { "0000", dangerBox },
                 { "1111", dangerNoBorder },
 
@@ -53,14 +49,9 @@ namespace Tactics.Models
             };
         }
 
-        public void SetSprite(string spriteKey)
+        public override string GetOverlayType()
         {
-            this.spriteRenderer.sprite = this.dangerOverlayMap[spriteKey];
-        }
-
-        public void ClearSprite()
-        {
-            this.spriteRenderer.sprite = null;
+            return TileOverlayTypes.Danger;
         }
     }
 }

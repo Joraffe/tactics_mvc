@@ -11,8 +11,6 @@ namespace Tactics.Controllers
     {
         public TileEvent setTerraformState;
         public TileEvent clearActiveState;
-        // public TileEvent showTerraformOverlay;
-        // public TileEvent clearTerraformOverlay;
         public TileEvent showOverlay;
         public TileEvent clearOverlay;
         public Map map;
@@ -88,10 +86,13 @@ namespace Tactics.Controllers
                 int terraformTileXPos = characterTile.XPosition + formaTile.relativeX;
                 int terraformTileYPos = characterTile.YPosition + formaTile.relativeY;
 
-                Tile terraformTile = this.map.tiles[terraformTileXPos, terraformTileYPos];
-                this.map.AddTerraformingTile(terraformTile);
-                RaiseShowTerraformOverlayTileEvent(terraformTile, formaTile.terraType);
-                RaiseSetTerraformTileEvent(terraformTile);
+                if (this.map.isCoordinatesWithinMap(terraformTileXPos, terraformTileYPos))
+                {
+                    Tile terraformTile = this.map.tiles[terraformTileXPos, terraformTileYPos];
+                    this.map.AddTerraformingTile(terraformTile);
+                    RaiseShowOverlayTileEvent(terraformTile, formaTile.terraType, TileOverlayTypes.Terraform);
+                    RaiseSetTerraformTileEvent(terraformTile);
+                }
             }
         }
 
@@ -100,7 +101,7 @@ namespace Tactics.Controllers
             foreach (Tile terraformTile in this.map.terraformingTiles)
             {
                 RaiseClearActiveStateTileEvent(terraformTile);
-                RaiseClearTerraformOverlayTileEvent(terraformTile);
+                RaiseClearOverlayTileEvent(terraformTile, TileOverlayTypes.Terraform);
             }
         }
 
@@ -118,21 +119,21 @@ namespace Tactics.Controllers
         /*-------------------------------------------------
         *                 Event Triggers
         --------------------------------------------------*/
-        private void RaiseShowTerraformOverlayTileEvent(Tile tile, string terraformOverlayImage)
+        private void RaiseShowOverlayTileEvent(Tile tile, string overlayImageKey, string overlayType)
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
-            tileEventData.overlayImageKey = terraformOverlayImage;
-            tileEventData.overlayType = TileOverlayTypes.Terraform;
+            tileEventData.overlayImageKey = overlayImageKey;
+            tileEventData.overlayType = overlayType;
 
             this.showOverlay.Raise(tileEventData);
         }
 
-        private void RaiseClearTerraformOverlayTileEvent(Tile tile)
+        private void RaiseClearOverlayTileEvent(Tile tile, string overlayType)
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
-            tileEventData.overlayType = TileOverlayTypes.Terraform;
+            tileEventData.overlayType = overlayType;
 
             this.clearOverlay.Raise(tileEventData);
         }
