@@ -12,10 +12,12 @@ namespace Tactics.Controllers
     public class MapController : MonoBehaviour
     {
 
-        public TileEvent setMovementTile;
-        public TileEvent setCombatTile;
-        public TileEvent setArrangementTile;
-        public TileEvent clearArrangementTile;
+        // public TileEvent setMovementTile;
+        // public TileEvent setCombatTile;
+        // public TileEvent setArrangementTile;
+        // public TileEvent clearArrangementTile;
+        public TileEvent setActiveState;
+        public TileEvent clearActiveState;
         public TileEvent clearTile;
         public TileEvent occupyTile;
         public TileEvent unoccupyTile;
@@ -297,7 +299,7 @@ namespace Tactics.Controllers
             {
                 if (movementTile.isMoveableForCharacter(character))
                 {
-                    RaiseMovementTileEvent(movementTile);
+                    RaiseSetActiveStateTileEvent(movementTile, TileInteractType.Movement);
                     RaiseShowOverlayTileEvent(movementTile, "move", TileOverlayTypes.Move);
                 }
             }
@@ -392,12 +394,12 @@ namespace Tactics.Controllers
 
         private void ShowPlayerArrangementTile(Tile tile)
         {
-            RaiseSetArrangementTileEvent(tile);
+            RaiseSetActiveStateTileEvent(tile, TileInteractType.Arrangement);
         }
 
         private void HidePlayerArrangementTile(Tile tile)
         {
-            RaiseClearArrangementTileEvent(tile);
+            RaiseClearActiveStateTileEvent(tile);
         }
 
         private void ClearDangerOverlayForAllTiles()
@@ -464,20 +466,21 @@ namespace Tactics.Controllers
         /*-------------------------------------------------
         *              Trigger Helpers
         --------------------------------------------------*/
-        private void RaiseMovementTileEvent(Tile tile)
+        private void RaiseSetActiveStateTileEvent(Tile tile, string activeState)
         {
-            TileEventData setMovementTileData = new TileEventData();
-            setMovementTileData.tile = tile;
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+            tileEventData.activeState = activeState;
 
-            this.setMovementTile.Raise(setMovementTileData);
+            this.setActiveState.Raise(tileEventData);
         }
 
-        private void RaiseCombatTileEvent(Tile tile)
+        private void RaiseClearActiveStateTileEvent(Tile tile)
         {
-            TileEventData setCombatTileData = new TileEventData();
-            setCombatTileData.tile = tile;
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
 
-            this.setCombatTile.Raise(setCombatTileData);
+            this.clearActiveState.Raise(tileEventData);
         }
 
         private void RaiseClearTileEvent(Tile tile)
@@ -566,22 +569,6 @@ namespace Tactics.Controllers
             teamEventData.team = character.team;
 
             this.completeTeamMemberAction.Raise(teamEventData);
-        }
-
-        private void RaiseSetArrangementTileEvent(Tile tile)
-        {
-            TileEventData tileEventData = new TileEventData();
-            tileEventData.tile = tile;
-
-            this.setArrangementTile.Raise(tileEventData);
-        }
-
-        private void RaiseClearArrangementTileEvent(Tile tile)
-        {
-            TileEventData tileEventData = new TileEventData();
-            tileEventData.tile = tile;
-
-            this.clearArrangementTile.Raise(tileEventData);
         }
         private void RaiseShowCharacterUIEvent(Character character)
         {

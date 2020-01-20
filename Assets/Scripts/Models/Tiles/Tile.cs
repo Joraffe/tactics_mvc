@@ -168,12 +168,6 @@ namespace Tactics.Models
             this.activeState = TileInteractType.Terraform;
         }
 
-        public void ClearActiveState()
-        {
-            this.active = false;
-            this.activeState = "";
-        }
-
         public void ClearActiveArrangement()
         {
             this.active = false;
@@ -215,6 +209,17 @@ namespace Tactics.Models
         public void SetIsNotShowingDanger()
         {
             this.isShowingDanger = false;
+        }
+        public void SetActiveState(string activeState)
+        {
+            this.active = true;
+            this.activeState = activeState;
+        }
+
+        public void ClearActiveState()
+        {
+            this.active = false;
+            this.activeState = "";
         }
 
         public void ShowOverlay(string overlayImageKey, string overlayType)

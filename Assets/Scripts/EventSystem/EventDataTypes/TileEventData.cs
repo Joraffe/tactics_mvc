@@ -9,7 +9,7 @@ namespace Tactics.Events
     {
         public Tile tile;
         public Character character;
-        public string actionOverlayImage;
+        public string activeState;
         public string overlayImageKey;
         public string overlayType;
     }

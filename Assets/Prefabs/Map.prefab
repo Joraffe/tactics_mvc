@@ -76,16 +76,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb863f8b70ad84116955aaec71c98add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setMovementTile: {fileID: 11400000, guid: e7bf687fdf1e04ffdaf92c2ff2e93942, type: 2}
-  setCombatTile: {fileID: 11400000, guid: a0acc0ae6904841f5899cc346e7d2770, type: 2}
-  setArrangementTile: {fileID: 11400000, guid: 8595c38d7bdf74827b2396e221b255a7, type: 2}
-  clearArrangementTile: {fileID: 11400000, guid: 19f054d4e8e7c4af5a73d6983e4478aa,
-    type: 2}
+  setActiveState: {fileID: 11400000, guid: 15b6dbe8baa1a4504ab0e14147ccccb4, type: 2}
+  clearActiveState: {fileID: 11400000, guid: 455d49a26288546d3bcb896592e4fe3b, type: 2}
   clearTile: {fileID: 11400000, guid: 75dc803d4dbe84d1b8060aa255e9b615, type: 2}
   occupyTile: {fileID: 11400000, guid: d869cb74260e24fc5aa05b75c3754839, type: 2}
   unoccupyTile: {fileID: 11400000, guid: 9420271ce99634e6ea7f618966fd92c4, type: 2}
-  showActionOverlay: {fileID: 11400000, guid: 99cba2ee8fa5a43e8b97de0d3959a64c, type: 2}
-  clearActionOverlay: {fileID: 11400000, guid: 3cc8ae9353fac45f08c19c435f765ef5, type: 2}
   showOverlay: {fileID: 11400000, guid: f74a477c2baaf461097be9d178e28302, type: 2}
   clearOverlay: {fileID: 11400000, guid: c43ad5b5d22de4b41a80135938708a6d, type: 2}
   previewCharacterMovement: {fileID: 11400000, guid: 66fdb79b4f0bb41e78a9986894b4c12d,
@@ -456,7 +451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7740385fdbe45109e1794c0d07cd86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  setTerraformState: {fileID: 11400000, guid: a44e15ced04e14c7eb5f52e981e3fed5, type: 2}
+  setActiveState: {fileID: 11400000, guid: 15b6dbe8baa1a4504ab0e14147ccccb4, type: 2}
   clearActiveState: {fileID: 11400000, guid: 455d49a26288546d3bcb896592e4fe3b, type: 2}
   showOverlay: {fileID: 11400000, guid: f74a477c2baaf461097be9d178e28302, type: 2}
   clearOverlay: {fileID: 11400000, guid: c43ad5b5d22de4b41a80135938708a6d, type: 2}

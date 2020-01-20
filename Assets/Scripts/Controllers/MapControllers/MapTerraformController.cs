@@ -9,7 +9,7 @@ namespace Tactics.Controllers
 {
     public class MapTerraformController : MonoBehaviour
     {
-        public TileEvent setTerraformState;
+        public TileEvent setActiveState;
         public TileEvent clearActiveState;
         public TileEvent showOverlay;
         public TileEvent clearOverlay;
@@ -17,7 +17,7 @@ namespace Tactics.Controllers
 
         public void Update()
         {
-            if (this.map.currentSelectedForma)
+            if (this.map.currentSelectedCharacter && this.map.currentSelectedForma)
             {
                 HandleFormaDirection();
             }
@@ -67,12 +67,19 @@ namespace Tactics.Controllers
 
         public void OnSelectForma(MapEventData mapEventData)
         {
-            SelectMapForma(mapEventData.forma);
+            if (this.map.currentSelectedCharacter && !this.map.currentSelectedForma)
+            {
+                SelectMapForma(mapEventData.forma);
+            }
         }
 
         public void OnResetForma(MapEventData mapEventData)
         {
-            ResetMapForma();
+            if (this.map.currentSelectedCharacter && this.map.currentSelectedForma)
+            {
+                ResetMapForma();
+            }
+
         }
 
         /*-------------------------------------------------
@@ -91,7 +98,7 @@ namespace Tactics.Controllers
                     Tile terraformTile = this.map.tiles[terraformTileXPos, terraformTileYPos];
                     this.map.AddTerraformingTile(terraformTile);
                     RaiseShowOverlayTileEvent(terraformTile, formaTile.terraType, TileOverlayTypes.Terraform);
-                    RaiseSetTerraformTileEvent(terraformTile);
+                    RaiseSetActiveStateTileEvent(terraformTile, TileInteractType.Terraform);
                 }
             }
         }
@@ -138,12 +145,13 @@ namespace Tactics.Controllers
             this.clearOverlay.Raise(tileEventData);
         }
 
-        private void RaiseSetTerraformTileEvent(Tile tile)
+        private void RaiseSetActiveStateTileEvent(Tile tile, string activeState)
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
+            tileEventData.activeState = activeState;
 
-            this.setTerraformState.Raise(tileEventData);
+            this.setActiveState.Raise(tileEventData);
         }
 
         private void RaiseClearActiveStateTileEvent(Tile tile)

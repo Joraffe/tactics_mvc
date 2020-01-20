@@ -108,6 +108,15 @@ namespace Tactics.Controllers
             }
         }
 
+
+        public void OnSetActiveState(TileEventData tileEventData)
+        {
+            if (this.tile == tileEventData.tile)
+            {
+                tileEventData.tile.SetActiveState(tileEventData.activeState);
+            }
+        }
+
         public void OnClearActiveState(TileEventData tileEventData)
         {
             if (this.tile == tileEventData.tile)
@@ -143,24 +152,6 @@ namespace Tactics.Controllers
                 tileToUnoccupy.ClearOccupant();
             }
         }
-
-        // public void OnShowActionOverlay(TileEventData tileEventData)
-        // {
-        //     if (this.tile == tileEventData.tile)
-        //     {
-        //         Tile tileToShow = tileEventData.tile;
-        //         tileToShow.SetActionOverlayImage(tileEventData.actionOverlayImage);
-        //     }
-        // }
-
-        // public void OnClearActionOverlay(TileEventData tileEventData)
-        // {
-        //     if (this.tile == tileEventData.tile)
-        //     {
-        //         Tile tileToClear = tileEventData.tile;
-        //         tileToClear.ClearActionOverlayImage();
-        //     }
-        // }
 
         public void OnShowOverlay(TileEventData tileEventData)
         {
