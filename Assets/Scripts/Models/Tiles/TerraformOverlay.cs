@@ -13,7 +13,7 @@ namespace Tactics.Models
 
         private Dictionary<string, Sprite> terraformOverlayMap;
 
-        public void Start()
+        public void Awake()
         {
             this.terraformOverlayMap = new Dictionary<string, Sprite>{
                 { TerraTypes.Swamp, swampTerraform }

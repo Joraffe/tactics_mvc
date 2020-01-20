@@ -85,8 +85,8 @@ namespace Tactics.Controllers
 
         private void UpdateTerraUI(Terra terra, TerraformOverlay terraformOverlay)
         {
-            if (this.gameUI.GetTerraUI().terraType != terra.type ||
-                this.gameUI.GetTerraUI().terraType != terraformOverlay.currentTerraType)
+            if (this.gameUI.GetTerraUI().currentTerraType != terra.type ||
+                this.gameUI.GetTerraUI().currentTerraType != terraformOverlay.currentTerraType)
             {
                 RaiseUpdateTerraUIEvent(terra, terraformOverlay);
             }

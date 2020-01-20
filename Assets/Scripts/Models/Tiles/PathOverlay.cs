@@ -28,7 +28,7 @@ namespace Tactics.Models {
 
         private Dictionary<string, Sprite> pathOverlayMap;
 
-        public void Start()
+        public void Awake()
         {
             pathOverlayMap = new Dictionary<string, Sprite>{
                 { "arrow_left", arrowLeft },

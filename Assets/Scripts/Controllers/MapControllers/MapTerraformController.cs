@@ -9,6 +9,8 @@ namespace Tactics.Controllers
 {
     public class MapTerraformController : MonoBehaviour
     {
+        public TileEvent setTerraformState;
+        public TileEvent clearActiveState;
         public TileEvent showTerraformOverlay;
         public TileEvent clearTerraformOverlay;
         public Map map;
@@ -87,6 +89,7 @@ namespace Tactics.Controllers
                 Tile terraformTile = this.map.tiles[terraformTileXPos, terraformTileYPos];
                 this.map.AddTerraformingTile(terraformTile);
                 RaiseShowTerraformOverlayTileEvent(terraformTile, formaTile.terraType);
+                RaiseSetTerraformTileEvent(terraformTile);
             }
         }
 
@@ -94,6 +97,7 @@ namespace Tactics.Controllers
         {
             foreach (Tile terraformTile in this.map.terraformingTiles)
             {
+                RaiseClearActiveStateTileEvent(terraformTile);
                 RaiseClearTerraformOverlayTileEvent(terraformTile);
             }
         }
@@ -127,6 +131,22 @@ namespace Tactics.Controllers
             tileEventData.tile = tile;
 
             this.clearTerraformOverlay.Raise(tileEventData);
+        }
+
+        private void RaiseSetTerraformTileEvent(Tile tile)
+        {
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+
+            this.setTerraformState.Raise(tileEventData);
+        }
+
+        private void RaiseClearActiveStateTileEvent(Tile tile)
+        {
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+
+            this.clearActiveState.Raise(tileEventData);
         }
     }
 }

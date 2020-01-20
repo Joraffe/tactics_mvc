@@ -8,18 +8,10 @@ namespace Tactics.Models
 
     public class TileInteractType
     {   
-        public static string Movement = "movement";
-        public static string Combat = "combat";
-        public static string Arrangement = "arrangement";
-    }
-
-    public class TileTerrainType
-    {
-        public static string Normal = "Tile";
-        public static string Rock = "Rock";
-        public static string Tree = "Tree";
-        public static string Water = "Water";
-
+        public const string Movement = "movement";
+        public const string Combat = "combat";
+        public const string Arrangement = "arrangement";
+        public const string Terraform = "terraform";
     }
 
     public class Tile : MonoBehaviour
@@ -159,6 +151,18 @@ namespace Tactics.Models
             this.activeState = TileInteractType.Arrangement;
         }
 
+        public void SetActiveTerraform()
+        {
+            this.active = true;
+            this.activeState = TileInteractType.Terraform;
+        }
+
+        public void ClearActiveState()
+        {
+            this.active = false;
+            this.activeState = "";
+        }
+
         public void ClearActiveArrangement()
         {
             this.active = false;
@@ -171,8 +175,8 @@ namespace Tactics.Models
             this.ClearSelectOverlayImage();
             this.ClearAssociatedMovementTiles();
             this.ClearActionOverlayImage();
-            this.active = false;
-            this.activeState = "";
+            this.ClearTerraformOverlayImage();
+            this.ClearActiveState();
         }
 
         public Vector3 GetTransformPosition()

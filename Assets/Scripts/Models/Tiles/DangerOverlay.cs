@@ -27,7 +27,7 @@ namespace Tactics.Models
 
         private Dictionary<string, Sprite> dangerOverlayMap;
 
-        public void Start()
+        public void Awake()
         {
             this.dangerOverlayMap = new Dictionary<string, Sprite>{
                 { "0000", dangerBox },

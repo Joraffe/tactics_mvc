@@ -10,11 +10,10 @@ namespace Tactics.Models
         public Sprite movementSprite;
         public Sprite combatSprite;
         public Sprite arrangeSprite;
-        public Sprite swampTerraformSprite;
 
         private Dictionary<string, Sprite> actionOverlayMap;
 
-        public void Start()
+        public void Awake()
         {
             this.actionOverlayMap = new Dictionary<string, Sprite>{
                 { "movement", movementSprite },

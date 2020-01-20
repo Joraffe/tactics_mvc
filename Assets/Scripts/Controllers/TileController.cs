@@ -45,7 +45,7 @@ namespace Tactics.Controllers
                 HideTerraUI();
                 return;
             }
-            
+
             foreach (Collider2D collider in mouseOverlapColliders)
             {
                 GameObject colliderGameObject = collider.gameObject;
@@ -97,6 +97,22 @@ namespace Tactics.Controllers
             {
                 Tile startTile = tileEventData.tile;
                 startTile.ClearActiveArrangement();
+            }
+        }
+
+        public void OnSetTerraformActiveState(TileEventData tileEventData)
+        {
+            if (this.tile == tileEventData.tile)
+            {
+                tileEventData.tile.SetActiveTerraform();
+            }
+        }
+
+        public void OnClearActiveState(TileEventData tileEventData)
+        {
+            if (this.tile == tileEventData.tile)
+            {
+                tileEventData.tile.ClearActiveState();
             }
         }
 

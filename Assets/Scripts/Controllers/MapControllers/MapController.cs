@@ -43,6 +43,7 @@ namespace Tactics.Controllers
 
         // For communicating with the other map controllers
         public MapEvent resetForma;
+        public MapEvent commitTerraform;
 
         public Map map;
 
@@ -128,6 +129,10 @@ namespace Tactics.Controllers
             else if (selectedTile.activeState == TileInteractType.Combat)
             {
                 PreviewSelectCombatTile(selectedTile);
+            }
+            else if (selectedTile.activeState == TileInteractType.Terraform)
+            {
+                Debug.Log($"Perform terraform actionf for tile: {selectedTile.GetCoordinates()}");
             }
         }
 

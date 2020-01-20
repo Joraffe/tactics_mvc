@@ -460,6 +460,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7740385fdbe45109e1794c0d07cd86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  setTerraformState: {fileID: 11400000, guid: a44e15ced04e14c7eb5f52e981e3fed5, type: 2}
+  clearActiveState: {fileID: 11400000, guid: 455d49a26288546d3bcb896592e4fe3b, type: 2}
   showTerraformOverlay: {fileID: 11400000, guid: 992ceef28e9f444a29ab0e351039795e,
     type: 2}
   clearTerraformOverlay: {fileID: 11400000, guid: 90401019c60664c6da198ec73c59446b,

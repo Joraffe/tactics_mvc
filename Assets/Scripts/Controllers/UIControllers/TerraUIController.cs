@@ -26,15 +26,11 @@ namespace Tactics.Controllers
         {
             if (terraformOverlay.currentTerraType != "")
             {
-                this.terraUI.SetTerraType(terraformOverlay.currentTerraType);
-                this.terraUI.SetImageSprite(terraformOverlay.GetCurrentSprite());
-                this.terraUI.SetName(terraformOverlay.currentTerraType);
+                this.terraUI.SetTerra(terraformOverlay.currentTerraType);
             }
             else
             {
-                this.terraUI.SetTerraType(terra.type);
-                this.terraUI.SetImageSprite(terra.sprite);
-                this.terraUI.SetName(terra.type);
+                this.terraUI.SetTerra(terra.type);
             }
 
         }
