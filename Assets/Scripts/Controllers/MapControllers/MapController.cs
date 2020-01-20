@@ -19,14 +19,8 @@ namespace Tactics.Controllers
         public TileEvent clearTile;
         public TileEvent occupyTile;
         public TileEvent unoccupyTile;
-        public TileEvent previewPathOverlay;
-        public TileEvent clearPathOverlay;
-        public TileEvent previewSelectOverlay;
-        public TileEvent clearSelectOverlay;
-        public TileEvent showDangerOverlay;
-        public TileEvent clearDangerOverlay;
-        public TileEvent showActionOverlay;
-        public TileEvent clearActionOverlay;
+        public TileEvent showOverlay;
+        public TileEvent clearOverlay;
 
         public CharacterEvent previewCharacterMovement;
         public CharacterEvent previewCharacterCombat;
@@ -132,7 +126,7 @@ namespace Tactics.Controllers
             }
             else if (selectedTile.activeState == TileInteractType.Terraform)
             {
-                Debug.Log($"Perform terraform actionf for tile: {selectedTile.GetCoordinates()}");
+                Debug.Log($"Perform terraform action for tile: {selectedTile.GetCoordinates()}");
             }
         }
 
@@ -298,22 +292,13 @@ namespace Tactics.Controllers
         {
             List<Tile> allMovementTiles = BFS.GetAllMovementTilesForCharacter(character, this.map);
             List<Tile> validMovementTiles = BFS.FilterMovementTilesOutsideOfCharacterMovementRange(allMovementTiles, character, this.map);
-            // HashSet<Tile> combatTiles = BFS.GetCombatTilesForCharacterMovementTiles(character, validMovementTiles, this.map);
-            // foreach (Tile combatTile in combatTiles)
-            // {
-            //     if (combatTile.isCombatableForCharacter(character))
-            //     {
-            //         RaiseCombatTileEvent(combatTile);
-            //         RaiseShowActionOverlayTileEvent(combatTile, "combat");
-            //     }
-            // }
 
             foreach (Tile movementTile in validMovementTiles)
             {
                 if (movementTile.isMoveableForCharacter(character))
                 {
                     RaiseMovementTileEvent(movementTile);
-                    RaiseShowActionOverlayTileEvent(movementTile, "movement");
+                    RaiseShowMoveOverlayTileEvent(movementTile, "move");
                 }
             }
         }
@@ -530,38 +515,43 @@ namespace Tactics.Controllers
             this.clearCharacterCombat.Raise(clearCharacterCombatData);
         }
 
-        private void RaisePreviewPathOverlayTileEvent(Tile tile, string pathOverlayImage)
+        private void RaisePreviewPathOverlayTileEvent(Tile tile, string pathOverlayImageKey)
         {
-            TileEventData previewPathOverlayData = new TileEventData();
-            previewPathOverlayData.tile = tile;
-            previewPathOverlayData.pathOverlayImage = pathOverlayImage;
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+            tileEventData.overlayImageKey = pathOverlayImageKey;
+            tileEventData.overlayType = TileOverlayTypes.Path;
 
-            this.previewPathOverlay.Raise(previewPathOverlayData);
+
+            this.showOverlay.Raise(tileEventData);
         }
 
         private void RaiseClearPathOverlayTileEvent(Tile tile)
         {
-            TileEventData clearPathOverlayData = new TileEventData();
-            clearPathOverlayData.tile = tile;
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+            tileEventData.overlayType = TileOverlayTypes.Path;
 
-            this.clearPathOverlay.Raise(clearPathOverlayData);
+            this.clearOverlay.Raise(tileEventData);
         }
 
         private void RaisePreviewSelectOverlayTileEvent(Tile tile, string selectOverlayType)
         {
-            TileEventData previewSelectOverlayData = new TileEventData();
-            previewSelectOverlayData.tile = tile;
-            previewSelectOverlayData.selectOverlayType = selectOverlayType;
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+            tileEventData.overlayImageKey = selectOverlayType;
+            tileEventData.overlayType = TileOverlayTypes.Select;
 
-            this.previewSelectOverlay.Raise(previewSelectOverlayData);
+            this.showOverlay.Raise(tileEventData);
         }
 
         private void RaiseClearSelectOverlayTileEvent(Tile tile)
         {
-            TileEventData clearSelectOverlayData = new TileEventData();
-            clearSelectOverlayData.tile = tile;
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+            tileEventData.overlayType = TileOverlayTypes.Select;
 
-            this.clearSelectOverlay.Raise(clearSelectOverlayData);
+            this.clearOverlay.Raise(tileEventData);
         }
 
         private void RaiseUndoCharacterMovement(Character character)
@@ -618,34 +608,38 @@ namespace Tactics.Controllers
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
-            tileEventData.dangerOverlayImage = dangerOverlayImage;
+            tileEventData.overlayType = dangerOverlayImage;
+            tileEventData.overlayType = TileOverlayTypes.Danger;
 
-            this.showDangerOverlay.Raise(tileEventData);
+            this.showOverlay.Raise(tileEventData);
         }
 
         private void RaiseClearDangerOverlayTileEvent(Tile tile)
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
+            tileEventData.overlayType = TileOverlayTypes.Danger;
 
-            this.clearDangerOverlay.Raise(tileEventData);
+            this.clearOverlay.Raise(tileEventData);
         }
 
-        private void RaiseShowActionOverlayTileEvent(Tile tile, string actionOverlayImage)
+        private void RaiseShowMoveOverlayTileEvent(Tile tile, string overlayImageKey)
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
-            tileEventData.actionOverlayImage = actionOverlayImage;
+            tileEventData.overlayImageKey = overlayImageKey;
+            tileEventData.overlayType = TileOverlayTypes.Move;
 
-            this.showActionOverlay.Raise(tileEventData);
+            this.showOverlay.Raise(tileEventData);
         }
 
-        private void RaiseClearActionOverlayTileEvent(Tile tile)
+        private void RaiseClearMoveOverlayTileEvent(Tile tile)
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
+            tileEventData.overlayType = TileOverlayTypes.Move;
 
-            this.clearActionOverlay.Raise(tileEventData);
+            this.clearOverlay.Raise(tileEventData);
         }
 
         private void RaiseShowCharacterUIEvent(Character character)

@@ -144,93 +144,42 @@ namespace Tactics.Controllers
             }
         }
 
-        public void OnPreviewPathOverlay(TileEventData tileEventData)
+        // public void OnShowActionOverlay(TileEventData tileEventData)
+        // {
+        //     if (this.tile == tileEventData.tile)
+        //     {
+        //         Tile tileToShow = tileEventData.tile;
+        //         tileToShow.SetActionOverlayImage(tileEventData.actionOverlayImage);
+        //     }
+        // }
+
+        // public void OnClearActionOverlay(TileEventData tileEventData)
+        // {
+        //     if (this.tile == tileEventData.tile)
+        //     {
+        //         Tile tileToClear = tileEventData.tile;
+        //         tileToClear.ClearActionOverlayImage();
+        //     }
+        // }
+
+        public void OnShowOverlay(TileEventData tileEventData)
         {
             if (this.tile == tileEventData.tile)
             {
-                Tile tileToPreview = tileEventData.tile;
-                tileToPreview.SetPathOverlayImage(tileEventData.pathOverlayImage);
+                tileEventData.tile.ShowOverlay(
+                    tileEventData.overlayImageKey,
+                    tileEventData.overlayType
+                );
             }
         }
 
-        public void OnClearPathOverlay(TileEventData tileEventData)
+        public void OnClearOverlay(TileEventData tileEventData)
         {
             if (this.tile == tileEventData.tile)
             {
-                Tile tileToClear = tileEventData.tile;
-                tileToClear.ClearPathOverlayImage();
-            }
-        }
-
-        public void OnPreviewSelectOverlay(TileEventData tileEventData)
-        {
-            if (this.tile == tileEventData.tile)
-            {
-                Tile tileToPreview = tileEventData.tile;
-                tileToPreview.SetSelectOverlayImage(tileEventData.selectOverlayType);
-            }
-        }
-
-        public void OnClearSelectOverlay(TileEventData tileEventData)
-        {
-            if (this.tile == tileEventData.tile)
-            {
-                Tile tileToClear = tileEventData.tile;
-                tileToClear.ClearSelectOverlayImage();
-            }
-        }
-
-        public void OnShowDangerOverlay(TileEventData tileEventData)
-        {
-            if (this.tile == tileEventData.tile)
-            {
-                Tile tileToShow = tileEventData.tile;
-                tileToShow.SetDangerOverlayImage(tileEventData.dangerOverlayImage);
-            }
-        }
-
-        public void OnClearDangerOverlay(TileEventData tileEventData)
-        {
-            if (this.tile == tileEventData.tile)
-            {
-                Tile tileToClear = tileEventData.tile;
-                tileToClear.ClearDangerOverlayImage();
-            }
-        }
-
-        public void OnShowActionOverlay(TileEventData tileEventData)
-        {
-            if (this.tile == tileEventData.tile)
-            {
-                Tile tileToShow = tileEventData.tile;
-                tileToShow.SetActionOverlayImage(tileEventData.actionOverlayImage);
-            }
-        }
-
-        public void OnClearActionOverlay(TileEventData tileEventData)
-        {
-            if (this.tile == tileEventData.tile)
-            {
-                Tile tileToClear = tileEventData.tile;
-                tileToClear.ClearActionOverlayImage();
-            }
-        }
-
-        public void OnShowTerraformOverlay(TileEventData tileEventData)
-        {
-            if (this.tile == tileEventData.tile)
-            {
-                Tile tileToShow = tileEventData.tile;
-                tileToShow.SetTerraformOverlayImage(tileEventData.terraformOverlayImage);
-            }
-        }
-
-        public void OnClearTerraformOverlay(TileEventData tileEventData)
-        {
-            if (this.tile == tileEventData.tile)
-            {
-                Tile tileToClear = tileEventData.tile;
-                tileToClear.ClearTerraformOverlayImage();
+                tileEventData.tile.ClearOverlay(
+                    tileEventData.overlayType
+                );
             }
         }
 

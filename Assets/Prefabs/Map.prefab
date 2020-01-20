@@ -84,15 +84,10 @@ MonoBehaviour:
   clearTile: {fileID: 11400000, guid: 75dc803d4dbe84d1b8060aa255e9b615, type: 2}
   occupyTile: {fileID: 11400000, guid: d869cb74260e24fc5aa05b75c3754839, type: 2}
   unoccupyTile: {fileID: 11400000, guid: 9420271ce99634e6ea7f618966fd92c4, type: 2}
-  previewPathOverlay: {fileID: 11400000, guid: 004a384aad9164550a8e1cb983a79acd, type: 2}
-  clearPathOverlay: {fileID: 11400000, guid: fcf73f97a1a2c486caf64a8d41fb2d35, type: 2}
-  previewSelectOverlay: {fileID: 11400000, guid: bfc30c53f59aa479e83b243157dea882,
-    type: 2}
-  clearSelectOverlay: {fileID: 11400000, guid: d1e18ba27b2e54ac1940605f19709d2d, type: 2}
-  showDangerOverlay: {fileID: 11400000, guid: 144f845f3c3b74751900b24764cabded, type: 2}
-  clearDangerOverlay: {fileID: 11400000, guid: 52b8b7369117b4fba9744f2a81fce8c6, type: 2}
   showActionOverlay: {fileID: 11400000, guid: 99cba2ee8fa5a43e8b97de0d3959a64c, type: 2}
   clearActionOverlay: {fileID: 11400000, guid: 3cc8ae9353fac45f08c19c435f765ef5, type: 2}
+  showOverlay: {fileID: 11400000, guid: f74a477c2baaf461097be9d178e28302, type: 2}
+  clearOverlay: {fileID: 11400000, guid: c43ad5b5d22de4b41a80135938708a6d, type: 2}
   previewCharacterMovement: {fileID: 11400000, guid: 66fdb79b4f0bb41e78a9986894b4c12d,
     type: 2}
   previewCharacterCombat: {fileID: 11400000, guid: fcc168478650540c7825b3e7e151714a,
@@ -108,6 +103,7 @@ MonoBehaviour:
   completeTeamMemberAction: {fileID: 11400000, guid: c2214f4101bd94c84ab7824af30b20aa,
     type: 2}
   resetForma: {fileID: 11400000, guid: 5e4c6bf5435344842870fd7502b8cfd9, type: 2}
+  commitTerraform: {fileID: 0}
   map: {fileID: 3756900671443878609}
 --- !u!114 &1275294651153525486
 MonoBehaviour:
@@ -462,10 +458,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setTerraformState: {fileID: 11400000, guid: a44e15ced04e14c7eb5f52e981e3fed5, type: 2}
   clearActiveState: {fileID: 11400000, guid: 455d49a26288546d3bcb896592e4fe3b, type: 2}
-  showTerraformOverlay: {fileID: 11400000, guid: 992ceef28e9f444a29ab0e351039795e,
-    type: 2}
-  clearTerraformOverlay: {fileID: 11400000, guid: 90401019c60664c6da198ec73c59446b,
-    type: 2}
+  showOverlay: {fileID: 11400000, guid: f74a477c2baaf461097be9d178e28302, type: 2}
+  clearOverlay: {fileID: 11400000, guid: c43ad5b5d22de4b41a80135938708a6d, type: 2}
   map: {fileID: 3756900671443878609}
 --- !u!114 &8046514740864510222
 MonoBehaviour:

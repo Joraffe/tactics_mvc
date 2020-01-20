@@ -11,8 +11,10 @@ namespace Tactics.Controllers
     {
         public TileEvent setTerraformState;
         public TileEvent clearActiveState;
-        public TileEvent showTerraformOverlay;
-        public TileEvent clearTerraformOverlay;
+        // public TileEvent showTerraformOverlay;
+        // public TileEvent clearTerraformOverlay;
+        public TileEvent showOverlay;
+        public TileEvent clearOverlay;
         public Map map;
 
         public void Update()
@@ -114,23 +116,25 @@ namespace Tactics.Controllers
         }
 
         /*-------------------------------------------------
-        *              Trigger Helpers
+        *                 Event Triggers
         --------------------------------------------------*/
         private void RaiseShowTerraformOverlayTileEvent(Tile tile, string terraformOverlayImage)
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
-            tileEventData.terraformOverlayImage = terraformOverlayImage;
+            tileEventData.overlayImageKey = terraformOverlayImage;
+            tileEventData.overlayType = TileOverlayTypes.Terraform;
 
-            this.showTerraformOverlay.Raise(tileEventData);
+            this.showOverlay.Raise(tileEventData);
         }
 
         private void RaiseClearTerraformOverlayTileEvent(Tile tile)
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
+            tileEventData.overlayType = TileOverlayTypes.Terraform;
 
-            this.clearTerraformOverlay.Raise(tileEventData);
+            this.clearOverlay.Raise(tileEventData);
         }
 
         private void RaiseSetTerraformTileEvent(Tile tile)

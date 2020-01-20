@@ -14,6 +14,16 @@ namespace Tactics.Models
         public const string Terraform = "terraform";
     }
 
+    public class TileOverlayTypes
+    {
+        public const string Path = "path";
+        public const string Select = "select";
+        public const string Move = "move";
+        public const string Arrange = "arrange";
+        public const string Terraform = "terraform";
+        public const string Danger = "danger";
+    }
+
     public class Tile : MonoBehaviour
     {
         public string terrainType;
@@ -27,7 +37,7 @@ namespace Tactics.Models
         public PathOverlay pathOverlay;
         public SelectOverlay selectOverlay;
         public DangerOverlay dangerOverlay;
-        public ActionOverlay actionOverlay;
+        public MoveOverlay moveOverlay;
         public TerraformOverlay terraformOverlay;
 
         public Terra terra;  // Stores What type of tile this is
@@ -174,7 +184,7 @@ namespace Tactics.Models
             this.ClearPathOverlayImage();
             this.ClearSelectOverlayImage();
             this.ClearAssociatedMovementTiles();
-            this.ClearActionOverlayImage();
+            this.ClearMoveOverlayImage();
             this.ClearTerraformOverlayImage();
             this.ClearActiveState();
         }
@@ -245,14 +255,23 @@ namespace Tactics.Models
             this.dangerOverlay.ClearSprite();
         }
 
-        public void SetActionOverlayImage(string actionOverlayImageKey)
+        // public void SetActionOverlayImage(string actionOverlayImageKey)
+        // {
+        //     this.actionOverlay.SetSprite(actionOverlayImageKey);
+        // }
+
+        // public void ClearActionOverlayImage()
+        // {
+        //     this.actionOverlay.ClearSprite();
+        // }
+        public void SetMoveOverlayImage(string overlayImageKey)
         {
-            this.actionOverlay.SetSprite(actionOverlayImageKey);
+            this.moveOverlay.SetSprite(overlayImageKey);
         }
 
-        public void ClearActionOverlayImage()
+        public void ClearMoveOverlayImage()
         {
-            this.actionOverlay.ClearSprite();
+            this.moveOverlay.ClearSprite();
         }
 
         public void SetTerraformOverlayImage(string terraformOverlayImageKey)
@@ -263,6 +282,65 @@ namespace Tactics.Models
         public void ClearTerraformOverlayImage()
         {
             this.terraformOverlay.ClearSprite();
+        }
+
+        public void ShowOverlay(string overlayImageKey, string overlayType)
+        {
+            switch (overlayType)
+            {
+                case TileOverlayTypes.Path:
+                    SetPathOverlayImage(overlayImageKey);
+                    break;
+                case TileOverlayTypes.Select:
+                    SetSelectOverlayImage(overlayImageKey);
+                    break;
+                case TileOverlayTypes.Danger:
+                    SetDangerOverlayImage(overlayImageKey);
+                    break;
+                case TileOverlayTypes.Move:
+                    SetMoveOverlayImage(overlayImageKey);
+                    break;
+                case TileOverlayTypes.Arrange:
+                    Debug.Log("revisit Arrange.ShowOverlay pls");
+                    // SetActionOverlayImage(overlayImageKey);
+                    break;
+                case TileOverlayTypes.Terraform:
+                    SetTerraformOverlayImage(overlayImageKey);
+                    break;
+
+                default:
+                    return;
+            }
+
+        }
+
+        public void ClearOverlay(string overlayType)
+        {
+            switch (overlayType)
+            {
+                case TileOverlayTypes.Path:
+                    ClearPathOverlayImage();
+                    break;
+                case TileOverlayTypes.Select:
+                    ClearSelectOverlayImage();
+                    break;
+                case TileOverlayTypes.Danger:
+                    ClearDangerOverlayImage();
+                    break;
+                case TileOverlayTypes.Move:
+                    ClearMoveOverlayImage();
+                    break;
+                case TileOverlayTypes.Arrange:
+                    Debug.Log("revisit Arrange.ClearOverlay pls");
+                    // ClearActionOverlayImage();
+                    break;
+                case TileOverlayTypes.Terraform:
+                    ClearTerraformOverlayImage();
+                    break;
+
+                default:
+                    return;
+            }
         }
 
     }

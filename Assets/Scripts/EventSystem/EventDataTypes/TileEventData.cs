@@ -5,16 +5,12 @@ using Tactics.Models;
 
 namespace Tactics.Events
 {
-
     public class TileEventData
     {
         public Tile tile;
         public Character character;
-
-        public string pathOverlayImage;
-        public string selectOverlayType;
-        public string dangerOverlayImage;
         public string actionOverlayImage;
-        public string terraformOverlayImage;
+        public string overlayImageKey;
+        public string overlayType;
     }
 }

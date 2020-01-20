@@ -103,8 +103,8 @@ namespace Tactics.SetUp
                     GameObject dangerOverlayGameObject = tileGameObject.transform.Find("DangerOverlay").gameObject;
                     tile.dangerOverlay = dangerOverlayGameObject.GetComponent<DangerOverlay>();
 
-                    GameObject actionOverlayGameObject = tileGameObject.transform.Find("ActionOverlay").gameObject;
-                    tile.actionOverlay = actionOverlayGameObject.GetComponent<ActionOverlay>();
+                    GameObject moveOverlayGameObject = tileGameObject.transform.Find("MoveOverlay").gameObject;
+                    tile.moveOverlay = moveOverlayGameObject.GetComponent<MoveOverlay>();
 
                     GameObject terraformOverlayGameObject = tileGameObject.transform.Find("TerraformOverlay").gameObject;
                     tile.terraformOverlay = terraformOverlayGameObject.GetComponent<TerraformOverlay>();
