@@ -12,6 +12,7 @@ namespace Tactics.Models
         public static int yMaxSize = 6;
         public Tile[,] tiles = new Tile[xMaxSize,yMaxSize];
         public Character currentSelectedCharacter;
+        public Forma currentSelectedForma;
         public List<Tile> terraformingTiles = new List<Tile>();
         public List<Tile> playerStartTiles = new List<Tile>();
         public List<Tile> enemyStartTiles = new List<Tile>();
@@ -38,6 +39,16 @@ namespace Tactics.Models
         public void ClearTerraformingTiles()
         {
             this.terraformingTiles.Clear();
+        }
+
+        public void SetCurrentSelectedForma(Forma forma)
+        {
+            this.currentSelectedForma = forma;
+        }
+
+        public void ClearCurrentSelectedForma()
+        {
+            this.currentSelectedForma = null;
         }
 
         /*-------------------------------------------------

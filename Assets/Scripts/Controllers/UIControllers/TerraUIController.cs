@@ -15,18 +15,28 @@ namespace Tactics.Controllers
         --------------------------------------------------*/
         public void OnUpdateTerra(UIEventData uiEventData)
         {
-            UpdateTerra(uiEventData.terra);
+            UpdateTerra(uiEventData.terra, uiEventData.terraformOverlay);
         }
 
 
         /*-------------------------------------------------
         *                     Helpers
         --------------------------------------------------*/
-        private void UpdateTerra(Terra terra)
+        private void UpdateTerra(Terra terra, TerraformOverlay terraformOverlay)
         {
-            this.terraUI.SetTerra(terra);
-            this.terraUI.SetImageSprite(terra.sprite);
-            this.terraUI.SetName(terra.type);
+            if (terraformOverlay.currentTerraType != "")
+            {
+                this.terraUI.SetTerraType(terraformOverlay.currentTerraType);
+                this.terraUI.SetImageSprite(terraformOverlay.GetCurrentSprite());
+                this.terraUI.SetName(terraformOverlay.currentTerraType);
+            }
+            else
+            {
+                this.terraUI.SetTerraType(terra.type);
+                this.terraUI.SetImageSprite(terra.sprite);
+                this.terraUI.SetName(terra.type);
+            }
+
         }
 
         /*-------------------------------------------------

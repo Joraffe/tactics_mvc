@@ -11,6 +11,7 @@ namespace Tactics.Models
     {
         public GameObject imageGameObject;
         public GameObject nameGameObject;
+        public string terraType;
         public Terra terra;
 
         public void SetImageSprite(Sprite sprite)
@@ -28,6 +29,11 @@ namespace Tactics.Models
         public void SetTerra(Terra terra)
         {
             this.terra = terra;
+        }
+
+        public void SetTerraType(string terraType)
+        {
+            this.terraType = terraType;
         }
     }
 }

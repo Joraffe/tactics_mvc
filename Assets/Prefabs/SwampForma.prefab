@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2bd88f2c6624f509ba994ecad0486d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showFormaArea: {fileID: 11400000, guid: d965cee7cbe494f75bdedf303cb246d1, type: 2}
+  selectForma: {fileID: 11400000, guid: 87ff401d2a447498a9fc46cb18a14b85, type: 2}
+  resetForma: {fileID: 11400000, guid: 5e4c6bf5435344842870fd7502b8cfd9, type: 2}
   forma: {fileID: 8570956352590441389}
 --- !u!114 &8570956352590441389
 MonoBehaviour:

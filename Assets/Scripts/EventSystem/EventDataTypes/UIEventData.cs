@@ -9,5 +9,6 @@ namespace Tactics.Events
         public Button button;
         public Character character;
         public Terra terra;
+        public TerraformOverlay terraformOverlay;
     }
 }

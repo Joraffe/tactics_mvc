@@ -22,7 +22,9 @@ GameObject:
   - component: {fileID: 7044434489788684248}
   - component: {fileID: -5298011962036289968}
   - component: {fileID: 3825557244358869303}
-  - component: {fileID: 4123124732725527114}
+  - component: {fileID: 8076870646073454918}
+  - component: {fileID: 8046514740864510222}
+  - component: {fileID: 2984481937837519613}
   m_Layer: 0
   m_Name: Map
   m_TagString: Map
@@ -57,6 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentSelectedCharacter: {fileID: 0}
+  currentSelectedForma: {fileID: 0}
   terraformingTiles: []
   playerStartTiles: []
   enemyStartTiles: []
@@ -90,10 +93,6 @@ MonoBehaviour:
   clearDangerOverlay: {fileID: 11400000, guid: 52b8b7369117b4fba9744f2a81fce8c6, type: 2}
   showActionOverlay: {fileID: 11400000, guid: 99cba2ee8fa5a43e8b97de0d3959a64c, type: 2}
   clearActionOverlay: {fileID: 11400000, guid: 3cc8ae9353fac45f08c19c435f765ef5, type: 2}
-  showTerraformOverlay: {fileID: 11400000, guid: 992ceef28e9f444a29ab0e351039795e,
-    type: 2}
-  clearTerraformOverlay: {fileID: 11400000, guid: 90401019c60664c6da198ec73c59446b,
-    type: 2}
   previewCharacterMovement: {fileID: 11400000, guid: 66fdb79b4f0bb41e78a9986894b4c12d,
     type: 2}
   previewCharacterCombat: {fileID: 11400000, guid: fcc168478650540c7825b3e7e151714a,
@@ -108,6 +107,7 @@ MonoBehaviour:
   resetCamera: {fileID: 11400000, guid: 6f5ce2ebb3b4949e7a8e58db6f815467, type: 2}
   completeTeamMemberAction: {fileID: 11400000, guid: c2214f4101bd94c84ab7824af30b20aa,
     type: 2}
+  resetForma: {fileID: 11400000, guid: 5e4c6bf5435344842870fd7502b8cfd9, type: 2}
   map: {fileID: 3756900671443878609}
 --- !u!114 &1275294651153525486
 MonoBehaviour:
@@ -448,7 +448,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4123124732725527114
+--- !u!114 &8076870646073454918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4985984669508076889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7740385fdbe45109e1794c0d07cd86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showTerraformOverlay: {fileID: 11400000, guid: 992ceef28e9f444a29ab0e351039795e,
+    type: 2}
+  clearTerraformOverlay: {fileID: 11400000, guid: 90401019c60664c6da198ec73c59446b,
+    type: 2}
+  map: {fileID: 3756900671443878609}
+--- !u!114 &8046514740864510222
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -460,12 +477,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d8a23851e307412883f65ff25f898ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: d965cee7cbe494f75bdedf303cb246d1, type: 2}
+  gameEvent: {fileID: 11400000, guid: 87ff401d2a447498a9fc46cb18a14b85, type: 2}
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4439515597793849956}
-        m_MethodName: OnShowFormaArea
+      - m_Target: {fileID: 8076870646073454918}
+        m_MethodName: OnSelectForma
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Tactics.Events.UnityMapEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &2984481937837519613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4985984669508076889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8a23851e307412883f65ff25f898ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 5e4c6bf5435344842870fd7502b8cfd9, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8076870646073454918}
+        m_MethodName: OnResetForma
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

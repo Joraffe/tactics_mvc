@@ -9,6 +9,7 @@ namespace Tactics.Models
     {
         public SpriteRenderer spriteRenderer;
         public Sprite swampTerraform;
+        public string currentTerraType;
 
         private Dictionary<string, Sprite> terraformOverlayMap;
 
@@ -21,12 +22,19 @@ namespace Tactics.Models
 
         public void SetSprite(string spriteKey)
         {
+            this.currentTerraType = spriteKey;
             this.spriteRenderer.sprite = this.terraformOverlayMap[spriteKey];
         }
 
         public void ClearSprite()
         {
+            this.currentTerraType = "";
             this.spriteRenderer.sprite = null;
+        }
+
+        public Sprite GetCurrentSprite()
+        {
+            return this.spriteRenderer.sprite;
         }
     }
 }

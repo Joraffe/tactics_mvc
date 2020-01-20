@@ -9,69 +9,25 @@ namespace Tactics.Controllers
 {
     public class FormaController : MonoBehaviour
     {
-        public MapEvent showFormaArea;
+        public MapEvent selectForma;
+        public MapEvent resetForma;
         public Forma forma;
+
+        public void Update()
+        {
+            HandleFormaCastableInput();
+            HandleFormaCancelInput();
+        }
+
         // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
-
-        /*-------------------------------------------------
-        *             Periodic Functionality
-        --------------------------------------------------*/
-        void Update()
-        {
-        // Only allow showing the forma if we have selected a character
-            if (this.forma.castable)
-            {
-                HandleFormaCancelInput();
-                HandleFormaDirectionInput();
-            }
-            else
-            {
-                HandleFormaCastableInput();
-            }
-        }
-        
-
-
         /*-------------------------------------------------
         *                  Event Handlers
         --------------------------------------------------*/
-        private void HandleFormaDirectionInput()
-        {
-            List<FormaTile> formaTiles = new List<FormaTile>();
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-            {
-                formaTiles = this.forma.GetUpFormaTiles();
-            }
-            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            {
-                formaTiles = this.forma.GetDownFormaTiles();
-            }
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            {
-                formaTiles = this.forma.GetLeftFormaTiles();
-            }
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            {
-                formaTiles = this.forma.GetRightFormaTiles();
-            }
-
-            if (formaTiles.Count != 0)
-            {
-                ShowFormaAreaOnMap(formaTiles);
-            }
-        }
-
         private void HandleFormaCastableInput()
         {
             if (Input.GetKey(KeyCode.Z))
             {
-                this.forma.SetCastable();
-                // By default pick a direction; in the future this may be determined by character
-                ShowFormaAreaOnMap(this.forma.GetUpFormaTiles());
+                SelectFormaForMap(this.forma);
             }
         }
 
@@ -79,28 +35,40 @@ namespace Tactics.Controllers
         {
             if (Input.GetKey(KeyCode.Escape) || Input.GetMouseButtonDown(1))
             {
-                this.forma.ResetCastable();
+                ResetFormaForMap();
             }
         }
 
         /*-------------------------------------------------
         *                     Helpers
         --------------------------------------------------*/
-        private void ShowFormaAreaOnMap(List<FormaTile> formaTiles)
+        private void SelectFormaForMap(Forma forma)
         {
-            RaiseShowFormaAreaMapEvent(formaTiles);
+            RaiseSelectFormaMapEvent(forma);
+        }
+
+        private void ResetFormaForMap()
+        {
+            RaiseResetFormaMapEvent();
         }
 
 
         /*-------------------------------------------------
         *              Trigger Helpers
         --------------------------------------------------*/
-        private void RaiseShowFormaAreaMapEvent(List<FormaTile> formaTiles)
+        private void RaiseSelectFormaMapEvent(Forma forma)
         {
             MapEventData mapEventData = new MapEventData();
-            mapEventData.formaTiles = formaTiles;
+            mapEventData.forma = forma;
 
-            this.showFormaArea.Raise(mapEventData);
+            this.selectForma.Raise(mapEventData);
+        }
+
+        private void RaiseResetFormaMapEvent()
+        {
+            MapEventData mapEventData = new MapEventData();
+            
+            this.resetForma.Raise(mapEventData);
         }
     }
 

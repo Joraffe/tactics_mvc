@@ -27,8 +27,6 @@ namespace Tactics.Controllers
         public TileEvent clearDangerOverlay;
         public TileEvent showActionOverlay;
         public TileEvent clearActionOverlay;
-        public TileEvent showTerraformOverlay;
-        public TileEvent clearTerraformOverlay;
 
         public CharacterEvent previewCharacterMovement;
         public CharacterEvent previewCharacterCombat;
@@ -42,6 +40,9 @@ namespace Tactics.Controllers
         public CameraEvent resetCamera;
 
         public TeamEvent completeTeamMemberAction;
+
+        // For communicating with the other map controllers
+        public MapEvent resetForma;
 
         public Map map;
 
@@ -60,9 +61,10 @@ namespace Tactics.Controllers
                 this.map.SetCurrentSelectedCharacter(mapEventData.character);
                 FocusCameraOnCharacter(mapEventData.character);
             }
-            // if we click the same character and they're previewing...
-            else if (this.map.currentSelectedCharacter == mapEventData.character
-                     && this.map.currentSelectedCharacter.isPreviewing)
+            // if we click the same character and they're previewing and they don't have a forma selected...
+            else if (this.map.currentSelectedCharacter == mapEventData.character &&
+                     this.map.currentSelectedCharacter.isPreviewing &&
+                     !this.map.currentSelectedForma)
             {
                 ClearAllTiles();
                 this.map.ClearCurrentSelectedCharacter();
@@ -73,10 +75,7 @@ namespace Tactics.Controllers
             else if (this.map.currentSelectedCharacter == mapEventData.character
                      && !this.map.currentSelectedCharacter.isPreviewing)
             {
-                ClearAllTiles();
-                ResetCurrentSelectedCharacter();
-                HideCharacterUI();
-                ResetCamera();
+                ResetMap();
             }
             // if we click an enemy character that's on an active combat tile...
             else if (this.map.currentSelectedCharacter.isOpposition(mapEventData.character)
@@ -116,11 +115,7 @@ namespace Tactics.Controllers
 
         public void OnResetTiles()
         {
-            ClearAllTiles();
-            ResetCurrentSelectedCharacter();
-            HideCharacterUI();
-            ResetCamera();
-            ClearPreviousTerraForm();
+            ResetMap();
         }
 
         public void OnTileSelected(MapEventData mapEventData)
@@ -168,24 +163,17 @@ namespace Tactics.Controllers
             ClearDangerOverlayForAllTiles();
         }
 
-        public void OnShowFormaArea(MapEventData mapEventData)
-        {
-            if (this.map.terraformingTiles.Count > 0)
-            {
-                ClearPreviousTerraForm();
-            }
-            
-
-            foreach (FormaTile formaTile in mapEventData.formaTiles)
-            {
-                PreviewTerraForm(formaTile);
-            }
-        }
-
-
         /*-------------------------------------------------
         *                     Helpers
         --------------------------------------------------*/
+        private void ResetMap()
+        {
+            ClearAllTiles();
+            ResetCurrentSelectedCharacter();
+            HideCharacterUI();
+            ResetCamera();
+            ResetMapForma();
+        }
         private void ClearAllTiles()
         {
             foreach (Tile tile in this.map.tiles)
@@ -235,9 +223,7 @@ namespace Tactics.Controllers
             // If we select the character originTile, then we are "unselecting" the character
             if (selectedTile == selectedCharacter.originTile)
             {
-                ClearAllTiles();
-                ResetCurrentSelectedCharacter();
-                HideCharacterUI();
+                ResetMap();
                 return;
             }
 
@@ -479,23 +465,9 @@ namespace Tactics.Controllers
             RaiseResetCameraEvent();
         }
 
-        private void PreviewTerraForm(FormaTile formaTile)
+        private void ResetMapForma()
         {
-            Tile characterTile = this.map.GetCurrentSelectedCharacter().currentTile;
-            int terraformTileXPos = characterTile.XPosition + formaTile.relativeX;
-            int terraformTileYPos = characterTile.YPosition + formaTile.relativeY;
-
-            Tile terraformTile = this.map.tiles[terraformTileXPos, terraformTileYPos];
-            this.map.AddTerraformingTile(terraformTile);
-            RaiseShowTerraformOverlayTileEvent(terraformTile, formaTile.terraType);
-        }
-
-        private void ClearPreviousTerraForm()
-        {
-            foreach (Tile terraformTile in this.map.terraformingTiles)
-            {
-                RaiseClearTerraformOverlayTileEvent(terraformTile);
-            }
+            RaiseResetFormaMapEvent();
         }
 
 
@@ -671,23 +643,6 @@ namespace Tactics.Controllers
             this.clearActionOverlay.Raise(tileEventData);
         }
 
-        private void RaiseShowTerraformOverlayTileEvent(Tile tile, string terraformOverlayImage)
-        {
-            TileEventData tileEventData = new TileEventData();
-            tileEventData.tile = tile;
-            tileEventData.terraformOverlayImage = terraformOverlayImage;
-
-            this.showTerraformOverlay.Raise(tileEventData);
-        }
-
-        private void RaiseClearTerraformOverlayTileEvent(Tile tile)
-        {
-            TileEventData tileEventData = new TileEventData();
-            tileEventData.tile = tile;
-
-            this.clearTerraformOverlay.Raise(tileEventData);
-        }
-
         private void RaiseShowCharacterUIEvent(Character character)
         {
             UIEventData uiEventData = new UIEventData();
@@ -716,6 +671,13 @@ namespace Tactics.Controllers
             CameraEventData cameraEventData = new CameraEventData();
 
             this.resetCamera.Raise(cameraEventData);
+        }
+
+        private void RaiseResetFormaMapEvent()
+        {
+            MapEventData mapEventData = new MapEventData();
+            
+            this.resetForma.Raise(mapEventData);
         }
 
     }
