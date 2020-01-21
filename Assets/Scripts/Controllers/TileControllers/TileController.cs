@@ -64,51 +64,6 @@ namespace Tactics.Controllers
             HandleMouseHover();
         }
 
-        public void OnSetMovementTile(TileEventData tileEventData)
-        {
-            if (this.tile == tileEventData.tile)
-            {
-                Tile movementTile = tileEventData.tile;
-                movementTile.SetActiveMovement();
-            }
-        }
-
-        public void OnSetCombatTile(TileEventData tileEventData)
-        {
-            if (this.tile == tileEventData.tile)
-            {
-                Tile combatTile = tileEventData.tile;
-                combatTile.SetActiveCombat();
-            }
-        }
-
-        public void OnSetArrangementTile(TileEventData tileEventData)
-        {
-            if (this.tile == tileEventData.tile)
-            {
-                Tile startTile = tileEventData.tile;
-                startTile.SetActiveArrangement();
-            }
-        }
-
-        public void OnClearArrangementTile(TileEventData tileEventData)
-        {
-            if (this.tile == tileEventData.tile)
-            {
-                Tile startTile = tileEventData.tile;
-                startTile.ClearActiveArrangement();
-            }
-        }
-
-        public void OnSetTerraformActiveState(TileEventData tileEventData)
-        {
-            if (this.tile == tileEventData.tile)
-            {
-                tileEventData.tile.SetActiveTerraform();
-            }
-        }
-
-
         public void OnSetActiveState(TileEventData tileEventData)
         {
             if (this.tile == tileEventData.tile)

@@ -12,6 +12,6 @@ namespace Tactics.Events
         public Terra terra;
         public TerraformOverlay terraformOverlay;
         public Dictionary<string, int> terraCountMap;
-        public List<Tile> terraformTiles;
+        public Dictionary<string, int> postTerraformTerraCountMap;
     }
 }

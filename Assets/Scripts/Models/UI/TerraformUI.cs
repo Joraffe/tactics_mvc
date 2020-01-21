@@ -35,20 +35,9 @@ namespace Tactics.Models
             }
         }
 
-        public void AddAfterTerraNumber(Dictionary<string, int> terraCountMap, List<Tile> terraformTiles)
+        public void AddAfterTerraNumber(Dictionary<string, int> postTerraformTerraCountMap)
         {
-            Dictionary<string, int> terraCountCopy = new Dictionary<string, int>(terraCountMap);
-            
-            foreach (Tile terraformTile in terraformTiles)
-            {
-                string currentTerraType = terraformTile.terra.type;
-                string nextTerraType = terraformTile.previewTerraformType;
-
-                terraCountCopy[currentTerraType] -= 1;
-                terraCountCopy[nextTerraType] += 1;
-            }
-
-            foreach (KeyValuePair<string, int> terraCount in terraCountCopy)
+            foreach (KeyValuePair<string, int> terraCount in postTerraformTerraCountMap)
             {
                 if (terraCount.Key != "total")
                 {

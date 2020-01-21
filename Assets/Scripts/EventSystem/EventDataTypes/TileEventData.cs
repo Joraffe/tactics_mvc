@@ -13,5 +13,6 @@ namespace Tactics.Events
         public string previewTerraformType;
         public string overlayImageKey;
         public string overlayType;
+        public string terraType;
     }
 }

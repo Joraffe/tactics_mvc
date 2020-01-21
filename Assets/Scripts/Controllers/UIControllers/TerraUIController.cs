@@ -26,7 +26,7 @@ namespace Tactics.Controllers
         {
             if (terra.type != "" || terra.type != null)
             {
-                this.terraUI.SetTerra(terra.type);
+                this.terraUI.SetTerra(terra);
             }
         }
 

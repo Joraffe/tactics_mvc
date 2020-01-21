@@ -36,6 +36,7 @@ namespace Tactics.Controllers
         // For communicating with the other map controllers
         public MapEvent resetForma;
         public MapEvent previewTerraform;
+        public MapEvent commitTerraform;
 
         public Map map;
 
@@ -59,10 +60,7 @@ namespace Tactics.Controllers
                      this.map.currentSelectedCharacter.isPreviewing &&
                      !this.map.currentSelectedForma)
             {
-                ClearAllTiles();
-                this.map.ClearCurrentSelectedCharacter();
-                CompleteTeamMemberAction(mapEventData.character);
-                HideCharacterUI();
+                CompleteCharacterTurn(mapEventData.character);
             }
             // if we click the same character and they're not previewing...
             else if (this.map.currentSelectedCharacter == mapEventData.character
@@ -114,17 +112,32 @@ namespace Tactics.Controllers
         public void OnTileSelected(MapEventData mapEventData)
         {
             Tile selectedTile = mapEventData.tile;
+            
+            // If we click a tile and it has a "movement" active state,
+            // we've displayed it as an option for a character to move;
+            // we consider this previewing movement to that tile
             if (selectedTile.activeState == TileInteractType.Movement)
             {
                 PreviewSelectMovementTile(selectedTile);
             }
-            else if (selectedTile.activeState == TileInteractType.Combat)
+            // If we click a tile and it has a "terraform" active state,
+            // we've displayed it as an option for a character to terraform,
+            // and we aren't already previewing a terraform...
+            // we consider this previewing terraforming that tile
+            else if (selectedTile.activeState == TileInteractType.Terraform &&
+                     !this.map.isPreviewingTerraform)
             {
-                PreviewSelectCombatTile(selectedTile);
+                PreviewTerraform(this.map.terraformingTiles, this.map.terraCountMap);
             }
-            else if (selectedTile.activeState == TileInteractType.Terraform)
+            // If we click a tile and it has a "terraform" active state,
+            // and we've displayed it as an option for a character to terraform,
+            // and we already area previewing a terraform...
+            // we consider this committing the terraform
+            else if (selectedTile.activeState == TileInteractType.Terraform &&
+                     this.map.isPreviewingTerraform)
             {
-                PreviewTerraform();
+                CommitTerraform(this.map.terraformingTiles, this.map.terraCountMap);
+                CompleteCharacterTurn(this.map.currentSelectedCharacter);
             }
         }
 
@@ -170,6 +183,14 @@ namespace Tactics.Controllers
             HideCharacterUI();
             ResetCamera();
             ResetMapForma();
+        }
+
+        private void CompleteCharacterTurn(Character character)
+        {
+            this.map.ClearCurrentSelectedCharacter();
+            ClearAllTiles();
+            CompleteTeamMemberAction(character);
+            HideCharacterUI();
         }
         private void ClearAllTiles()
         {
@@ -458,9 +479,14 @@ namespace Tactics.Controllers
             RaiseResetFormaMapEvent();
         }
 
-        private void PreviewTerraform()
+        private void PreviewTerraform(List<Tile> terraformingTiles, Dictionary<string, int> terraCountMap)
         {
-            RaisePreviewTerraformMapEvent();
+            RaisePreviewTerraformMapEvent(terraformingTiles, terraCountMap);
+        }
+
+        private void CommitTerraform(List<Tile> terraformingTiles, Dictionary<string, int> terraCountMap)
+        {
+            RaiseCommitTerraformMapEvent(terraformingTiles, terraCountMap);
         }
 
 
@@ -608,13 +634,22 @@ namespace Tactics.Controllers
             this.resetForma.Raise(mapEventData);
         }
 
-        private void RaisePreviewTerraformMapEvent()
+        private void RaisePreviewTerraformMapEvent(List<Tile> terraformingTiles, Dictionary<string, int> terraCountMap)
         {
             MapEventData mapEventData = new MapEventData();
+            mapEventData.terraformingTiles = terraformingTiles;
+            mapEventData.terraCountMap = terraCountMap;
 
             this.previewTerraform.Raise(mapEventData);
-            
         }
 
+        private void RaiseCommitTerraformMapEvent(List<Tile> terraformingTiles, Dictionary<string, int> terraCountMap)
+        {
+            MapEventData mapEventData = new MapEventData();
+            mapEventData.terraformingTiles = terraformingTiles;
+            mapEventData.terraCountMap = terraCountMap;
+
+            this.commitTerraform.Raise(mapEventData);
+        }
     }
 }

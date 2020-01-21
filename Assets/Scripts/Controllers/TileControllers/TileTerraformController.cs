@@ -33,6 +33,14 @@ namespace Tactics.Controllers
             }
         }
 
+        public void OnTerraformTile(TileEventData tileEventData)
+        {
+            if (this.tile == tileEventData.tile)
+            {
+                TerraformTile(tileEventData.tile, tileEventData.terraType);
+            }
+        }
+
 
         /*-------------------------------------------------
         *                 Helpers
@@ -46,6 +54,13 @@ namespace Tactics.Controllers
         {
             tile.ClearPreviewTerraformType();
         }
+
+        private void TerraformTile(Tile tile, string terraType)
+        {
+            tile.SetTerraType(terraType);
+            tile.SetSprite(tile.GetTerra().GetCurrentSprite());
+        }
+
 
         /*-------------------------------------------------
         *              Event Triggers

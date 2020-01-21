@@ -55,136 +55,15 @@ namespace Tactics.Models
         public SpriteRenderer spriteRenderer;
         public Transform tileTransform;
 
-        /*
-         * Things you can do with tiles
-         *
-         * With Character Unselected:
-         *   - Select an empty map tile (nothing happens)
-         *   - Select a player character on a map tile
-         *     - Displays character movement + attack + assist options
-         *     - Also display character info at top
-         *   - Select an enemy character on a map tile
-         *     - Displays enemy attack range
-         *     - Also displays enemy character info at top
-         *
-         * With Character Selected:
-         *   - Move to an empty tile within move range
-         *   - Attack an enemy within combat range
-         *   - Assist an ally within move range + 1
-         */
 
-        public string GetCoordinates()
-        {
-            return $"({this.XPosition}, {this.YPosition})";
-        }
-
-        public bool isOccupiedByOpposition(Character character) {
-            return this.occupant != null && this.occupant.isOpposition(character);
-        }
-
-        public bool isOccupiedByAlly(Character character)
-        {
-            return (
-                this.occupant != null
-                && this.occupant.isAlly(character)
-                && this.occupant.name != character.name
-            );
-        }
-
-        public bool isMoveableTerrain(Character character)
-        {
-            // Note: we pass in character to account for character move type later
-
-            // if (this.terra.type == TerraTypes.Oceanic)
-            // {
-            //     return false;
-            // }
-
-            // This is a "normal" tile
-            return true;
-        }
-
-        public bool isCombatableTerrain(Character character)
-        {
-            // if (this.terra.type == TerraTypes.Oceanic)
-            // {
-            //     return false;
-            // }
-
-            return true;
-        }
-
-        public bool isWithinMoveDistance(Character character)
-        {
-            int xDiff = character.originTile.XPosition - this.XPosition;
-            int yDiff = character.originTile.YPosition - this.YPosition;
-
-            return (Math.Abs(xDiff) + Math.Abs(yDiff)) <= character.movementRange;
-        }
-
-        public bool isMoveableForCharacter(Character character)
-        {
-            return (
-                this.isMoveableTerrain(character)
-                && this.isWithinMoveDistance(character)
-                && !this.isOccupiedByOpposition(character)
-
-            );
-        }
-
-        public bool isCombatableForCharacter(Character character)
-        {
-            return (
-                this.isCombatableTerrain(character)
-                || this.isOccupiedByOpposition(character)
-            );
-        }
-
-        public void ChangeTileColor(Color color)
-        {
-            this.spriteRenderer.color = color;
-        }
-
-        public void SetActiveMovement()
-        {
-            this.active = true;
-            this.activeState = TileInteractType.Movement;
-        }
-
-        public void SetActiveCombat()
-        {
-            this.active = true;
-            this.activeState = TileInteractType.Combat;
-        }
-
-        public void SetActiveArrangement()
-        {
-            this.active = true;
-            this.activeState = TileInteractType.Arrangement;
-        }
-
-        public void SetActiveTerraform()
-        {
-            this.active = true;
-            this.activeState = TileInteractType.Terraform;
-        }
-
-        public void ClearActiveArrangement()
-        {
-            this.active = false;
-            this.activeState = "";
-        }
-
+        /*-------------------------------------------------
+        *                     Setters
+        --------------------------------------------------*/
         public void ClearTile()
         {
             ClearOverlay(TileOverlayTypes.All);
             ClearAssociatedMovementTiles();
             ClearActiveState();
-        }
-
-        public Vector3 GetTransformPosition()
-        {
-            return this.tileTransform.position;
         }
 
         public void SetOccupant(Character character)
@@ -297,6 +176,102 @@ namespace Tactics.Models
         public void ClearPreviewTerraformType()
         {
             this.previewTerraformType = null;
+        }
+
+        public void SetSprite(Sprite sprite)
+        {
+            this.spriteRenderer.sprite = sprite;
+        }
+
+        public void SetTerraType(string terraType)
+        {
+            this.terra.SetTerraType(terraType);
+        }
+
+
+        /*-------------------------------------------------
+        *                     Getters
+        --------------------------------------------------*/
+        public string GetCoordinates()
+        {
+            return $"({this.XPosition}, {this.YPosition})";
+        }
+
+        public Vector3 GetTransformPosition()
+        {
+            return this.tileTransform.position;
+        }
+
+        public Terra GetTerra()
+        {
+            return this.terra;
+        }
+
+
+
+        /*-------------------------------------------------
+        *                     Helpers
+        --------------------------------------------------*/
+        public bool isOccupiedByOpposition(Character character) {
+            return this.occupant != null && this.occupant.isOpposition(character);
+        }
+
+        public bool isOccupiedByAlly(Character character)
+        {
+            return (
+                this.occupant != null
+                && this.occupant.isAlly(character)
+                && this.occupant.name != character.name
+            );
+        }
+
+        public bool isMoveableTerrain(Character character)
+        {
+            // Note: we pass in character to account for character move type later
+
+            // if (this.terra.type == TerraTypes.Oceanic)
+            // {
+            //     return false;
+            // }
+
+            // This is a "normal" tile
+            return true;
+        }
+
+        public bool isCombatableTerrain(Character character)
+        {
+            // if (this.terra.type == TerraTypes.Oceanic)
+            // {
+            //     return false;
+            // }
+
+            return true;
+        }
+
+        public bool isWithinMoveDistance(Character character)
+        {
+            int xDiff = character.originTile.XPosition - this.XPosition;
+            int yDiff = character.originTile.YPosition - this.YPosition;
+
+            return (Math.Abs(xDiff) + Math.Abs(yDiff)) <= character.movementRange;
+        }
+
+        public bool isMoveableForCharacter(Character character)
+        {
+            return (
+                this.isMoveableTerrain(character)
+                && this.isWithinMoveDistance(character)
+                && !this.isOccupiedByOpposition(character)
+
+            );
+        }
+
+        public bool isCombatableForCharacter(Character character)
+        {
+            return (
+                this.isCombatableTerrain(character)
+                || this.isOccupiedByOpposition(character)
+            );
         }
 
     }

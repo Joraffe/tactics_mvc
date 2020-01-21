@@ -44,8 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc71a0b67d3cd400d90af70de4d39a99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  NeutralTerra: {fileID: 21300000, guid: 05f1d06f1acf6457f917fbefd9b800df, type: 3}
+  SwampTerra: {fileID: 21300000, guid: d0577dfd1837b45b2bfb8e1002f36ea6, type: 3}
+  DesertTerra: {fileID: 21300000, guid: e9d100841b8324ab4b34273ef09f6852, type: 3}
+  ForestTerra: {fileID: 21300000, guid: db0ff8344aacf4477bca9179a547563c, type: 3}
+  VolcanicTerra: {fileID: 21300000, guid: 1331b3001c6e2481ca30d289642bceba, type: 3}
+  OceanicTerra: {fileID: 21300000, guid: db5a64f9da83a461eaa0ac779d6122ff, type: 3}
+  IndustrialTerra: {fileID: 21300000, guid: e5db0149ff00c419ca3deebfa2ae1d9b, type: 3}
   type: 
 --- !u!114 &8240298251341597270
 MonoBehaviour:

@@ -15,6 +15,7 @@ namespace Tactics.Controllers
         public TileEvent clearPreviewTerraformType;
         public TileEvent showOverlay;
         public TileEvent clearOverlay;
+        public TileEvent terraformTile;
 
         public UIEvent showTerraformUI;
         public UIEvent hideTerraformUI;
@@ -94,7 +95,12 @@ namespace Tactics.Controllers
 
         public void OnPreviewTerraform(MapEventData mapEventData)
         {
-            PreviewTerraform();
+            PreviewTerraform(mapEventData.terraformingTiles, mapEventData.terraCountMap);
+        }
+
+        public void OnCommitTerraform(MapEventData mapEventData)
+        {
+            CommitTerraform(mapEventData.terraformingTiles, mapEventData.terraCountMap);
         }
 
         /*-------------------------------------------------
@@ -131,10 +137,10 @@ namespace Tactics.Controllers
             this.map.ClearTerraformingTiles();
         }
 
-        private void PreviewTerraform()
+        private void PreviewTerraform(List<Tile> terraformingTiles, Dictionary<string, int> terraCountMap)
         {
             this.map.SetIsPreviewingTerraform();
-            foreach (Tile tile in this.map.terraformingTiles)
+            foreach (Tile tile in terraformingTiles)
             {
                 RaiseShowOverlayTileEvent(
                     tile,
@@ -142,7 +148,21 @@ namespace Tactics.Controllers
                     TileOverlayTypes.Select
                 );
             }
-            RaiseShowTerraformUI(this.map.terraCountMap, this.map.terraformingTiles);
+            Dictionary<string, int> postTerraformTerraCountMap = this.map.GetPostTerraformTerraCountMap(
+                terraformingTiles,
+                terraCountMap
+            );
+            RaiseShowTerraformUI(terraCountMap, postTerraformTerraCountMap);
+        }
+
+        private void CommitTerraform(List<Tile> terraformingTiles, Dictionary<string, int> terraCountMap)
+        {
+            this.map.UpdateTerraCountMap(terraformingTiles);
+            foreach (Tile terraformingTile in terraformingTiles)
+            {
+                RaiseTerraformTileEvent(terraformingTile, terraformingTile.previewTerraformType);
+            }
+            ResetMapForma();
         }
 
         private void SelectMapForma(Forma forma)
@@ -215,11 +235,11 @@ namespace Tactics.Controllers
             this.clearPreviewTerraformType.Raise(tileEventData);
         }
 
-        private void RaiseShowTerraformUI(Dictionary<string, int> terraCountMap, List<Tile> terraformTiles)
+        private void RaiseShowTerraformUI(Dictionary<string, int> terraCountMap, Dictionary<string, int> postTerraformTerraCountMap)
         {
             UIEventData uiEventData = new UIEventData();
             uiEventData.terraCountMap = terraCountMap;
-            uiEventData.terraformTiles = terraformTiles;
+            uiEventData.postTerraformTerraCountMap = postTerraformTerraCountMap;
 
             this.showTerraformUI.Raise(uiEventData);
         }
@@ -229,6 +249,15 @@ namespace Tactics.Controllers
             UIEventData uiEventData = new UIEventData();
 
             this.hideTerraformUI.Raise(uiEventData);
+        }
+
+        private void RaiseTerraformTileEvent(Tile tile, string terraType)
+        {
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+            tileEventData.terraType = terraType;
+
+            this.terraformTile.Raise(tileEventData);
         }
     }
 }

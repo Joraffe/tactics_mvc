@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 8046514740864510222}
   - component: {fileID: 2984481937837519613}
   - component: {fileID: 6748302328586204827}
+  - component: {fileID: 87845207627974119}
   m_Layer: 0
   m_Name: Map
   m_TagString: Map
@@ -62,6 +63,7 @@ MonoBehaviour:
   currentSelectedCharacter: {fileID: 0}
   currentSelectedForma: {fileID: 0}
   isPreviewingTerraform: 0
+  currentFormaDirection: 
   terraformingTiles: []
   playerStartTiles: []
   enemyStartTiles: []
@@ -101,6 +103,7 @@ MonoBehaviour:
     type: 2}
   resetForma: {fileID: 11400000, guid: 5e4c6bf5435344842870fd7502b8cfd9, type: 2}
   previewTerraform: {fileID: 11400000, guid: 8d2106c0b6f74449eb23776dba320481, type: 2}
+  commitTerraform: {fileID: 11400000, guid: 65d23f0322074470d8d61f0c1769bf60, type: 2}
   map: {fileID: 3756900671443878609}
 --- !u!114 &1275294651153525486
 MonoBehaviour:
@@ -461,6 +464,7 @@ MonoBehaviour:
     type: 2}
   showOverlay: {fileID: 11400000, guid: f74a477c2baaf461097be9d178e28302, type: 2}
   clearOverlay: {fileID: 11400000, guid: c43ad5b5d22de4b41a80135938708a6d, type: 2}
+  terraformTile: {fileID: 11400000, guid: e983f130ca9d64294b668f1a7ec8dc42, type: 2}
   showTerraformUI: {fileID: 11400000, guid: 095b837951427405c959b24442b82a9c, type: 2}
   hideTerraformUI: {fileID: 11400000, guid: bf820ca3839b345158f208d58136cbd9, type: 2}
   map: {fileID: 3756900671443878609}
@@ -540,6 +544,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8076870646073454918}
         m_MethodName: OnPreviewTerraform
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Tactics.Events.UnityMapEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &87845207627974119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4985984669508076889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8a23851e307412883f65ff25f898ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 65d23f0322074470d8d61f0c1769bf60, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8076870646073454918}
+        m_MethodName: OnCommitTerraform
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

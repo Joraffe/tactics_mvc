@@ -13,32 +13,10 @@ namespace Tactics.Models
         public GameObject nameGameObject;
         public string currentTerraType;
 
-        public Sprite neutralTerra;
-        public Sprite swampTerra;
-        public Sprite desertTerra;
-        public Sprite forestTerra;
-        public Sprite volcanicTerra;
-        public Sprite oceanicTerra;
-        public Sprite industrialTerra;
-        public Dictionary<string, Sprite> terraSpriteMap;
-
-        public void Awake()
-        {
-            this.terraSpriteMap = new Dictionary<string, Sprite>{
-                { TerraTypes.Neutral, neutralTerra },
-                { TerraTypes.Swamp, swampTerra },
-                { TerraTypes.Desert, desertTerra  },
-                { TerraTypes.Forest, forestTerra },
-                { TerraTypes.Volcanic, volcanicTerra },
-                { TerraTypes.Oceanic, oceanicTerra },
-                { TerraTypes.Industrial, industrialTerra }
-            };
-        }
-
-        public void SetImageSprite(string spriteKey)
+        public void SetImageSprite(Sprite sprite)
         {
             Image image = imageGameObject.GetComponent<Image>();
-            image.sprite = this.terraSpriteMap[spriteKey];
+            image.sprite = sprite;
         }
 
         public void SetName(string name)
@@ -52,11 +30,11 @@ namespace Tactics.Models
             this.currentTerraType = terraType;
         }
 
-        public void SetTerra(string terraType)
+        public void SetTerra(Terra terra)
         {
-            SetTerraType(terraType);
-            SetImageSprite(terraType);
-            SetName(terraType);
+            SetTerraType(terra.type);
+            SetImageSprite(terra.GetCurrentSprite());
+            SetName(terra.type);
         }
     }
 }
