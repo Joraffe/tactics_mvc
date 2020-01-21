@@ -205,7 +205,7 @@ namespace Tactics.Controllers
 
 
         /*-------------------------------------------------
-        *              Trigger Helpers
+        *             Event Triggers
         --------------------------------------------------*/
         private void RaiseSelectTileMapEvent(Tile tile)
         {

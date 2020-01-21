@@ -54,7 +54,7 @@ namespace Tactics.Controllers
 
 
         /*-------------------------------------------------
-        *              Trigger Helpers
+        *              Event Triggers
         --------------------------------------------------*/
         private void RaiseSelectFormaMapEvent(Forma forma)
         {

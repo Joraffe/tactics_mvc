@@ -122,7 +122,7 @@ namespace Tactics.Controllers
 
 
         /*-------------------------------------------------
-        *              Trigger Helpers
+        *              Event Triggers
         --------------------------------------------------*/
         private void RaiseClickCharacterMapEvent(Character character)
         {

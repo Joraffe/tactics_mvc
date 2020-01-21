@@ -1,4 +1,5 @@
-﻿using Tactics.Models;
+﻿using System.Collections.Generic;
+using Tactics.Models;
 
 
 namespace Tactics.Events
@@ -10,5 +11,7 @@ namespace Tactics.Events
         public Character character;
         public Terra terra;
         public TerraformOverlay terraformOverlay;
+        public Dictionary<string, int> terraCountMap;
+        public List<Tile> terraformTiles;
     }
 }

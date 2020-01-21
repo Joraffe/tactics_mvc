@@ -11,7 +11,7 @@ namespace Tactics.Controllers
         public Team team;
 
         /*-------------------------------------------------
-        *                 Event Handlers
+        *             Event Handlers
         --------------------------------------------------*/
         public void OnCompleteTeamMemberAction(TeamEventData teamEventData)
         {
@@ -23,7 +23,7 @@ namespace Tactics.Controllers
 
 
         /*-------------------------------------------------
-        *                     Helpers
+        *                Helpers
         --------------------------------------------------*/
         private void CompleteTeamMemberAction(Character character)
         {
@@ -32,7 +32,7 @@ namespace Tactics.Controllers
 
 
         /*-------------------------------------------------
-        *              Trigger Helpers
+        *              Event Triggers
         --------------------------------------------------*/
         private void RaiseCompleteCharacterActionCharacterEvent(Character character)
         {

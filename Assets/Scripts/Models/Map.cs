@@ -13,11 +13,28 @@ namespace Tactics.Models
         public Tile[,] tiles = new Tile[xMaxSize,yMaxSize];
         public Character currentSelectedCharacter;
         public Forma currentSelectedForma;
+        public bool isPreviewingTerraform;
+        public string currentFormaDirection;
+
+        public Dictionary<string, int> terraCountMap;
         public List<Tile> terraformingTiles = new List<Tile>();
         public List<Tile> playerStartTiles = new List<Tile>();
         public List<Tile> enemyStartTiles = new List<Tile>();
         public SpriteRenderer spriteRenderer;
 
+        public void Awake()
+        {
+            this.terraCountMap = new Dictionary<string, int>{
+                { TerraTypes.Neutral, 0 },
+                { TerraTypes.Swamp, 0 },
+                // { TerraTypes.Desert, 0 },
+                // { TerraTypes.Forest, 0 },
+                // { TerraTypes.Volcanic, 0 },
+                // { TerraTypes.Oceanic, 0 },
+                // { TerraTypes.Industrial, 0 },
+                { "total", 0 }
+            };
+        }
         /*-------------------------------------------------
         *                     Setters
         --------------------------------------------------*/
@@ -49,6 +66,24 @@ namespace Tactics.Models
         public void ClearCurrentSelectedForma()
         {
             this.currentSelectedForma = null;
+        }
+
+        public void SetIsPreviewingTerraform()
+        {
+            this.isPreviewingTerraform = true;
+        }
+
+        public void ResetIsPreviewingTerraform()
+        {
+            this.isPreviewingTerraform = false;
+        }
+
+        public void AddTileTerraCount(int xPosition, int yPosition)
+        {
+            Tile tile = this.tiles[xPosition, yPosition];
+            string terraType = tile.terra.type;
+            this.terraCountMap[terraType] += 1;
+            this.terraCountMap["total"] += 1;
         }
 
         /*-------------------------------------------------

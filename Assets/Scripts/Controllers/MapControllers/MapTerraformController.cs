@@ -11,14 +11,22 @@ namespace Tactics.Controllers
     {
         public TileEvent setActiveState;
         public TileEvent clearActiveState;
+        public TileEvent setPreviewTerraformType;
+        public TileEvent clearPreviewTerraformType;
         public TileEvent showOverlay;
         public TileEvent clearOverlay;
+
+        public UIEvent showTerraformUI;
+        public UIEvent hideTerraformUI;
         public Map map;
 
         public void Update()
         {
-            if (this.map.currentSelectedCharacter && this.map.currentSelectedForma)
+            if (this.map.currentSelectedCharacter &&
+                this.map.currentSelectedForma &&
+                !this.map.isPreviewingTerraform)
             {
+
                 HandleFormaDirection();
             }
         }
@@ -31,36 +39,42 @@ namespace Tactics.Controllers
             List<FormaTile> formaTiles = new List<FormaTile>();
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 selectedCharPosition = this.map.currentSelectedCharacter.transform.position;
+            string formaDirection = "";
 
             if (mousePosition.x > selectedCharPosition.x + 0.5 &&
                 mousePosition.y < selectedCharPosition.y + 0.5 &&
                 mousePosition.y > selectedCharPosition.y - 0.5)
             {
+                formaDirection = "right";
                 formaTiles = this.map.currentSelectedForma.GetRightFormaTiles();
             }
             else if (mousePosition.x < selectedCharPosition.x - 0.5 &&
                      mousePosition.y < selectedCharPosition.y + 0.5 &&
                      mousePosition.y > selectedCharPosition.y - 0.5)
             {
+                formaDirection = "left";
                 formaTiles = this.map.currentSelectedForma.GetLeftFormaTiles();
             }
             else if (mousePosition.y > selectedCharPosition.y + 0.5 &&
                      mousePosition.x < selectedCharPosition.x + 0.5 &&
                      mousePosition.x > selectedCharPosition.x - 0.5)
             {
+                formaDirection = "up";
                 formaTiles = this.map.currentSelectedForma.GetUpFormaTiles();
             }
             else if (mousePosition.y < selectedCharPosition.y - 0.5 &&
                      mousePosition.x < selectedCharPosition.x + 0.5 &&
                      mousePosition.x > selectedCharPosition.x - 0.5)
             {
+                formaDirection = "down";
                 formaTiles = this.map.currentSelectedForma.GetDownFormaTiles();
             }
 
-            if (formaTiles.Count > 0)
+            if (formaTiles.Count > 0 && formaDirection != this.map.currentFormaDirection)
             {
-                ClearPreviousTerraform();
-                PreviewTerraform(formaTiles);
+                ClearPreviousTerraformAOE();
+                ShowTerraformAOE(formaTiles);
+                this.map.currentFormaDirection = formaDirection;
             }
 
         }
@@ -75,17 +89,18 @@ namespace Tactics.Controllers
 
         public void OnResetForma(MapEventData mapEventData)
         {
-            if (this.map.currentSelectedCharacter && this.map.currentSelectedForma)
-            {
-                ResetMapForma();
-            }
+            ResetMapForma();
+        }
 
+        public void OnPreviewTerraform(MapEventData mapEventData)
+        {
+            PreviewTerraform();
         }
 
         /*-------------------------------------------------
         *                     Helpers
         --------------------------------------------------*/
-        private void PreviewTerraform(List<FormaTile> formaTiles)
+        private void ShowTerraformAOE(List<FormaTile> formaTiles)
         {
             foreach (FormaTile formaTile in formaTiles)
             {
@@ -99,17 +114,35 @@ namespace Tactics.Controllers
                     this.map.AddTerraformingTile(terraformTile);
                     RaiseShowOverlayTileEvent(terraformTile, formaTile.terraType, TileOverlayTypes.Terraform);
                     RaiseSetActiveStateTileEvent(terraformTile, TileInteractType.Terraform);
+                    RaiseSetPreviewTerraformTypeTileEvent(terraformTile, formaTile.terraType);
                 }
             }
         }
 
-        private void ClearPreviousTerraform()
+        private void ClearPreviousTerraformAOE()
         {
             foreach (Tile terraformTile in this.map.terraformingTiles)
             {
                 RaiseClearActiveStateTileEvent(terraformTile);
                 RaiseClearOverlayTileEvent(terraformTile, TileOverlayTypes.Terraform);
+                RaiseClearOverlayTileEvent(terraformTile, TileOverlayTypes.Select);
+                RaiseClearPreviewTerraformTypeTileEvent(terraformTile);
             }
+            this.map.ClearTerraformingTiles();
+        }
+
+        private void PreviewTerraform()
+        {
+            this.map.SetIsPreviewingTerraform();
+            foreach (Tile tile in this.map.terraformingTiles)
+            {
+                RaiseShowOverlayTileEvent(
+                    tile,
+                    SelectOverlayTypes.Terraform,
+                    TileOverlayTypes.Select
+                );
+            }
+            RaiseShowTerraformUI(this.map.terraCountMap, this.map.terraformingTiles);
         }
 
         private void SelectMapForma(Forma forma)
@@ -119,8 +152,11 @@ namespace Tactics.Controllers
 
         private void ResetMapForma()
         {
-            ClearPreviousTerraform();
+            ClearPreviousTerraformAOE();
             this.map.ClearCurrentSelectedForma();
+            this.map.ResetIsPreviewingTerraform();
+            this.map.currentFormaDirection = "";
+            RaiseHideTerraformUI();
         }
 
         /*-------------------------------------------------
@@ -160,6 +196,39 @@ namespace Tactics.Controllers
             tileEventData.tile = tile;
 
             this.clearActiveState.Raise(tileEventData);
+        }
+
+        private void RaiseSetPreviewTerraformTypeTileEvent(Tile tile, string previewTerraformType)
+        {
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+            tileEventData.previewTerraformType = previewTerraformType;
+
+            this.setPreviewTerraformType.Raise(tileEventData);
+        }
+
+        private void RaiseClearPreviewTerraformTypeTileEvent(Tile tile)
+        {
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+
+            this.clearPreviewTerraformType.Raise(tileEventData);
+        }
+
+        private void RaiseShowTerraformUI(Dictionary<string, int> terraCountMap, List<Tile> terraformTiles)
+        {
+            UIEventData uiEventData = new UIEventData();
+            uiEventData.terraCountMap = terraCountMap;
+            uiEventData.terraformTiles = terraformTiles;
+
+            this.showTerraformUI.Raise(uiEventData);
+        }
+
+        private void RaiseHideTerraformUI()
+        {
+            UIEventData uiEventData = new UIEventData();
+
+            this.hideTerraformUI.Raise(uiEventData);
         }
     }
 }

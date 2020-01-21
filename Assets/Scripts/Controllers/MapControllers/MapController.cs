@@ -12,10 +12,6 @@ namespace Tactics.Controllers
     public class MapController : MonoBehaviour
     {
 
-        // public TileEvent setMovementTile;
-        // public TileEvent setCombatTile;
-        // public TileEvent setArrangementTile;
-        // public TileEvent clearArrangementTile;
         public TileEvent setActiveState;
         public TileEvent clearActiveState;
         public TileEvent clearTile;
@@ -39,7 +35,7 @@ namespace Tactics.Controllers
 
         // For communicating with the other map controllers
         public MapEvent resetForma;
-        public MapEvent commitTerraform;
+        public MapEvent previewTerraform;
 
         public Map map;
 
@@ -128,7 +124,7 @@ namespace Tactics.Controllers
             }
             else if (selectedTile.activeState == TileInteractType.Terraform)
             {
-                Debug.Log($"Perform terraform action for tile: {selectedTile.GetCoordinates()}");
+                PreviewTerraform();
             }
         }
 
@@ -462,9 +458,14 @@ namespace Tactics.Controllers
             RaiseResetFormaMapEvent();
         }
 
+        private void PreviewTerraform()
+        {
+            RaisePreviewTerraformMapEvent();
+        }
+
 
         /*-------------------------------------------------
-        *              Trigger Helpers
+        *              Event Triggers
         --------------------------------------------------*/
         private void RaiseSetActiveStateTileEvent(Tile tile, string activeState)
         {
@@ -603,8 +604,16 @@ namespace Tactics.Controllers
         private void RaiseResetFormaMapEvent()
         {
             MapEventData mapEventData = new MapEventData();
-            
+
             this.resetForma.Raise(mapEventData);
+        }
+
+        private void RaisePreviewTerraformMapEvent()
+        {
+            MapEventData mapEventData = new MapEventData();
+
+            this.previewTerraform.Raise(mapEventData);
+            
         }
 
     }

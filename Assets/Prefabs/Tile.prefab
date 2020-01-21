@@ -225,6 +225,9 @@ GameObject:
   - component: {fileID: -1730647984984982690}
   - component: {fileID: 4165511460868725030}
   - component: {fileID: 8280167954385442326}
+  - component: {fileID: 1720337465314863872}
+  - component: {fileID: 8778017872859984619}
+  - component: {fileID: 8627931704638510668}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Tile
@@ -350,6 +353,7 @@ MonoBehaviour:
   moveOverlay: {fileID: 0}
   terraformOverlay: {fileID: 0}
   terra: {fileID: 0}
+  previewTerraformType: 
   active: 0
   activeState: 
   isShowingDanger: 0
@@ -566,6 +570,77 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2980618245169236744}
         m_MethodName: OnClearOverlay
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Tactics.Events.UnityTileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &1720337465314863872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012841591862070518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ff0bdd091fd4fd1954b3d9b455e51c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tile: {fileID: 8166856726616220454}
+--- !u!114 &8778017872859984619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012841591862070518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898d946007400432a9e706e31e509a9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 197bdccf2b19f476fbe8b75bf3d74499, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1720337465314863872}
+        m_MethodName: OnSetPreviewTerraformType
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Tactics.Events.UnityTileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &8627931704638510668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012841591862070518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898d946007400432a9e706e31e509a9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: dae951e5927844dcbbc4e37c5a589746, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1720337465314863872}
+        m_MethodName: OnClearPreviewTerraformType
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -854,7 +929,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -500689105
   m_SortingLayer: -1
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -882,6 +957,7 @@ MonoBehaviour:
   currentSpriteKey: 
   selectedMovement: {fileID: 21300000, guid: fd9de29997e78401c8b99b74f42e2102, type: 3}
   selectedCombat: {fileID: 21300000, guid: f900e5687df614adcb83b1cfb5c4e239, type: 3}
+  selectedTerraform: {fileID: 21300000, guid: d64d1b26f849d4c1384c43dc47f04db6, type: 3}
 --- !u!1001 &7808672442344059285
 PrefabInstance:
   m_ObjectHideFlags: 0

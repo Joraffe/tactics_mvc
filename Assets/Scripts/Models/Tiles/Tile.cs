@@ -42,6 +42,7 @@ namespace Tactics.Models
         public TerraformOverlay terraformOverlay;
 
         public Terra terra;  // Stores What type of tile this is
+        public string previewTerraformType;
 
         public bool active;  // If the tile has some kind of "active" state; i.e.
                              // If the player can select it to move, or selct to target
@@ -285,6 +286,17 @@ namespace Tactics.Models
                 default:
                     return;
             }
+        }
+
+
+        public void SetPreviewTerraformType(string previewTerraformType)
+        {
+            this.previewTerraformType = previewTerraformType;
+        }
+
+        public void ClearPreviewTerraformType()
+        {
+            this.previewTerraformType = null;
         }
 
     }

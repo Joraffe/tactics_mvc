@@ -11,6 +11,7 @@ namespace Tactics.Controllers
     {
         public UIEvent updateCharacterUI;
         public UIEvent updateTerraUI;
+        public UIEvent updateTerraformUI;
         public GameUI gameUI;
 
 
@@ -38,6 +39,17 @@ namespace Tactics.Controllers
         public void OnHideTerraUI(UIEventData uiEventData)
         {
             HideTerraUI();
+        }
+
+        public void OnShowTerraformUI(UIEventData uiEventData)
+        {
+            ShowTerraformUI();
+            UpdateTerraformUI(uiEventData.terraCountMap, uiEventData.terraformTiles);
+        }
+
+        public void OnHideTerraformUI(UIEventData uiEventData)
+        {
+            HideTerraformUI();
         }
 
         /*-------------------------------------------------
@@ -92,8 +104,29 @@ namespace Tactics.Controllers
             }
         }
 
+        private void ShowTerraformUI()
+        {
+            if (!this.gameUI.terraformUIGameObject.activeSelf)
+            {
+                this.gameUI.terraformUIGameObject.SetActive(true);
+            }
+        }
+
+        private void HideTerraformUI()
+        {
+            if (this.gameUI.terraformUIGameObject.activeSelf)
+            {
+                this.gameUI.terraformUIGameObject.SetActive(false);
+            }
+        }
+
+        private void UpdateTerraformUI(Dictionary<string, int> terraCountMap, List<Tile> terraformTiles)
+        {
+            RaiseUpdateTerraformUIEvent(terraCountMap, terraformTiles);
+        }
+
         /*-------------------------------------------------
-        *              Trigger Helpers
+        *              Event Triggers
         --------------------------------------------------*/
         private void RaiseUpdateCharacterUIEvent(Character character)
         {
@@ -109,6 +142,15 @@ namespace Tactics.Controllers
             uiEventData.terra = terra;
 
             this.updateTerraUI.Raise(uiEventData);
+        }
+
+        private void RaiseUpdateTerraformUIEvent(Dictionary<string, int> terraCountMap, List<Tile> terraformTiles)
+        {
+            UIEventData uiEventData = new UIEventData();
+            uiEventData.terraCountMap = terraCountMap;
+            uiEventData.terraformTiles = terraformTiles;
+
+            this.updateTerraformUI.Raise(uiEventData);
         }
     }
 }

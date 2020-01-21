@@ -8,6 +8,7 @@ namespace Tactics.Models
     {
         public const string Movement = "movement";
         public const string Combat = "combat";
+        public const string Terraform = "terraform";
     }
 
     public class SelectOverlay : BaseOverlay
@@ -15,12 +16,14 @@ namespace Tactics.Models
         // Sprite List
         public Sprite selectedMovement;
         public Sprite selectedCombat;
+        public Sprite selectedTerraform;
 
         protected override Dictionary<string, Sprite> GetOverlaySpriteMap()
         {
             return new Dictionary<string, Sprite>{
                 { SelectOverlayTypes.Movement, selectedMovement },
-                { SelectOverlayTypes.Combat, selectedCombat }
+                { SelectOverlayTypes.Combat, selectedCombat },
+                { SelectOverlayTypes.Terraform, selectedTerraform }
             };
         }
 

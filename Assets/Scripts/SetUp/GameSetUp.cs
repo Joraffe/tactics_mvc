@@ -116,6 +116,7 @@ namespace Tactics.SetUp
                     terraGameObject.name = $"{terra.type} Terra {tile.GetCoordinates()}";
                     tileGameObject.GetComponent<SpriteRenderer>().sprite = terra.sprite;
                     tile.terra = terra;
+                    this.map.AddTileTerraCount(x, y);
                 }
             }
 
