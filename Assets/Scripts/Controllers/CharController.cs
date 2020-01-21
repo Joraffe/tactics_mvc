@@ -11,7 +11,6 @@ namespace Tactics.Controllers
     public class CharController : MonoBehaviour
     {
         public MapEvent clickCharacter;
-
         public MapEvent occupyTileOnMap;
         public MapEvent unoccupyTileOnMap;
 
@@ -100,7 +99,6 @@ namespace Tactics.Controllers
         {
 
             Vector3 targetPathTilePosition = character.pathTargetTile.GetTransformPosition();
-
             Vector3 targetTilePosition = character.targetTile.GetTransformPosition();
 
             // First move to the current targetPathTile
@@ -124,14 +122,14 @@ namespace Tactics.Controllers
 
 
         /*-------------------------------------------------
-        *              Trigger Helpers
+        *              Event Triggers
         --------------------------------------------------*/
         private void RaiseClickCharacterMapEvent(Character character)
         {
             MapEventData clickCharacterData = new MapEventData();
             clickCharacterData.character = character;
 
-            clickCharacter.Raise(clickCharacterData);
+            this.clickCharacter.Raise(clickCharacterData);
         }
 
         private void RaiseOccupyTileMapEvent(Character character, Tile tile)
@@ -140,7 +138,7 @@ namespace Tactics.Controllers
             mapEventData.character = character;
             mapEventData.tile = tile;
 
-            occupyTileOnMap.Raise(mapEventData);
+            this.occupyTileOnMap.Raise(mapEventData);
         }
 
         private void RaiseUnoccupyTileMapEvent(Tile tile)
@@ -148,7 +146,7 @@ namespace Tactics.Controllers
             MapEventData mapEventData = new MapEventData();
             mapEventData.tile = tile;
 
-            unoccupyTileOnMap.Raise(mapEventData);
+            this.unoccupyTileOnMap.Raise(mapEventData);
         }
 
     }

@@ -35,7 +35,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 405947104329045841}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -140,6 +141,7 @@ MonoBehaviour:
   selectedCombatTile: {fileID: 0}
   team: {fileID: 0}
   acted: 0
+  characterSprite: {fileID: 0}
   spriteRenderer: {fileID: 1476551450612469152}
   characterTransform: {fileID: 4727301575220888923}
   greyscaleMaterial: {fileID: 2100000, guid: b2904bea1dffd4ff196e30d896019cc2, type: 2}
@@ -305,3 +307,78 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Tactics.Events.UnityCharacterEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1001 &8309160939872484546
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 4727301575220888923}
+    m_Modifications:
+    - target: {fileID: 8570956352590441388, guid: 75c16db28ddde4371b7dada0f9907be3,
+        type: 3}
+      propertyPath: m_Name
+      value: SwampForma
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570956352590441363, guid: 75c16db28ddde4371b7dada0f9907be3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570956352590441363, guid: 75c16db28ddde4371b7dada0f9907be3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570956352590441363, guid: 75c16db28ddde4371b7dada0f9907be3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570956352590441363, guid: 75c16db28ddde4371b7dada0f9907be3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570956352590441363, guid: 75c16db28ddde4371b7dada0f9907be3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570956352590441363, guid: 75c16db28ddde4371b7dada0f9907be3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570956352590441363, guid: 75c16db28ddde4371b7dada0f9907be3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570956352590441363, guid: 75c16db28ddde4371b7dada0f9907be3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570956352590441363, guid: 75c16db28ddde4371b7dada0f9907be3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570956352590441363, guid: 75c16db28ddde4371b7dada0f9907be3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8570956352590441363, guid: 75c16db28ddde4371b7dada0f9907be3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 75c16db28ddde4371b7dada0f9907be3, type: 3}
+--- !u!4 &405947104329045841 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8570956352590441363, guid: 75c16db28ddde4371b7dada0f9907be3,
+    type: 3}
+  m_PrefabInstance: {fileID: 8309160939872484546}
+  m_PrefabAsset: {fileID: 0}

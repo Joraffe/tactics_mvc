@@ -1,5 +1,101 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &117648426640912399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3491850025658579673}
+  - component: {fileID: 696535830993739152}
+  - component: {fileID: 2198354680577059055}
+  m_Layer: 0
+  m_Name: MoveOverlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3491850025658579673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117648426640912399}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5374182878182732485}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &696535830993739152
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117648426640912399}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -500689105
+  m_SortingLayer: -1
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &2198354680577059055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 117648426640912399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3fd45923a37d4047a05bc49f928ac6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 696535830993739152}
+  currentSpriteKey: 
+  moveSprite: {fileID: 21300000, guid: 539572e28886743a68279f73ccc02394, type: 3}
 --- !u!1 &754916099721848460
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,7 +165,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -500689105
   m_SortingLayer: -1
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -94,6 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 6910955919016666033}
+  currentSpriteKey: 
   arrowLeft: {fileID: 21300000, guid: 8e287c8ac665b4d2592af117362d7408, type: 3}
   arrowRight: {fileID: 21300000, guid: dfa27a830bb6d476ba10842d52ea8a57, type: 3}
   arrowUp: {fileID: 21300000, guid: ada91e99136dd4d458a7357ebb71f2d0, type: 3}
@@ -122,18 +219,15 @@ GameObject:
   - component: {fileID: 8166856726616220454}
   - component: {fileID: 2980618245169236744}
   - component: {fileID: 9005643126542449421}
-  - component: {fileID: 8168472918992804725}
-  - component: {fileID: 2489984062012952807}
   - component: {fileID: 2816360481871889776}
   - component: {fileID: 6372827518326035978}
-  - component: {fileID: 487357897825521591}
-  - component: {fileID: 5892978675451856029}
-  - component: {fileID: 6722700118598945150}
-  - component: {fileID: 8878804240787286460}
-  - component: {fileID: 8259285016054213050}
-  - component: {fileID: 7164355508631524256}
-  - component: {fileID: -8643090546884347839}
-  - component: {fileID: 4635098446296383385}
+  - component: {fileID: 3107094832260775890}
+  - component: {fileID: -1730647984984982690}
+  - component: {fileID: 4165511460868725030}
+  - component: {fileID: 8280167954385442326}
+  - component: {fileID: 1720337465314863872}
+  - component: {fileID: 8778017872859984619}
+  - component: {fileID: 8627931704638510668}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Tile
@@ -155,6 +249,9 @@ Transform:
   - {fileID: 5636743864397622533}
   - {fileID: 3788636702857926736}
   - {fileID: 2297367711164498985}
+  - {fileID: 123972413786223159}
+  - {fileID: 3491850025658579673}
+  - {fileID: 7604331540495400037}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -253,6 +350,10 @@ MonoBehaviour:
   pathOverlay: {fileID: 0}
   selectOverlay: {fileID: 0}
   dangerOverlay: {fileID: 0}
+  moveOverlay: {fileID: 0}
+  terraformOverlay: {fileID: 0}
+  terra: {fileID: 0}
+  previewTerraformType: 
   active: 0
   activeState: 
   isShowingDanger: 0
@@ -273,7 +374,10 @@ MonoBehaviour:
   selectTileOnMap: {fileID: 11400000, guid: f5aa943e2d330406eb4dbceec896d204, type: 2}
   clearTilesOnMap: {fileID: 11400000, guid: 8057625faade94d058ab858d6abc45f6, type: 2}
   resetTilesOnMap: {fileID: 11400000, guid: 4292b153f641e4231a4051c2e51aa7d4, type: 2}
+  showTerraUI: {fileID: 11400000, guid: 4091fff67e66e4f35a13acbc3480ccc6, type: 2}
+  hideTerraUI: {fileID: 11400000, guid: 99650c0931835439d8dcc0f11214bbd0, type: 2}
   tile: {fileID: 8166856726616220454}
+  mouseOverlapColliders: []
 --- !u!114 &9005643126542449421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,64 +396,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2980618245169236744}
         m_MethodName: OnCleartile
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: Tactics.Events.UnityTileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
---- !u!114 &8168472918992804725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2012841591862070518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 898d946007400432a9e706e31e509a9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: e7bf687fdf1e04ffdaf92c2ff2e93942, type: 2}
-  unityEventResponse:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2980618245169236744}
-        m_MethodName: OnSetMovementTile
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: Tactics.Events.UnityTileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
---- !u!114 &2489984062012952807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2012841591862070518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 898d946007400432a9e706e31e509a9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: a0acc0ae6904841f5899cc346e7d2770, type: 2}
-  unityEventResponse:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2980618245169236744}
-        m_MethodName: OnSetCombatTile
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -419,7 +465,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Tactics.Events.UnityTileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &487357897825521591
+--- !u!114 &3107094832260775890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -431,12 +477,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898d946007400432a9e706e31e509a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 004a384aad9164550a8e1cb983a79acd, type: 2}
+  gameEvent: {fileID: 11400000, guid: 15b6dbe8baa1a4504ab0e14147ccccb4, type: 2}
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2980618245169236744}
-        m_MethodName: OnPreviewPathOverlay
+        m_MethodName: OnSetActiveState
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -448,7 +494,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Tactics.Events.UnityTileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &5892978675451856029
+--- !u!114 &-1730647984984982690
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -460,12 +506,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898d946007400432a9e706e31e509a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: fcf73f97a1a2c486caf64a8d41fb2d35, type: 2}
+  gameEvent: {fileID: 11400000, guid: 455d49a26288546d3bcb896592e4fe3b, type: 2}
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2980618245169236744}
-        m_MethodName: OnClearPathOverlay
+        m_MethodName: OnClearActiveState
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -477,7 +523,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Tactics.Events.UnityTileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &6722700118598945150
+--- !u!114 &4165511460868725030
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -489,12 +535,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898d946007400432a9e706e31e509a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: bfc30c53f59aa479e83b243157dea882, type: 2}
+  gameEvent: {fileID: 11400000, guid: f74a477c2baaf461097be9d178e28302, type: 2}
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2980618245169236744}
-        m_MethodName: OnPreviewSelectOverlay
+        m_MethodName: OnShowOverlay
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -506,7 +552,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Tactics.Events.UnityTileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &8878804240787286460
+--- !u!114 &8280167954385442326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -518,12 +564,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898d946007400432a9e706e31e509a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: d1e18ba27b2e54ac1940605f19709d2d, type: 2}
+  gameEvent: {fileID: 11400000, guid: c43ad5b5d22de4b41a80135938708a6d, type: 2}
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2980618245169236744}
-        m_MethodName: OnClearSelectOverlay
+        m_MethodName: OnClearOverlay
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -535,7 +581,20 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Tactics.Events.UnityTileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &8259285016054213050
+--- !u!114 &1720337465314863872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012841591862070518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12ff0bdd091fd4fd1954b3d9b455e51c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tile: {fileID: 8166856726616220454}
+--- !u!114 &8778017872859984619
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -547,12 +606,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898d946007400432a9e706e31e509a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 8595c38d7bdf74827b2396e221b255a7, type: 2}
+  gameEvent: {fileID: 11400000, guid: 197bdccf2b19f476fbe8b75bf3d74499, type: 2}
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2980618245169236744}
-        m_MethodName: OnSetArrangementTile
+      - m_Target: {fileID: 1720337465314863872}
+        m_MethodName: OnSetPreviewTerraformType
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -564,7 +623,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Tactics.Events.UnityTileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
---- !u!114 &7164355508631524256
+--- !u!114 &8627931704638510668
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -576,70 +635,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898d946007400432a9e706e31e509a9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 144f845f3c3b74751900b24764cabded, type: 2}
+  gameEvent: {fileID: 11400000, guid: dae951e5927844dcbbc4e37c5a589746, type: 2}
   unityEventResponse:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2980618245169236744}
-        m_MethodName: OnShowDangerOverlay
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: Tactics.Events.UnityTileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
---- !u!114 &-8643090546884347839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2012841591862070518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 898d946007400432a9e706e31e509a9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 52b8b7369117b4fba9744f2a81fce8c6, type: 2}
-  unityEventResponse:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2980618245169236744}
-        m_MethodName: OnClearDangerOverlay
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: Tactics.Events.UnityTileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
---- !u!114 &4635098446296383385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2012841591862070518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 898d946007400432a9e706e31e509a9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameEvent: {fileID: 11400000, guid: 19f054d4e8e7c4af5a73d6983e4478aa, type: 2}
-  unityEventResponse:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2980618245169236744}
-        m_MethodName: OnClearArrangementTile
+      - m_Target: {fileID: 1720337465314863872}
+        m_MethodName: OnClearPreviewTerraformType
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -745,6 +746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 2809302485177593155}
+  currentSpriteKey: 
   dangerBox: {fileID: 21300000, guid: a19317951be174db3a885b38a0c8613b, type: 3}
   dangerRight: {fileID: 21300000, guid: 6db789159567b4daebad73a09f8ec9c5, type: 3}
   dangerLeft: {fileID: 21300000, guid: 7da53eea9173d434fa6580c53535182d, type: 3}
@@ -762,6 +764,102 @@ MonoBehaviour:
   dangerLeftUpDown: {fileID: 21300000, guid: 6d57e4d769cf44be99e2d3dd2dff531f, type: 3}
   dangerLeftRightUp: {fileID: 21300000, guid: d619f2e917d15457cb7379e0b746584b, type: 3}
   dangerRightUpDown: {fileID: 21300000, guid: 943bc2678d14240e49077a57e6617bab, type: 3}
+--- !u!1 &6882537652936623354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 123972413786223159}
+  - component: {fileID: 4058139769172687901}
+  - component: {fileID: 1941725738192801975}
+  m_Layer: 0
+  m_Name: TerraformOverlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &123972413786223159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6882537652936623354}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5374182878182732485}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &4058139769172687901
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6882537652936623354}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -500689105
+  m_SortingLayer: -1
+  m_SortingOrder: 3
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!114 &1941725738192801975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6882537652936623354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e1bd3288070a49e3bdaf23535bb60ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 4058139769172687901}
+  currentSpriteKey: 
+  swampTerraform: {fileID: 21300000, guid: bb4a271ec390e4bcb83b24ecc3d9c87b, type: 3}
 --- !u!1 &8246019659860404099
 GameObject:
   m_ObjectHideFlags: 0
@@ -831,7 +929,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -500689105
   m_SortingLayer: -1
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -856,5 +954,82 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 1712267553187905216}
+  currentSpriteKey: 
   selectedMovement: {fileID: 21300000, guid: fd9de29997e78401c8b99b74f42e2102, type: 3}
   selectedCombat: {fileID: 21300000, guid: f900e5687df614adcb83b1cfb5c4e239, type: 3}
+  selectedTerraform: {fileID: 21300000, guid: d64d1b26f849d4c1384c43dc47f04db6, type: 3}
+--- !u!1001 &7808672442344059285
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5374182878182732485}
+    m_Modifications:
+    - target: {fileID: 8739804933733259497, guid: 6c6df570658f54bc290f2ac492128482,
+        type: 3}
+      propertyPath: m_Name
+      value: Terra
+      objectReference: {fileID: 0}
+    - target: {fileID: 420515961385930224, guid: 6c6df570658f54bc290f2ac492128482,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420515961385930224, guid: 6c6df570658f54bc290f2ac492128482,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420515961385930224, guid: 6c6df570658f54bc290f2ac492128482,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420515961385930224, guid: 6c6df570658f54bc290f2ac492128482,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420515961385930224, guid: 6c6df570658f54bc290f2ac492128482,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420515961385930224, guid: 6c6df570658f54bc290f2ac492128482,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420515961385930224, guid: 6c6df570658f54bc290f2ac492128482,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 420515961385930224, guid: 6c6df570658f54bc290f2ac492128482,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 420515961385930224, guid: 6c6df570658f54bc290f2ac492128482,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420515961385930224, guid: 6c6df570658f54bc290f2ac492128482,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 420515961385930224, guid: 6c6df570658f54bc290f2ac492128482,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6c6df570658f54bc290f2ac492128482, type: 3}
+--- !u!4 &7604331540495400037 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 420515961385930224, guid: 6c6df570658f54bc290f2ac492128482,
+    type: 3}
+  m_PrefabInstance: {fileID: 7808672442344059285}
+  m_PrefabAsset: {fileID: 0}

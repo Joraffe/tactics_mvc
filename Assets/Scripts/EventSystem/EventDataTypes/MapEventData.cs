@@ -13,5 +13,8 @@ namespace Tactics.Events
         public Character character;
 
         public Team team;
+
+        public Forma forma;
+        public List<FormaTile> formaTiles;
     }
 }
