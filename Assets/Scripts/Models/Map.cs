@@ -35,6 +35,7 @@ namespace Tactics.Models
                 { "total", 0 }
             };
         }
+
         /*-------------------------------------------------
         *                     Setters
         --------------------------------------------------*/
@@ -84,6 +85,14 @@ namespace Tactics.Models
             string terraType = tile.terra.type;
             this.terraCountMap[terraType] += 1;
             this.terraCountMap["total"] += 1;
+        }
+
+        public void UpdateTerraCountMap(List<Tile> terraformingTiles)
+        {
+            this.terraCountMap = this.GetPostTerraformTerraCountMap(
+                terraformingTiles,
+                this.terraCountMap
+            );
         }
 
         /*-------------------------------------------------
@@ -235,6 +244,23 @@ namespace Tactics.Models
             bool withinYBounds = (yMinSize <= YPosition) && (YPosition <= yMaxSize);
 
             return withinXBounds && withinYBounds;
+        }
+
+        public Dictionary<string, int> GetPostTerraformTerraCountMap(List<Tile> terraformingTiles, Dictionary<string, int> terraCountMap)
+        {
+
+            Dictionary<string, int> postTerraformTerraCountMap = new Dictionary<string, int>(terraCountMap);
+
+            foreach (Tile terraformingTile in terraformingTiles)
+            {
+                string currentTerraType = terraformingTile.terra.type;
+                string nextTerraType = terraformingTile.previewTerraformType;
+
+                postTerraformTerraCountMap[currentTerraType] -= 1;
+                postTerraformTerraCountMap[nextTerraType] += 1;
+            }
+
+            return postTerraformTerraCountMap;
         }
     }
 }

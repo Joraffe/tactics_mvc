@@ -16,20 +16,23 @@ namespace Tactics.Controllers
         --------------------------------------------------*/
         public void OnUpdateTerraform(UIEventData uiEventData)
         {
-            UpdateTerraform(uiEventData.terraCountMap, uiEventData.terraformTiles);
+            UpdateTerraform(
+                uiEventData.terraCountMap,
+                uiEventData.postTerraformTerraCountMap
+            );
         }
 
 
         /*-------------------------------------------------
         *                 Helpers
         --------------------------------------------------*/
-        private void UpdateTerraform(Dictionary<string, int> terraCountMap, List<Tile> terraformTiles)
+    private void UpdateTerraform(Dictionary<string, int> terraCountMap, Dictionary<string, int> postTerraformTerraCountMap)
         {
             this.terraformUI.DestroyBeforeTerraNumbers();
             this.terraformUI.AddBeforeTerraNumber(terraCountMap);
 
             this.terraformUI.DestroyAfterTerraNumbers();
-            this.terraformUI.AddAfterTerraNumber(terraCountMap, terraformTiles);
+            this.terraformUI.AddAfterTerraNumber(postTerraformTerraCountMap);
         }
 
         /*-------------------------------------------------

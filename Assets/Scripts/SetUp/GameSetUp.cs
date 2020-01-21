@@ -114,7 +114,7 @@ namespace Tactics.SetUp
                     // this.terraSetUp.SetUpDevTerra(y, terra);
                     this.terraSetUp.SetNeutralTerra(terra);
                     terraGameObject.name = $"{terra.type} Terra {tile.GetCoordinates()}";
-                    tileGameObject.GetComponent<SpriteRenderer>().sprite = terra.sprite;
+                    tileGameObject.GetComponent<SpriteRenderer>().sprite = terra.GetCurrentSprite();
                     tile.terra = terra;
                     this.map.AddTileTerraCount(x, y);
                 }

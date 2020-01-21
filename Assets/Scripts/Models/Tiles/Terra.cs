@@ -18,8 +18,38 @@ namespace Tactics.Models
 
     public class Terra : MonoBehaviour
     {
-        public Sprite sprite;
+        public Sprite NeutralTerra;
+        public Sprite SwampTerra;
+        public Sprite DesertTerra;
+        public Sprite ForestTerra;
+        public Sprite VolcanicTerra;
+        public Sprite OceanicTerra;
+        public Sprite IndustrialTerra;
+        public Dictionary<string, Sprite> terraSpriteMap;
         public string type;
+
+        public void Awake()
+        {
+            this.terraSpriteMap = new Dictionary<string, Sprite>{
+                { TerraTypes.Neutral, NeutralTerra },
+                { TerraTypes.Swamp, SwampTerra },
+                { TerraTypes.Desert, DesertTerra  },
+                { TerraTypes.Forest, ForestTerra },
+                { TerraTypes.Volcanic, VolcanicTerra },
+                { TerraTypes.Oceanic, OceanicTerra },
+                { TerraTypes.Industrial, IndustrialTerra }
+            };
+        }
+
+        public Sprite GetCurrentSprite()
+        {
+            return this.terraSpriteMap[this.type];
+        }
+
+        public void SetTerraType(string terraType)
+        {
+            this.type = terraType;
+        }
     }
 
 }

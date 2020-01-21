@@ -8,54 +8,39 @@ namespace Tactics.SetUp
 {
     public class TerraSetUp: MonoBehaviour
     {
-        public Sprite DesertSprite;
-        public Sprite SwampSprite;
-        public Sprite ForestSprite;
-        public Sprite VolcanicSprite;
-        public Sprite OceanicSprite;
-        public Sprite IndustrialSprite;
-        public Sprite NeutralSprite;
-
         public void SetDesertTerra(Terra terra)
         {
-            terra.sprite = this.DesertSprite;
-            terra.type = TerraTypes.Desert;
+            terra.SetTerraType(TerraTypes.Desert);
         }
 
         public void SetSwampTerra(Terra terra)
         {
-            terra.sprite = this.SwampSprite;
-            terra.type = TerraTypes.Swamp;
+            terra.SetTerraType(TerraTypes.Swamp);
         }
 
         public void SetForestTerra(Terra terra)
         {
-            terra.sprite = this.ForestSprite;
-            terra.type = TerraTypes.Forest;
+            terra.SetTerraType(TerraTypes.Forest);
         }
 
         public void SetVolcanicTerra(Terra terra)
         {
-            terra.sprite = this.VolcanicSprite;
-            terra.type = TerraTypes.Volcanic;
+            terra.SetTerraType(TerraTypes.Volcanic);
         }
 
         public void SetOceanicTerra(Terra terra)
         {
-            terra.sprite = this.OceanicSprite;
-            terra.type = TerraTypes.Oceanic;
+            terra.SetTerraType(TerraTypes.Oceanic);
         }
 
         public void SetIndustrialTerra(Terra terra)
         {
-            terra.sprite = this.IndustrialSprite;
-            terra.type = TerraTypes.Industrial;
+            terra.SetTerraType(TerraTypes.Industrial);
         }
 
         public void SetNeutralTerra(Terra terra)
         {
-            terra.sprite = this.NeutralSprite;
-            terra.type = TerraTypes.Neutral;
+            terra.SetTerraType(TerraTypes.Neutral);
         }
 
         public void SetUpDevTerra(int yPosition, Terra terra)

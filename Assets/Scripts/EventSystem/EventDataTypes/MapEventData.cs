@@ -16,5 +16,7 @@ namespace Tactics.Events
 
         public Forma forma;
         public List<FormaTile> formaTiles;
+        public List<Tile> terraformingTiles;
+        public Dictionary<string, int> terraCountMap;
     }
 }
