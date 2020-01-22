@@ -82,7 +82,7 @@ namespace Tactics.Models
         public void AddTileTerraCount(int xPosition, int yPosition)
         {
             Tile tile = this.tiles[xPosition, yPosition];
-            string terraType = tile.terra.type;
+            string terraType = tile.GetTerra().type;
             this.terraCountMap[terraType] += 1;
             this.terraCountMap["total"] += 1;
         }
@@ -253,8 +253,8 @@ namespace Tactics.Models
 
             foreach (Tile terraformingTile in terraformingTiles)
             {
-                string currentTerraType = terraformingTile.terra.type;
-                string nextTerraType = terraformingTile.previewTerraformType;
+                string currentTerraType = terraformingTile.GetTerra().type;
+                string nextTerraType = terraformingTile.GetPreviewTerraformTerraType();
 
                 postTerraformTerraCountMap[currentTerraType] -= 1;
                 postTerraformTerraCountMap[nextTerraType] += 1;

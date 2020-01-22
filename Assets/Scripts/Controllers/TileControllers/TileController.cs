@@ -51,7 +51,7 @@ namespace Tactics.Controllers
                 GameObject colliderGameObject = collider.gameObject;
                 if (colliderGameObject.tag == "Tile")
                 {
-                    Terra colliderTerra = colliderGameObject.GetComponent<Tile>().terra;
+                    Terra colliderTerra = colliderGameObject.GetComponent<Tile>().GetTerra();
                     // TerraformOverlay terraformOverlay = colliderGameObject.GetComponent<Tile>().terraformOverlay;
                     ShowTerraUI(colliderTerra);
                     break;

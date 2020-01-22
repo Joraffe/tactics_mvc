@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Tactics.Events;
 using Tactics.Models;
+using Tactics.Views;
 using UnityEngine;
 
 
@@ -9,35 +10,59 @@ namespace Tactics.Controllers
 {
     public class TileTerraformController : MonoBehaviour
     {
-        public Tile tile;
+        public TileTerraformView tileTerraformView;
 
         /*-------------------------------------------------
         *              Event Handlers
         --------------------------------------------------*/
-        public void OnSetPreviewTerraformType(TileEventData tileEventData)
+        public void OnPreviewTerraform(TileEventData tileEventData)
         {
-            if (this.tile == tileEventData.tile)
+            if (this.tileTerraformView.tile == tileEventData.tile)
             {
-                SetPreviewTerraformTypeForTile(
-                    tileEventData.tile,
-                    tileEventData.previewTerraformType
+                this.PreviewTerrform(
+                    tileEventData.previewTerraformType,
+                    tileEventData.previewAuraAmount
                 );
             }
         }
 
-        public void OnClearPreviewTerraformType(TileEventData tileEventData)
+        public void OnClearTerraformPreview(TileEventData tileEventData)
         {
-            if (this.tile == tileEventData.tile)
+            if (this.tileTerraformView.tile == tileEventData.tile)
             {
-                ClearPreviewTerraformTypeForTile(tileEventData.tile);
+                this.ClearTerraformPreview();
             }
         }
 
+        // public void OnSetPreviewTerraformType(TileEventData tileEventData)
+        // {
+        //     if (this.tileTerraformView.tile == tileEventData.tile)
+        //     {
+        //         this.SetPreviewTerraformType(tileEventData.previewTerraformType);
+        //     }
+        // }
+
+        // public void OnClearPreviewTerraformType(TileEventData tileEventData)
+        // {
+        //     if (this.tileTerraformView.tile == tileEventData.tile)
+        //     {
+        //         this.ClearPreviewTerraformType();
+        //     }
+        // }
+
+        // public void OnSetPreviewTerraformAuraAmount(TileEventData tileEventData)
+        // {
+        //     if (this.tileTerraformView.tile == tileEventData.tile)
+        //     {
+        //         this.SetPreviewTerraformAuraAmount(tileEventData.previewAuraAmount);
+        //     }
+        // }
+
         public void OnTerraformTile(TileEventData tileEventData)
         {
-            if (this.tile == tileEventData.tile)
+            if (this.tileTerraformView.tile == tileEventData.tile)
             {
-                TerraformTile(tileEventData.tile, tileEventData.terraType);
+                this.TerraformTile(tileEventData.terraType);
             }
         }
 
@@ -45,20 +70,43 @@ namespace Tactics.Controllers
         /*-------------------------------------------------
         *                 Helpers
         --------------------------------------------------*/
-        private void SetPreviewTerraformTypeForTile(Tile tile, string previewTerraformType)
+        private void PreviewTerrform(string terraType, int auraAmount)
         {
-            tile.SetPreviewTerraformType(previewTerraformType);
+            this.tileTerraformView.SetPreviewTerraformTerraType(terraType);
+            this.tileTerraformView.SetPreviewTerraformAuraAmount(auraAmount);
         }
 
-        private void ClearPreviewTerraformTypeForTile(Tile tile)
+        private void ClearTerraformPreview()
         {
-            tile.ClearPreviewTerraformType();
+            this.tileTerraformView.SetPreviewTerraformTerraType("");
+            this.tileTerraformView.SetPreviewTerraformAuraAmount(0);
         }
+        // private void SetPreviewTerraformType(string previewTerraformType)
+        // {
+        //     this.tileTerraformView.SetPreviewTerraformTerraType(previewTerraformType);
+        // }
 
-        private void TerraformTile(Tile tile, string terraType)
+        // private void ClearPreviewTerraformType()
+        // {
+        //     this.tileTerraformView.SetPreviewTerraformTerraType("");
+        // }
+
+        // private void SetPreviewTerraformAuraAmount(int auraAmount)
+        // {
+        //     this.tileTerraformView.SetPreviewTerraformAuraAmount(auraAmount);
+        // }
+
+        // private void ClearPreviewTerraformAuraAmount()
+        // {
+        //     this.tileTerraformView.SetPreviewTerraformAuraAmount(0);
+        // }
+
+        private void TerraformTile(string terraType)
         {
-            tile.SetTerraType(terraType);
-            tile.SetSprite(tile.GetTerra().GetCurrentSprite());
+            this.tileTerraformView.tile.SetTerraType(terraType);
+            this.tileTerraformView.tile.SetSprite(
+                this.tileTerraformView.tile.GetTerra().GetCurrentSprite()
+            );
         }
 
 

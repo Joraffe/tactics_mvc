@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Tactics.Views;
 using UnityEngine;
 
 
@@ -35,15 +36,6 @@ namespace Tactics.Models
         public int YPosition;  // Y position on the map
 
         public Character occupant;  // What is currently occupying this tile
-        public PathOverlay pathOverlay;
-        public SelectOverlay selectOverlay;
-        public DangerOverlay dangerOverlay;
-        public MoveOverlay moveOverlay;
-        public TerraformOverlay terraformOverlay;
-
-        public Terra terra;  // Stores What type of tile this is
-        public string previewTerraformType;
-
         public bool active;  // If the tile has some kind of "active" state; i.e.
                              // If the player can select it to move, or selct to target
         public string activeState;  // What type of active state is it (move/combat)
@@ -54,6 +46,76 @@ namespace Tactics.Models
 
         public SpriteRenderer spriteRenderer;
         public Transform tileTransform;
+
+
+        /*-------------------------------------------------
+        *                 Heirarchy
+        --------------------------------------------------*/
+        public GameObject tileTerraformGameObject;
+        public GameObject tileTerraGameObject;
+        public GameObject tileAuraMapGameObject;
+        public GameObject tileMoveOverlayGameObject;
+        public GameObject tilePathOverlayGameObject;
+        public GameObject tileTerraformOverlayGameObject;
+        public GameObject tileSelectOverlayGameObject;
+
+        public void Awake()
+        {
+            TileTerraformView tileTerraformView = this.GetTileTerraformView();
+            tileTerraformView.tile = this;
+            tileTerraformView.terra = this.GetTerra();
+            tileTerraformView.auraMap = this.GetAuraMap();
+        }
+
+        // Note to self for the future -- look into cacheing these for optimization
+        public Terra GetTerra()
+        {
+            return this.tileTerraGameObject.GetComponent<Terra>();
+        }
+
+        public AuraMap GetAuraMap()
+        {
+            return this.tileAuraMapGameObject.GetComponent<AuraMap>();
+        }
+
+        public MoveOverlay GetMoveOverlay()
+        {
+            return this.tileMoveOverlayGameObject.GetComponent<MoveOverlay>();
+        }
+
+        public PathOverlay GetPathOverlay()
+        {
+            return this.tilePathOverlayGameObject.GetComponent<PathOverlay>();
+        }
+
+        public TerraformOverlay GetTerraformOverlay()
+        {
+            return this.tileTerraformOverlayGameObject.GetComponent<TerraformOverlay>();
+        }
+
+        public SelectOverlay GetSelectOverlay()
+        {
+            return this.tileSelectOverlayGameObject.GetComponent<SelectOverlay>();
+        }
+
+        public TileTerraformView GetTileTerraformView()
+        {
+            return this.tileTerraformGameObject.GetComponent<TileTerraformView>();
+        }
+        public string GetPreviewTerraformTerraType()
+        {
+            return this.GetTileTerraformView().GetPreviewTerraformTerraType();
+        }
+
+        public string GetPreviewTerraformTeamName()
+        {
+            return this.GetTileTerraformView().GetPreviewTerraformTeamName();
+        }
+
+        public int GetPreviewTerrformAuraAmount()
+        {
+            return this.GetTileTerraformView().GetPreviewTerraformAuraAmount();
+        }
 
 
         /*-------------------------------------------------
@@ -107,23 +169,16 @@ namespace Tactics.Models
             switch (overlayType)
             {
                 case TileOverlayTypes.Path:
-                    this.pathOverlay.SetSprite(overlayImageKey);
+                    this.GetPathOverlay().SetSprite(overlayImageKey);
                     break;
                 case TileOverlayTypes.Select:
-                    this.selectOverlay.SetSprite(overlayImageKey);
-                    break;
-                case TileOverlayTypes.Danger:
-                    this.dangerOverlay.SetSprite(overlayImageKey);
+                    this.GetSelectOverlay().SetSprite(overlayImageKey);
                     break;
                 case TileOverlayTypes.Move:
-                    this.moveOverlay.SetSprite(overlayImageKey);
-                    break;
-                case TileOverlayTypes.Arrange:
-                    Debug.Log("revisit Arrange.ShowOverlay pls");
-                    // SetActionOverlayImage(overlayImageKey);
+                    this.GetMoveOverlay().SetSprite(overlayImageKey);
                     break;
                 case TileOverlayTypes.Terraform:
-                    this.terraformOverlay.SetSprite(overlayImageKey);
+                    this.GetTerraformOverlay().SetSprite(overlayImageKey);
                     break;
 
                 default:
@@ -137,45 +192,26 @@ namespace Tactics.Models
             switch (overlayType)
             {
                 case TileOverlayTypes.Path:
-                    this.pathOverlay.ClearSprite();
+                    this.GetPathOverlay().ClearSprite();
                     break;
                 case TileOverlayTypes.Select:
-                    this.selectOverlay.ClearSprite();
-                    break;
-                case TileOverlayTypes.Danger:
-                    this.dangerOverlay.ClearSprite();
+                    this.GetSelectOverlay().ClearSprite();
                     break;
                 case TileOverlayTypes.Move:
-                    this.moveOverlay.ClearSprite();
-                    break;
-                case TileOverlayTypes.Arrange:
-                    Debug.Log("revisit Arrange.ClearOverlay pls");
-                    // ClearActionOverlayImage();
+                    this.GetMoveOverlay().ClearSprite();
                     break;
                 case TileOverlayTypes.Terraform:
-                    this.terraformOverlay.ClearSprite();
+                    this.GetTerraformOverlay().ClearSprite();
                     break;
                 case TileOverlayTypes.All:
-                    this.pathOverlay.ClearSprite();
-                    this.selectOverlay.ClearSprite();
-                    this.dangerOverlay.ClearSprite();
-                    this.moveOverlay.ClearSprite();
-                    this.terraformOverlay.ClearSprite();
+                    this.GetPathOverlay().ClearSprite();
+                    this.GetSelectOverlay().ClearSprite();
+                    this.GetMoveOverlay().ClearSprite();
+                    this.GetTerraformOverlay().ClearSprite();
                     break;
                 default:
                     return;
             }
-        }
-
-
-        public void SetPreviewTerraformType(string previewTerraformType)
-        {
-            this.previewTerraformType = previewTerraformType;
-        }
-
-        public void ClearPreviewTerraformType()
-        {
-            this.previewTerraformType = null;
         }
 
         public void SetSprite(Sprite sprite)
@@ -185,7 +221,7 @@ namespace Tactics.Models
 
         public void SetTerraType(string terraType)
         {
-            this.terra.SetTerraType(terraType);
+            this.GetTerra().SetTerraType(terraType);
         }
 
 
@@ -201,13 +237,6 @@ namespace Tactics.Models
         {
             return this.tileTransform.position;
         }
-
-        public Terra GetTerra()
-        {
-            return this.terra;
-        }
-
-
 
         /*-------------------------------------------------
         *                     Helpers

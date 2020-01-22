@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3952259451571353174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8346580348984539113}
+  - component: {fileID: 3043327930027121448}
+  - component: {fileID: 5790226814603915332}
+  m_Layer: 0
+  m_Name: MapTeam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8346580348984539113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3952259451571353174}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3480886765079557313}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3043327930027121448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3952259451571353174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3f3a68fe9dcb4cab9e7109d6bffbc8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  map: {fileID: 0}
+  team: {fileID: 0}
+--- !u!114 &5790226814603915332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3952259451571353174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f40f5d000f4e44ecb33fc402f20904b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapGameObject: {fileID: 4985984669508076889}
+  mapTeamView: {fileID: 3043327930027121448}
 --- !u!1 &4985984669508076889
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,7 +104,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5250587503055415206}
+  - {fileID: 8346580348984539113}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -104,7 +166,9 @@ MonoBehaviour:
   resetForma: {fileID: 11400000, guid: 5e4c6bf5435344842870fd7502b8cfd9, type: 2}
   previewTerraform: {fileID: 11400000, guid: 8d2106c0b6f74449eb23776dba320481, type: 2}
   commitTerraform: {fileID: 11400000, guid: 65d23f0322074470d8d61f0c1769bf60, type: 2}
+  setUpMapTeam: {fileID: 0}
   map: {fileID: 3756900671443878609}
+  mapTeamGameObject: {fileID: 3952259451571353174}
 --- !u!114 &1275294651153525486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,6 +526,9 @@ MonoBehaviour:
     type: 2}
   clearPreviewTerraformType: {fileID: 11400000, guid: dae951e5927844dcbbc4e37c5a589746,
     type: 2}
+  previewTerraform: {fileID: 11400000, guid: 092d91b187357498cba0c74d5a191ce5, type: 2}
+  clearTerraformPreview: {fileID: 11400000, guid: 7509e795e2cad4117b08c5a382d17cb9,
+    type: 2}
   showOverlay: {fileID: 11400000, guid: f74a477c2baaf461097be9d178e28302, type: 2}
   clearOverlay: {fileID: 11400000, guid: c43ad5b5d22de4b41a80135938708a6d, type: 2}
   terraformTile: {fileID: 11400000, guid: e983f130ca9d64294b668f1a7ec8dc42, type: 2}
@@ -584,3 +651,33 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Tactics.Events.UnityMapEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!1 &6714641330682257045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5250587503055415206}
+  m_Layer: 0
+  m_Name: MapView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5250587503055415206
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6714641330682257045}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3480886765079557313}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

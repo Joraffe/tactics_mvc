@@ -94,28 +94,11 @@ namespace Tactics.SetUp
                     tileGameObject.transform.SetParent(columnGameObject.transform);
                     this.map.tiles[x, y] = tile;
 
-                    GameObject pathOverlayGameObject = tileGameObject.transform.Find("PathOverlay").gameObject;
-                    tile.pathOverlay = pathOverlayGameObject.GetComponent<PathOverlay>();
+                    GameObject terraGameObject = tile.tileTerraGameObject;
+                    Terra terra = tile.GetTerra();
 
-                    GameObject selectOverlayGameObject = tileGameObject.transform.Find("SelectOverlay").gameObject;
-                    tile.selectOverlay = selectOverlayGameObject.GetComponent<SelectOverlay>();
-
-                    GameObject dangerOverlayGameObject = tileGameObject.transform.Find("DangerOverlay").gameObject;
-                    tile.dangerOverlay = dangerOverlayGameObject.GetComponent<DangerOverlay>();
-
-                    GameObject moveOverlayGameObject = tileGameObject.transform.Find("MoveOverlay").gameObject;
-                    tile.moveOverlay = moveOverlayGameObject.GetComponent<MoveOverlay>();
-
-                    GameObject terraformOverlayGameObject = tileGameObject.transform.Find("TerraformOverlay").gameObject;
-                    tile.terraformOverlay = terraformOverlayGameObject.GetComponent<TerraformOverlay>();
-
-                    GameObject terraGameObject = tileGameObject.transform.Find("Terra").gameObject;
-                    Terra terra = terraGameObject.GetComponent<Terra>();
-                    // this.terraSetUp.SetUpDevTerra(y, terra);
-                    this.terraSetUp.SetNeutralTerra(terra);
-                    terraGameObject.name = $"{terra.type} Terra {tile.GetCoordinates()}";
-                    tileGameObject.GetComponent<SpriteRenderer>().sprite = terra.GetCurrentSprite();
-                    tile.terra = terra;
+                    this.terraSetUp.SetNeutralTerra(tile.GetTerra());
+                    tile.SetSprite(terra.GetCurrentSprite());
                     this.map.AddTileTerraCount(x, y);
                 }
             }

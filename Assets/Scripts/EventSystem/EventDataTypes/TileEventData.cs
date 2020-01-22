@@ -14,5 +14,7 @@ namespace Tactics.Events
         public string overlayImageKey;
         public string overlayType;
         public string terraType;
+        public int previewAuraAmount;
+        public string previewAuraTeam;
     }
 }

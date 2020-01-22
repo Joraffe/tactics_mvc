@@ -12,8 +12,8 @@ namespace Tactics.Controllers
     {
         public TileEvent setActiveState;
         public TileEvent clearActiveState;
-        public TileEvent setPreviewTerraformType;
-        public TileEvent clearPreviewTerraformType;
+        public TileEvent previewTerraform;
+        public TileEvent clearTerraformPreview;
         public TileEvent showOverlay;
         public TileEvent clearOverlay;
         public TileEvent terraformTile;
@@ -121,7 +121,7 @@ namespace Tactics.Controllers
                     this.map.AddTerraformingTile(terraformTile);
                     RaiseShowOverlayTileEvent(terraformTile, formaTile.terraType, TileOverlayTypes.Terraform);
                     RaiseSetActiveStateTileEvent(terraformTile, TileInteractType.Terraform);
-                    RaiseSetPreviewTerraformTypeTileEvent(terraformTile, formaTile.terraType);
+                    RaisePreviewTerraformTileEvent(terraformTile, formaTile.terraType, formaTile.auraAmount);
                 }
             }
         }
@@ -133,7 +133,7 @@ namespace Tactics.Controllers
                 RaiseClearActiveStateTileEvent(terraformTile);
                 RaiseClearOverlayTileEvent(terraformTile, TileOverlayTypes.Terraform);
                 RaiseClearOverlayTileEvent(terraformTile, TileOverlayTypes.Select);
-                RaiseClearPreviewTerraformTypeTileEvent(terraformTile);
+                RaiseClearTerraformPreviewTileEvent(terraformTile);
             }
             this.map.ClearTerraformingTiles();
         }
@@ -161,7 +161,7 @@ namespace Tactics.Controllers
             this.map.UpdateTerraCountMap(terraformingTiles);
             foreach (Tile terraformingTile in terraformingTiles)
             {
-                RaiseTerraformTileEvent(terraformingTile, terraformingTile.previewTerraformType);
+                RaiseTerraformTileEvent(terraformingTile, terraformingTile.GetPreviewTerraformTerraType());
             }
             ResetMapForma();
         }
@@ -219,21 +219,22 @@ namespace Tactics.Controllers
             this.clearActiveState.Raise(tileEventData);
         }
 
-        private void RaiseSetPreviewTerraformTypeTileEvent(Tile tile, string previewTerraformType)
+        private void RaisePreviewTerraformTileEvent(Tile tile, string previewTerraformType, int previewAuraAmount)
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
             tileEventData.previewTerraformType = previewTerraformType;
+            tileEventData.previewAuraAmount = previewAuraAmount;
 
-            this.setPreviewTerraformType.Raise(tileEventData);
+            this.previewTerraform.Raise(tileEventData);
         }
 
-        private void RaiseClearPreviewTerraformTypeTileEvent(Tile tile)
+        private void RaiseClearTerraformPreviewTileEvent(Tile tile)
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
 
-            this.clearPreviewTerraformType.Raise(tileEventData);
+            this.clearTerraformPreview.Raise(tileEventData);
         }
 
         private void RaiseShowTerraformUI(Dictionary<string, int> terraCountMap, Dictionary<string, int> postTerraformTerraCountMap)

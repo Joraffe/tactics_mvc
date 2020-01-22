@@ -4,6 +4,7 @@ using System.Linq;
 using Tactics.Algorithms;
 using Tactics.Models;
 using Tactics.Events;
+using Tactics.Views;
 using UnityEngine;
 
 
@@ -38,7 +39,22 @@ namespace Tactics.Controllers
         public MapEvent previewTerraform;
         public MapEvent commitTerraform;
 
+        // Map Heirarchy SetUp Events
+        public MapEvent setUpMapTeam;
+
         public Map map;
+
+        public GameObject mapTeamGameObject;
+
+
+        /*-------------------------------------------------
+        *                      Heirarchy
+        --------------------------------------------------*/
+        public void Awake()
+        {
+            this.mapTeamGameObject.GetComponent<MapTeamView>().map = this.map;
+        }
+
 
         /*-------------------------------------------------
         *                 Event Handlers
