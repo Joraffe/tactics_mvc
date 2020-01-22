@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Tactics.Constants;
 using UnityEngine;
 
 
@@ -7,13 +8,9 @@ namespace Tactics.Models
 {
     public class TerraformOverlay : BaseOverlay
     {
-        public Sprite swampTerraform;
-
-        protected override Dictionary<string, Sprite> GetOverlaySpriteMap()
+        protected override BaseSprites GetSpriteConstants()
         {
-            return new Dictionary<string, Sprite>{
-                { TerraTypes.Swamp, swampTerraform }
-            };
+            return SpritesConstants.Instance.terraformOverlaySprites;
         }
 
         public override string GetOverlayType()

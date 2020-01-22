@@ -2,6 +2,7 @@
 using System; 
 using System.Collections;
 using System.Collections.Generic;
+using Tactics.Constants;
 using UnityEngine;
 
 
@@ -11,22 +12,17 @@ namespace Tactics.Models
     {
         public SpriteRenderer spriteRenderer;
         public string currentSpriteKey;
-        protected Dictionary<string, Sprite> overlaySpriteMap;
-        public void Awake()
-        {
-            this.overlaySpriteMap = GetOverlaySpriteMap();
-        }
 
         public void SetSprite(string spriteKey)
         {
-            if (!this.overlaySpriteMap.ContainsKey(spriteKey))
+            if (!HasSprite(spriteKey))
             {
                 throw new Exception($"Missing spriteKey: {spriteKey} in {GetOverlayType()} overlay");
             }
             else
             {
                 this.currentSpriteKey = spriteKey;
-                this.spriteRenderer.sprite = this.overlaySpriteMap[spriteKey];
+                this.spriteRenderer.sprite = GetSprite(spriteKey);
             }
         }
 
@@ -36,7 +32,17 @@ namespace Tactics.Models
             this.spriteRenderer.sprite = null;
         }
 
-        protected virtual Dictionary<string, Sprite> GetOverlaySpriteMap()
+        public Sprite GetSprite(string spriteKey)
+        {
+            return GetSpriteConstants().GetSprite(spriteKey);
+        }
+
+        public bool HasSprite(string spriteKey)
+        {
+            return GetSpriteConstants().HasSprite(spriteKey);
+        }
+
+        protected virtual BaseSprites GetSpriteConstants()
         {
             throw new NotImplementedException();
         }
@@ -49,6 +55,11 @@ namespace Tactics.Models
         public Sprite GetCurrentSprite()
         {
             return this.spriteRenderer.sprite;
+        }
+
+        public string GetcurrentSpriteName()
+        {
+            return this.currentSpriteKey;
         }
     }
 

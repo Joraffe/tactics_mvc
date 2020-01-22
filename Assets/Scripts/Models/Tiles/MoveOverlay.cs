@@ -1,18 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Tactics.Constants;
 using UnityEngine;
 
 namespace Tactics.Models
 {
         public class MoveOverlay : BaseOverlay
         {
-            public Sprite moveSprite;
 
-            protected override Dictionary<string, Sprite> GetOverlaySpriteMap()
+            protected override BaseSprites GetSpriteConstants()
             {
-                return new Dictionary<string, Sprite>{
-                    { "move", moveSprite }
-                };
+                return SpritesConstants.Instance.moveOverlaySprites;
             }
 
             public override string GetOverlayType()

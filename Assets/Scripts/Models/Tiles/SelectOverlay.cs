@@ -1,30 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Tactics.Constants;
 using UnityEngine;
+
 
 namespace Tactics.Models
 {
-    public class SelectOverlayTypes
-    {
-        public const string Movement = "movement";
-        public const string Combat = "combat";
-        public const string Terraform = "terraform";
-    }
-
     public class SelectOverlay : BaseOverlay
     {
-        // Sprite List
-        public Sprite selectedMovement;
-        public Sprite selectedCombat;
-        public Sprite selectedTerraform;
-
-        protected override Dictionary<string, Sprite> GetOverlaySpriteMap()
+        protected override BaseSprites GetSpriteConstants()
         {
-            return new Dictionary<string, Sprite>{
-                { SelectOverlayTypes.Movement, selectedMovement },
-                { SelectOverlayTypes.Combat, selectedCombat },
-                { SelectOverlayTypes.Terraform, selectedTerraform }
-            };
+            return SpritesConstants.Instance.selectOverlaySprites;
         }
 
         public override string GetOverlayType()
@@ -32,6 +18,5 @@ namespace Tactics.Models
             return TileOverlayTypes.Select;
         }
     }
-
 }
 
