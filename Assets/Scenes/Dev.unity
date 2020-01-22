@@ -268,13 +268,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e57fcc43df47498ea94b879477a4ed7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DesertSprite: {fileID: 21300000, guid: e9d100841b8324ab4b34273ef09f6852, type: 3}
-  SwampSprite: {fileID: 21300000, guid: d0577dfd1837b45b2bfb8e1002f36ea6, type: 3}
-  ForestSprite: {fileID: 21300000, guid: db0ff8344aacf4477bca9179a547563c, type: 3}
-  VolcanicSprite: {fileID: 21300000, guid: 1331b3001c6e2481ca30d289642bceba, type: 3}
-  OceanicSprite: {fileID: 21300000, guid: db5a64f9da83a461eaa0ac779d6122ff, type: 3}
-  IndustrialSprite: {fileID: 21300000, guid: e5db0149ff00c419ca3deebfa2ae1d9b, type: 3}
-  NeutralSprite: {fileID: 21300000, guid: 05f1d06f1acf6457f917fbefd9b800df, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +351,176 @@ Transform:
   m_Father: {fileID: 1588196744}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1420183539
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1420183541}
+  - component: {fileID: 1420183547}
+  - component: {fileID: 1420183540}
+  - component: {fileID: 1420183545}
+  - component: {fileID: 1420183544}
+  - component: {fileID: 1420183543}
+  - component: {fileID: 1420183542}
+  - component: {fileID: 1420183546}
+  m_Layer: 0
+  m_Name: SpriteConstants
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1420183540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420183539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5421c9e201ae479e901043c3c469bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NeutralTerra: {fileID: 21300000, guid: 05f1d06f1acf6457f917fbefd9b800df, type: 3}
+  SwampTerra: {fileID: 21300000, guid: d0577dfd1837b45b2bfb8e1002f36ea6, type: 3}
+  DesertTerra: {fileID: 21300000, guid: e9d100841b8324ab4b34273ef09f6852, type: 3}
+  ForestTerra: {fileID: 21300000, guid: db0ff8344aacf4477bca9179a547563c, type: 3}
+  VolcanicTerra: {fileID: 21300000, guid: 1331b3001c6e2481ca30d289642bceba, type: 3}
+  OceanicTerra: {fileID: 21300000, guid: db5a64f9da83a461eaa0ac779d6122ff, type: 3}
+  IndustrialTerra: {fileID: 21300000, guid: e5db0149ff00c419ca3deebfa2ae1d9b, type: 3}
+--- !u!4 &1420183541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420183539}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1913329177}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1420183542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420183539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0770cfb77c69a4fdf990dfae2c00f9c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowLeft: {fileID: 21300000, guid: 8e287c8ac665b4d2592af117362d7408, type: 3}
+  arrowRight: {fileID: 21300000, guid: dfa27a830bb6d476ba10842d52ea8a57, type: 3}
+  arrowUp: {fileID: 21300000, guid: ada91e99136dd4d458a7357ebb71f2d0, type: 3}
+  arrowDown: {fileID: 21300000, guid: 91f145bf014804e15852be423f07540f, type: 3}
+  startLeft: {fileID: 21300000, guid: d8632a4149a4242328688e6f8e65b206, type: 3}
+  startRight: {fileID: 21300000, guid: e9c81673d71cf48078f0423bd52f61f9, type: 3}
+  startUp: {fileID: 21300000, guid: 62bc0dcd73fc24e1ca2e4fb98648fda5, type: 3}
+  startDown: {fileID: 21300000, guid: 4a40459314696409b8078f740b5dc5e8, type: 3}
+  midDownLeft: {fileID: 21300000, guid: 94190fd4b2ad5423c98d52194c043df8, type: 3}
+  midDownRight: {fileID: 21300000, guid: 67e61b60d9d074530bf9f0c2703582dc, type: 3}
+  midUpLeft: {fileID: 21300000, guid: c435d65f933aa4a87b8a48a487c9b0a1, type: 3}
+  midUpRight: {fileID: 21300000, guid: 6554b2c6233ef4e0f8df76163b75a118, type: 3}
+  midHorizontal: {fileID: 21300000, guid: a7a1b1c4b0ec94535917b832e0fa2ed2, type: 3}
+  midVertical: {fileID: 21300000, guid: 8e6dd9221a8f141f4b510076f9d58ee0, type: 3}
+--- !u!114 &1420183543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420183539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c9f73b95e590486fa90bf5018a6507c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectedMovement: {fileID: 21300000, guid: fd9de29997e78401c8b99b74f42e2102, type: 3}
+  SelectedCombat: {fileID: 21300000, guid: f900e5687df614adcb83b1cfb5c4e239, type: 3}
+  SelectedTerraform: {fileID: 21300000, guid: d64d1b26f849d4c1384c43dc47f04db6, type: 3}
+--- !u!114 &1420183544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420183539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f1fcb83b5da84d69adcfa94120fb699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dangerBox: {fileID: 21300000, guid: a19317951be174db3a885b38a0c8613b, type: 3}
+  dangerRight: {fileID: 21300000, guid: 6db789159567b4daebad73a09f8ec9c5, type: 3}
+  dangerLeft: {fileID: 21300000, guid: 7da53eea9173d434fa6580c53535182d, type: 3}
+  dangerUp: {fileID: 21300000, guid: 2e99fd99d12e7463da9e73a35dcece75, type: 3}
+  dangerDown: {fileID: 21300000, guid: 6f67abf5a70454207adeb3ad626e24a0, type: 3}
+  dangerNoBorder: {fileID: 21300000, guid: 015c8ae54b6374d139804712ae4cd574, type: 3}
+  dangerLeftRight: {fileID: 21300000, guid: c979cc153a7514f7ea2185c55cd586fa, type: 3}
+  dangerUpDown: {fileID: 21300000, guid: 87001ccc4f52f40f6971147fa83d6eb0, type: 3}
+  dangerLeftDown: {fileID: 21300000, guid: be11c1b9f78ea4e7fb02ee37e77ea9df, type: 3}
+  dangerLeftUp: {fileID: 21300000, guid: 51b8d4aa34745427aaf4643542982494, type: 3}
+  dangerRightUp: {fileID: 21300000, guid: b708765d4d2f440eabcdb44e75971661, type: 3}
+  dangerRightDown: {fileID: 21300000, guid: 7e09157ad3a41470c9eee35d8f347305, type: 3}
+  dangerLeftRightDown: {fileID: 21300000, guid: bfd75cc23dcab423ba052ee808a50c02,
+    type: 3}
+  dangerLeftUpDown: {fileID: 21300000, guid: 6d57e4d769cf44be99e2d3dd2dff531f, type: 3}
+  dangerLeftRightUp: {fileID: 21300000, guid: d619f2e917d15457cb7379e0b746584b, type: 3}
+  dangerRightUpDown: {fileID: 21300000, guid: 943bc2678d14240e49077a57e6617bab, type: 3}
+--- !u!114 &1420183545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420183539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c70311cb74f7946f08b7a63fe730907d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSprite: {fileID: 21300000, guid: 539572e28886743a68279f73ccc02394, type: 3}
+--- !u!114 &1420183546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420183539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64c0ddbfbc63e4d61bab1ad626b921e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swampTerraform: {fileID: 21300000, guid: bb4a271ec390e4bcb83b24ecc3d9c87b, type: 3}
+--- !u!114 &1420183547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420183539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a52fdd0e592214d538e42144a3bec382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terraSprites: {fileID: 1420183540}
+  dangerOverlaySprites: {fileID: 1420183544}
+  pathOverlaySprites: {fileID: 1420183542}
+  selectOverlaySprites: {fileID: 1420183543}
+  terraformOverlaySprites: {fileID: 1420183546}
+  moveOverlaySprites: {fileID: 1420183545}
 --- !u!1 &1588196742
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +631,37 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Tactics.Events.UnityCameraEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1 &1913329176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1913329177}
+  m_Layer: 0
+  m_Name: GameConstants
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1913329177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913329176}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1420183541}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2445104997365429513
 PrefabInstance:
   m_ObjectHideFlags: 0
