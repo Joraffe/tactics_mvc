@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8586294278179934463}
   - component: {fileID: -1232903298314968810}
   - component: {fileID: 7938113090801525163}
+  - component: {fileID: 1128479113463784476}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -130,6 +131,8 @@ MonoBehaviour:
   characterName: 
   movementRange: 2
   attackRange: 1
+  startXPosition: 0
+  startYPosition: 0
   isMoving: 0
   isUndoing: 0
   isPreviewing: 0
@@ -296,6 +299,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3493596726213037880}
         m_MethodName: OnCompleteCharacterAction
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Tactics.Events.UnityCharacterEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &1128479113463784476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6343788293131931480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 251e7e7f1e1254ebf93a54ba8557e0ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 33c2dda6bc03748c9ad8027f6d455c2a, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3493596726213037880}
+        m_MethodName: OnSetUpCharacter
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

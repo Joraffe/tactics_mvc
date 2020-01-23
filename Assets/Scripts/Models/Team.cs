@@ -7,20 +7,31 @@ namespace Tactics.Models
 {
     public class Team : MonoBehaviour
     {
-        public string faction = "";
-        public List<Character> members = new List<Character>();
+        public string teamName = "";
+        private List<Character> members = new List<Character>();
 
-        public List<Character> availableToAct = new List<Character>();
-        public List<Character> alreadyActed = new List<Character>();
-
-        public void AddCharacterToAlreadyActed(Character character)
+        /*-------------------------------------------------
+        *                 Heirarchy
+        --------------------------------------------------*/
+        public void Awake()
         {
-            this.alreadyActed.Add(character);
+            this.SetUpMembers();
         }
 
-        public void RemoveCharacterFromAvailableToAct(Character character)
+        public void SetUpMembers()
         {
-            this.availableToAct.Remove(character);
+            foreach (Transform characterTransform in this.transform)
+            {
+                
+                GameObject characterGameObject = characterTransform.gameObject;
+                Character character = characterGameObject.GetComponent<Character>();
+                this.members.Add(character);
+            }
+        }
+
+        public List<Character> GetMembers()
+        {
+            return this.members;
         }
     }
 }

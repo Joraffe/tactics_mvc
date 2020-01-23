@@ -26,7 +26,7 @@ namespace Tactics.Models
     public class Forma : MonoBehaviour
     {
         public bool castable = false;
-        
+
         public virtual int GetAuraAmount()
         {
              throw new NotImplementedException();

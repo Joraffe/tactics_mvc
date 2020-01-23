@@ -8,8 +8,32 @@ namespace Tactics.Views
 {
     public class MapTeamView : MonoBehaviour
     {
+        /*-------------------------------------------------
+        *                     Models
+        --------------------------------------------------*/
         public Map map;
-        public Team team;
+        public List<Team> teams;
+
+        /*-------------------------------------------------
+        *               Relationship Variables
+        --------------------------------------------------*/
+        private Team activeTeam;  // whose turn is it to act on the map
+
+        /*-------------------------------------------------
+        *                     Getters
+        --------------------------------------------------*/
+        public Team GetActiveTeam()
+        {
+            return this.activeTeam;
+        }
+
+        /*-------------------------------------------------
+        *                     Setters
+        --------------------------------------------------*/
+        public void SetActiveTeam(Team team)
+        {
+            this.activeTeam = team;
+        }
     }
 }
 

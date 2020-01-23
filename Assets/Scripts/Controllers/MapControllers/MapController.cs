@@ -44,18 +44,6 @@ namespace Tactics.Controllers
 
         public Map map;
 
-        public GameObject mapTeamGameObject;
-
-
-        /*-------------------------------------------------
-        *                      Heirarchy
-        --------------------------------------------------*/
-        public void Awake()
-        {
-            this.mapTeamGameObject.GetComponent<MapTeamView>().map = this.map;
-        }
-
-
         /*-------------------------------------------------
         *                 Event Handlers
         --------------------------------------------------*/
@@ -179,7 +167,7 @@ namespace Tactics.Controllers
 
         public void OnShowPlayerDangerZone(MapEventData mapEventData)
         {
-            List<Character> enemies = mapEventData.team.members;
+            List<Character> enemies = mapEventData.team.GetMembers();
 
             ShowPlayerDangerZoneForEnemies(enemies);
         }

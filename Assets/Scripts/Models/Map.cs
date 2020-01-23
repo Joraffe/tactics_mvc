@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Tactics.Views;
 using UnityEngine;
 
 
@@ -22,6 +23,12 @@ namespace Tactics.Models
         public List<Tile> enemyStartTiles = new List<Tile>();
         public SpriteRenderer spriteRenderer;
 
+        /*-------------------------------------------------
+        *                 Heirarchy
+        --------------------------------------------------*/
+        public GameObject mapTeamGameObject;
+        public GameObject mapTilesGameObject;
+
         public void Awake()
         {
             this.terraCountMap = new Dictionary<string, int>{
@@ -34,6 +41,41 @@ namespace Tactics.Models
                 // { TerraTypes.Industrial, 0 },
                 { "total", 0 }
             };
+            this.SetUpMapTiles();
+            this.SetUpCamera();
+        }
+
+        public MapTeamView GetMapTeamView()
+        {
+            return this.mapTeamGameObject.GetComponent<MapTeamView>();
+        }
+
+        public Team GetActiveTeam()
+        {
+            return this.GetMapTeamView().GetActiveTeam();
+        }
+
+        private void SetUpMapTiles()
+        {
+            foreach (Transform columnTransform in this.mapTilesGameObject.transform)
+            {
+                foreach (Transform tileTransform in columnTransform)
+                {
+                    GameObject tileGameObject = tileTransform.gameObject;
+                    Tile mapTile = tileGameObject.GetComponent<Tile>();
+                    this.tiles[mapTile.XPosition, mapTile.YPosition] = mapTile;
+                    this.AddTileTerraCount(mapTile.XPosition, mapTile.YPosition);
+                }
+            } 
+        }
+
+        private void SetUpCamera()
+        {
+            // float orthoSize = this.map.spriteRenderer.bounds.size.x * Screen.height / Screen.width * 0.5f;
+            Debug.Log($"y bounds: {this.spriteRenderer.bounds.size.y}");
+            float orthoSize = this.spriteRenderer.bounds.size.y * 0.5f;
+            Debug.Log($"orthoSize: {orthoSize}");
+            Camera.main.orthographicSize = orthoSize;
         }
 
         /*-------------------------------------------------
@@ -98,6 +140,11 @@ namespace Tactics.Models
         /*-------------------------------------------------
         *                     Getters
         --------------------------------------------------*/
+        public Tile GetTile(int XPosition, int YPosition)
+        {
+            return this.tiles[XPosition, YPosition];
+        }
+
         public Character GetCurrentSelectedCharacter()
         {
             return this.currentSelectedCharacter;

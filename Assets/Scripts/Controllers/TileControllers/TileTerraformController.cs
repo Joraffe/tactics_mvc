@@ -34,30 +34,6 @@ namespace Tactics.Controllers
             }
         }
 
-        // public void OnSetPreviewTerraformType(TileEventData tileEventData)
-        // {
-        //     if (this.tileTerraformView.tile == tileEventData.tile)
-        //     {
-        //         this.SetPreviewTerraformType(tileEventData.previewTerraformType);
-        //     }
-        // }
-
-        // public void OnClearPreviewTerraformType(TileEventData tileEventData)
-        // {
-        //     if (this.tileTerraformView.tile == tileEventData.tile)
-        //     {
-        //         this.ClearPreviewTerraformType();
-        //     }
-        // }
-
-        // public void OnSetPreviewTerraformAuraAmount(TileEventData tileEventData)
-        // {
-        //     if (this.tileTerraformView.tile == tileEventData.tile)
-        //     {
-        //         this.SetPreviewTerraformAuraAmount(tileEventData.previewAuraAmount);
-        //     }
-        // }
-
         public void OnTerraformTile(TileEventData tileEventData)
         {
             if (this.tileTerraformView.tile == tileEventData.tile)
@@ -81,25 +57,6 @@ namespace Tactics.Controllers
             this.tileTerraformView.SetPreviewTerraformTerraType("");
             this.tileTerraformView.SetPreviewTerraformAuraAmount(0);
         }
-        // private void SetPreviewTerraformType(string previewTerraformType)
-        // {
-        //     this.tileTerraformView.SetPreviewTerraformTerraType(previewTerraformType);
-        // }
-
-        // private void ClearPreviewTerraformType()
-        // {
-        //     this.tileTerraformView.SetPreviewTerraformTerraType("");
-        // }
-
-        // private void SetPreviewTerraformAuraAmount(int auraAmount)
-        // {
-        //     this.tileTerraformView.SetPreviewTerraformAuraAmount(auraAmount);
-        // }
-
-        // private void ClearPreviewTerraformAuraAmount()
-        // {
-        //     this.tileTerraformView.SetPreviewTerraformAuraAmount(0);
-        // }
 
         private void TerraformTile(string terraType)
         {

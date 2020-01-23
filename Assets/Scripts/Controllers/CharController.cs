@@ -27,6 +27,17 @@ namespace Tactics.Controllers
         /*-------------------------------------------------
         *                  Event Handlers
         --------------------------------------------------*/
+        public void OnSetUpCharacter(CharacterEventData characterEventData)
+        {
+            if (this.character == characterEventData.character)
+            {
+                characterEventData.character.SetUp(
+                    characterEventData.team,
+                    characterEventData.tile
+                );
+            }
+        }
+
         public void OnMouseDown()
         {
             if (!this.character.HasActed())

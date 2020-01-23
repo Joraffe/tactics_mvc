@@ -511,7 +511,6 @@ MonoBehaviour:
   hideTerraUI: {fileID: 11400000, guid: 99650c0931835439d8dcc0f11214bbd0, type: 2}
   tile: {fileID: 8166856726616220454}
   mouseOverlapColliders: []
-  tileAuraGameObject: {fileID: 4994258933898971109}
 --- !u!114 &9005643126542449421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,7 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc71a0b67d3cd400d90af70de4d39a99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 
+  type: Neutral
 --- !u!1 &4994258933898971109
 GameObject:
   m_ObjectHideFlags: 0
