@@ -19,12 +19,19 @@ namespace Tactics.Views
         --------------------------------------------------*/
         private Team activeTeam;  // whose turn is it to act on the map
 
+        private Dictionary<string, int> teamScoreMap = new Dictionary<string, int>();
+
         /*-------------------------------------------------
         *                     Getters
         --------------------------------------------------*/
         public Team GetActiveTeam()
         {
             return this.activeTeam;
+        }
+
+        public Dictionary<string, int> GetTeamScoreMap()
+        {
+            return this.teamScoreMap;
         }
 
         /*-------------------------------------------------
@@ -34,6 +41,17 @@ namespace Tactics.Views
         {
             this.activeTeam = team;
         }
+
+        public void SetMap(Map map)
+        {
+            this.map = map;
+        }
+
+        public void InitTeamScore(string teamName)
+        {
+            this.teamScoreMap.Add(teamName, 0);
+        }
+
     }
 }
 

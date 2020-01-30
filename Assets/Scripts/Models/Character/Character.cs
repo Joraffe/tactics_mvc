@@ -41,6 +41,27 @@ namespace Tactics.Models
         public Material defaultMaterial;
 
         /*-------------------------------------------------
+        *                 Heirarchy
+        --------------------------------------------------*/
+        public GameObject formaSetGameObject;
+
+        public FormaSet GetCharacterFormaSet()
+        {
+            return this.formaSetGameObject.GetComponent<FormaSet>();
+        }
+
+        public void SetUpCharacterFormaSet(Team team)
+        {
+            FormaSet formaSet = this.GetCharacterFormaSet();
+            foreach (Transform formaTransform in this.formaSetGameObject.transform)
+            {
+                Forma forma = formaTransform.gameObject.GetComponent<Forma>();
+                forma.teamName = team.teamName;
+                formaSet.formas.Add(forma);
+            }
+        }
+
+        /*-------------------------------------------------
         *                     Initalization
         --------------------------------------------------*/
         public void SetUp(Team team, Tile tile)
@@ -48,6 +69,7 @@ namespace Tactics.Models
             this.team = team;
             this.originTile = tile;
             this.currentTile = tile;
+            this.SetUpCharacterFormaSet(team);
         }
 
         /*-------------------------------------------------

@@ -42,6 +42,7 @@ namespace Tactics.Models
                 { "total", 0 }
             };
             this.SetUpMapTiles();
+            this.SetUpMapTeamView();
             this.SetUpCamera();
         }
 
@@ -69,12 +70,16 @@ namespace Tactics.Models
             } 
         }
 
+        private void SetUpMapTeamView()
+        {
+            MapTeamView mapTeamView = this.GetMapTeamView();
+            mapTeamView.SetMap(this);
+        }
+
         private void SetUpCamera()
         {
             // float orthoSize = this.map.spriteRenderer.bounds.size.x * Screen.height / Screen.width * 0.5f;
-            Debug.Log($"y bounds: {this.spriteRenderer.bounds.size.y}");
             float orthoSize = this.spriteRenderer.bounds.size.y * 0.5f;
-            Debug.Log($"orthoSize: {orthoSize}");
             Camera.main.orthographicSize = orthoSize;
         }
 
@@ -296,7 +301,14 @@ namespace Tactics.Models
         public Dictionary<string, int> GetPostTerraformTerraCountMap(List<Tile> terraformingTiles, Dictionary<string, int> terraCountMap)
         {
 
-            Dictionary<string, int> postTerraformTerraCountMap = new Dictionary<string, int>(terraCountMap);
+            Dictionary<string, int> postTerraformTerraCountMap = new Dictionary<string, int>();
+            foreach (KeyValuePair<string, int> terraCount in terraCountMap)
+            {
+                if (terraCount.Key != "total")
+                {
+                    postTerraformTerraCountMap.Add(terraCount.Key, terraCount.Value);
+                }
+            }
 
             foreach (Tile terraformingTile in terraformingTiles)
             {
@@ -308,6 +320,35 @@ namespace Tactics.Models
             }
 
             return postTerraformTerraCountMap;
+        }
+
+        public Dictionary<Tile, Dictionary<string, int>> GetCurrentAuraCountMap(List<Tile> terraformingTiles)
+        {
+            Dictionary<Tile, Dictionary<string, int>> auraCountMap = new Dictionary<Tile, Dictionary<string, int>>();
+            foreach (Tile terraformingTile in terraformingTiles)
+            {
+                TileTerraformView tileTerraformView = terraformingTile.GetTileTerraformView();
+                AuraMap tileAuraMap = tileTerraformView.auraMap;
+                auraCountMap.Add(terraformingTile, tileAuraMap.GetCurrentAuraCount());
+            }
+
+            return auraCountMap;
+        }
+
+        public Dictionary<Tile, Dictionary<string, int>> GetPostTerraformAuraCountMap(List<Tile> terraformingTiles)
+        {
+            Dictionary<Tile, Dictionary<string, int>> auraCountMap = new Dictionary<Tile, Dictionary<string, int>>();
+            foreach (Tile terraformingTile in terraformingTiles)
+            {
+                TileTerraformView tileTerraformView = terraformingTile.GetTileTerraformView();
+                AuraMap tileAuraMap = tileTerraformView.auraMap;
+                string previewTeam = tileTerraformView.GetPreviewTerraformTeamName();
+                int previewAura = tileTerraformView.GetPreviewTerraformAuraAmount();
+
+                auraCountMap.Add(terraformingTile, tileAuraMap.GetPreviewAuraCount(previewTeam, previewAura));
+            }
+
+            return auraCountMap;
         }
     }
 }

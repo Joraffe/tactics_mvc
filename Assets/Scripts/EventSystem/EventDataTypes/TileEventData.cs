@@ -9,6 +9,7 @@ namespace Tactics.Events
     {
         public Tile tile;
         public Character character;
+        public Team team;
         public string activeState;
         public string previewTerraformType;
         public string overlayImageKey;

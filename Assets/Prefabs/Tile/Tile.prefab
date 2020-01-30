@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 6783626845584154089}
   - component: {fileID: 376840479461725684}
   - component: {fileID: 1792163905423534384}
+  - component: {fileID: 6375844056163211884}
   m_Layer: 0
   m_Name: TileTerraform
   m_TagString: Untagged
@@ -329,6 +330,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3551584495584603301}
         m_MethodName: OnTerraformTile
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Tactics.Events.UnityTileEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &6375844056163211884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842848157923730112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898d946007400432a9e706e31e509a9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: bbbef63e64dcd43dba56962898dff610, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3551584495584603301}
+        m_MethodName: OnAddTeamAura
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

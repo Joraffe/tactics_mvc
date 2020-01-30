@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Tactics.Models
 {
-    public class Aura : MonoBehaviour
+    public class Aura
     {
         public string teamName;
         public int amount;

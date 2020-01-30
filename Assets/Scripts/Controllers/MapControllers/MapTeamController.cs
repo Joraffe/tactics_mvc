@@ -10,6 +10,7 @@ namespace Tactics.Controllers
 {
     public class MapTeamController : MonoBehaviour
     {
+        public TileEvent addTeamAura;
         public MapTeamView mapTeamView;
 
         /*-------------------------------------------------
@@ -20,6 +21,12 @@ namespace Tactics.Controllers
             this.SetActiveTeam(mapEventData.team);
         }
 
+        public void OnAddTeamAura(MapEventData mapEventData)
+        {
+            this.AddTeamAuraToMap(mapEventData.team);
+        }
+
+
         /*-------------------------------------------------
         *                 Helpers
         --------------------------------------------------*/
@@ -28,9 +35,28 @@ namespace Tactics.Controllers
             this.mapTeamView.SetActiveTeam(team);
         }
 
+        private void AddTeamAuraToMap(Team team)
+        {
+            foreach (Tile tile in this.mapTeamView.map.tiles)
+            {
+                this.RaiseAddTeamAuraTileEvent(tile, team);
+            }
+
+            this.mapTeamView.InitTeamScore(team.teamName);
+        }
+
+
         /*-------------------------------------------------
         *              Event Triggers
         --------------------------------------------------*/
+        private void RaiseAddTeamAuraTileEvent(Tile tile, Team team)
+        {
+            TileEventData tileEventData = new TileEventData();
+            tileEventData.tile = tile;
+            tileEventData.team = team;
+
+            this.addTeamAura.Raise(tileEventData);
+        }
     }
 }
 

@@ -14,6 +14,10 @@ namespace Tactics.Controllers
         public MapEvent showPlayerDangerZone;
         public MapEvent hidePlayerDangerZone;
         public MapEvent setActiveTeam;
+        public MapEvent addTeamAura;
+
+        public UIEvent setAuraInfoTeamName;
+        public UIEvent hideTerraformUI;
 
         public CharacterEvent setUpCharacter;
         public TileEvent occupyTile;
@@ -40,7 +44,12 @@ namespace Tactics.Controllers
 
             this.SetUpTeam(cakebin, map);
             this.SetUpTeam(enemies, map);
-            RaiseSetActiveTeamMapEvent(cakebin);
+            this.RaiseSetActiveTeamMapEvent(cakebin);
+            this.RaiseAddTeamAuraMapEvent(cakebin);
+            this.RaiseAddTeamAuraMapEvent(enemies);
+            this.RaiseSetAuraInfoTeamNameUIEvent(cakebin);
+            this.RaiseSetAuraInfoTeamNameUIEvent(enemies);
+            this.RaiseHideTerraformUI();
         }
 
         private void SetUpTeam(Team team, Map map)
@@ -158,6 +167,29 @@ namespace Tactics.Controllers
             tileEventData.character = character;
 
             this.occupyTile.Raise(tileEventData);
+        }
+
+        private void RaiseAddTeamAuraMapEvent(Team team)
+        {
+            MapEventData mapEventData = new MapEventData();
+            mapEventData.team = team;
+
+            this.addTeamAura.Raise(mapEventData);
+        }
+
+        private void RaiseSetAuraInfoTeamNameUIEvent(Team team)
+        {
+            UIEventData uiEventData = new UIEventData();
+            uiEventData.team = team;
+
+            this.setAuraInfoTeamName.Raise(uiEventData);
+        }
+
+        private void RaiseHideTerraformUI()
+        {
+            UIEventData uiEventData = new UIEventData();
+
+            this.hideTerraformUI.Raise(uiEventData);
         }
     }
 }

@@ -21,7 +21,8 @@ namespace Tactics.Controllers
             {
                 this.PreviewTerrform(
                     tileEventData.previewTerraformType,
-                    tileEventData.previewAuraAmount
+                    tileEventData.previewAuraAmount,
+                    tileEventData.previewAuraTeam
                 );
             }
         }
@@ -42,14 +43,23 @@ namespace Tactics.Controllers
             }
         }
 
+        public void OnAddTeamAura(TileEventData tileEventData)
+        {
+            if (this.tileTerraformView.tile == tileEventData.tile)
+            {
+                this.AddTeamAura(tileEventData.team);
+            }
+        }
+
 
         /*-------------------------------------------------
         *                 Helpers
         --------------------------------------------------*/
-        private void PreviewTerrform(string terraType, int auraAmount)
+        private void PreviewTerrform(string terraType, int auraAmount, string teamName)
         {
             this.tileTerraformView.SetPreviewTerraformTerraType(terraType);
             this.tileTerraformView.SetPreviewTerraformAuraAmount(auraAmount);
+            this.tileTerraformView.SetPreviewTerraformTeamName(teamName);
         }
 
         private void ClearTerraformPreview()
@@ -64,6 +74,11 @@ namespace Tactics.Controllers
             this.tileTerraformView.tile.SetSprite(
                 this.tileTerraformView.tile.GetTerra().GetCurrentSprite()
             );
+        }
+
+        public void AddTeamAura(Team team)
+        {
+            this.tileTerraformView.tile.GetAuraMap().AddTeamToMap(team);
         }
 
 

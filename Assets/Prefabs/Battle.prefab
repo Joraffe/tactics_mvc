@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 593353932899337360}
   - component: {fileID: 8240200279701139452}
   - component: {fileID: 7529580068236985289}
+  - component: {fileID: 2248085609448044027}
   m_Layer: 0
   m_Name: MapTeam
   m_TagString: Untagged
@@ -95,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f40f5d000f4e44ecb33fc402f20904b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  addTeamAura: {fileID: 11400000, guid: bbbef63e64dcd43dba56962898dff610, type: 2}
   mapTeamView: {fileID: 593353932899337360}
 --- !u!114 &7529580068236985289
 MonoBehaviour:
@@ -114,6 +116,35 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8240200279701139452}
         m_MethodName: OnSetActiveTeam
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Tactics.Events.UnityMapEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &2248085609448044027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502278015031601646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8a23851e307412883f65ff25f898ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 3f9754041b31345e3803a753c284d122, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8240200279701139452}
+        m_MethodName: OnAddTeamAura
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -415,6 +446,10 @@ MonoBehaviour:
   hidePlayerDangerZone: {fileID: 11400000, guid: de7a5b9d78b124fa9b4322fdf6fb1366,
     type: 2}
   setActiveTeam: {fileID: 11400000, guid: f6380d7559c61434db6ab35ee61c6a6a, type: 2}
+  addTeamAura: {fileID: 11400000, guid: 3f9754041b31345e3803a753c284d122, type: 2}
+  setAuraInfoTeamName: {fileID: 11400000, guid: 5487f1912f7e84b22af284e9731ec04b,
+    type: 2}
+  hideTerraformUI: {fileID: 11400000, guid: bf820ca3839b345158f208d58136cbd9, type: 2}
   setUpCharacter: {fileID: 11400000, guid: 33c2dda6bc03748c9ad8027f6d455c2a, type: 2}
   occupyTile: {fileID: 11400000, guid: d869cb74260e24fc5aa05b75c3754839, type: 2}
   battle: {fileID: 4443026718952776732}
@@ -561,6 +596,7 @@ GameObject:
   - component: {fileID: 822773761078897989}
   - component: {fileID: 9198285392398461219}
   - component: {fileID: 2537778539997141599}
+  - component: {fileID: 2526049885495641807}
   m_Layer: 0
   m_Name: Map
   m_TagString: Map
@@ -1122,6 +1158,35 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: Tactics.Events.UnityMapEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &2526049885495641807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7435953437513341665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d8a23851e307412883f65ff25f898ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 3f9754041b31345e3803a753c284d122, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5915154776474889982}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: Tactics.Events.UnityMapEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &8202070480789487234
 GameObject:
   m_ObjectHideFlags: 0
@@ -1206,6 +1271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamName: Los Cattos
+  totalAura: 0
+  teamType: enemy
 --- !u!114 &5582527701191803922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1334,6 +1401,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamName: Cakebin
+  totalAura: 0
+  teamType: player
 --- !u!114 &5017288102254127052
 MonoBehaviour:
   m_ObjectHideFlags: 0

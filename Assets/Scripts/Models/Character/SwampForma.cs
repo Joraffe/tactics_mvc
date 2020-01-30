@@ -21,7 +21,13 @@ namespace Tactics.Models
         {
             List<FormaTile> formaTiles = new List<FormaTile>();
             formaTiles.Add(
-                new FormaTile(0, 1, this.GetTerraType(), this.GetAuraAmount())
+                new FormaTile(
+                    0, 
+                    1,
+                    this.GetTerraType(),
+                    this.teamName,
+                    this.GetAuraAmount()
+                )
             );
 
             return formaTiles;
@@ -31,7 +37,13 @@ namespace Tactics.Models
         {
             List<FormaTile> formaTiles = new List<FormaTile>();
             formaTiles.Add(
-                new FormaTile(0, -1, this.GetTerraType(), this.GetAuraAmount())
+                new FormaTile(
+                    0,
+                    -1, 
+                    this.GetTerraType(),
+                    this.teamName,
+                    this.GetAuraAmount()
+                )
             );
 
             return formaTiles;
@@ -41,7 +53,13 @@ namespace Tactics.Models
         {
             List<FormaTile> formaTiles = new List<FormaTile>();
             formaTiles.Add(
-                new FormaTile(-1, 0, this.GetTerraType(), this.GetAuraAmount())
+                new FormaTile(
+                    -1,
+                    0,
+                    this.GetTerraType(),
+                    this.teamName,
+                    this.GetAuraAmount()
+                )
             );
 
             return formaTiles;
@@ -51,7 +69,13 @@ namespace Tactics.Models
         {
             List<FormaTile> formaTiles = new List<FormaTile>();
             formaTiles.Add(
-                new FormaTile(1, 0, this.GetTerraType(), this.GetAuraAmount())
+                new FormaTile(
+                    1,
+                    0,
+                    this.GetTerraType(),
+                    this.teamName,
+                    this.GetAuraAmount()
+                )
             );
 
             return formaTiles;

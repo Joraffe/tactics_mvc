@@ -121,7 +121,7 @@ namespace Tactics.Controllers
                     this.map.AddTerraformingTile(terraformTile);
                     RaiseShowOverlayTileEvent(terraformTile, formaTile.terraType, TileOverlayTypes.Terraform);
                     RaiseSetActiveStateTileEvent(terraformTile, TileInteractType.Terraform);
-                    RaisePreviewTerraformTileEvent(terraformTile, formaTile.terraType, formaTile.auraAmount);
+                    RaisePreviewTerraformTileEvent(terraformTile, formaTile.terraType, formaTile.auraAmount, formaTile.teamName);
                 }
             }
         }
@@ -149,11 +149,8 @@ namespace Tactics.Controllers
                     TileOverlayTypes.Select
                 );
             }
-            Dictionary<string, int> postTerraformTerraCountMap = this.map.GetPostTerraformTerraCountMap(
-                terraformingTiles,
-                terraCountMap
-            );
-            RaiseShowTerraformUI(terraCountMap, postTerraformTerraCountMap);
+
+            RaiseShowTerraformUI(terraformingTiles, terraCountMap);
         }
 
         private void CommitTerraform(List<Tile> terraformingTiles, Dictionary<string, int> terraCountMap)
@@ -219,12 +216,13 @@ namespace Tactics.Controllers
             this.clearActiveState.Raise(tileEventData);
         }
 
-        private void RaisePreviewTerraformTileEvent(Tile tile, string previewTerraformType, int previewAuraAmount)
+        private void RaisePreviewTerraformTileEvent(Tile tile, string previewTerraformType, int previewAuraAmount, string previewAuraTeam)
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
             tileEventData.previewTerraformType = previewTerraformType;
             tileEventData.previewAuraAmount = previewAuraAmount;
+            tileEventData.previewAuraTeam = previewAuraTeam;
 
             this.previewTerraform.Raise(tileEventData);
         }
@@ -237,11 +235,14 @@ namespace Tactics.Controllers
             this.clearTerraformPreview.Raise(tileEventData);
         }
 
-        private void RaiseShowTerraformUI(Dictionary<string, int> terraCountMap, Dictionary<string, int> postTerraformTerraCountMap)
+        private void RaiseShowTerraformUI(List<Tile> terraformingTiles, Dictionary<string, int> terraCountMap)
         {
             UIEventData uiEventData = new UIEventData();
             uiEventData.terraCountMap = terraCountMap;
-            uiEventData.postTerraformTerraCountMap = postTerraformTerraCountMap;
+            uiEventData.postTerraformTerraCountMap = this.map.GetPostTerraformTerraCountMap(terraformingTiles, terraCountMap);
+            uiEventData.auraCountMap = this.map.GetCurrentAuraCountMap(terraformingTiles);
+            uiEventData.postTerraformAuraCountMap = this.map.GetPostTerraformAuraCountMap(terraformingTiles);
+            uiEventData.teamAuraScoreMap = this.map.GetMapTeamView().GetTeamScoreMap();
 
             this.showTerraformUI.Raise(uiEventData);
         }
