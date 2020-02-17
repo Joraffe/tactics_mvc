@@ -141,6 +141,20 @@ namespace Tactics.Models
                 this.terraCountMap
             );
         }
+        public void UpdateTeamAuraScore(List<Tile> terraformingTiles)
+        {
+            Dictionary<Tile, Dictionary<string, int>> auraCountMap = this.GetCurrentAuraCountMap(terraformingTiles);
+            Dictionary<Tile, Dictionary<string, int>> postTerraformTerraCountMap = this.GetPostTerraformAuraCountMap(terraformingTiles);
+            Dictionary<string, int> teamAuraScoreMap = this.GetMapTeamView().GetTeamScoreMap();
+            Dictionary<string, int> auraDeltaMap = this.GetAuraDeltaMap(teamAuraScoreMap, auraCountMap, postTerraformTerraCountMap);
+
+            foreach (KeyValuePair<string, int> teamAuraDelta in auraDeltaMap)
+            {
+                string teamName = teamAuraDelta.Key;
+                int score = teamAuraDelta.Value;
+                this.GetMapTeamView().AddTeamScore(teamName, score);
+            }
+        }
 
         /*-------------------------------------------------
         *                     Getters
@@ -349,6 +363,35 @@ namespace Tactics.Models
             }
 
             return auraCountMap;
+        }
+
+        public Dictionary<string, int> GetAuraDeltaMap(Dictionary<string, int> teamAuraScoreMap, Dictionary<Tile, Dictionary<string, int>> auraCountMap, Dictionary<Tile, Dictionary<string, int>> postTerraformAuraCountMap)
+        {
+            Dictionary<string, int> auraDeltaMap = new Dictionary<string, int>();
+
+            foreach (KeyValuePair<string, int> teamScore in teamAuraScoreMap)
+            {
+                auraDeltaMap.Add(teamScore.Key, 0);
+            }
+
+            foreach (KeyValuePair<Tile, Dictionary<string, int>> auraCount in auraCountMap)
+            {
+                Tile tile = auraCount.Key;
+                Dictionary<string, int> currentAuraValues = auraCount.Value;
+                Dictionary<string, int> postAuraValues = postTerraformAuraCountMap[tile];
+
+                foreach (KeyValuePair<string, int> teamAuraCount in currentAuraValues)
+                {
+                    string teamName = teamAuraCount.Key;
+                    int currentTeamAuraValueForTile = teamAuraCount.Value;
+                    int postTeamAuraValueForTile = postAuraValues[teamName];
+                    int teamAuraDeltaForTile = postTeamAuraValueForTile - currentTeamAuraValueForTile;
+
+                    auraDeltaMap[teamName] += teamAuraDeltaForTile;
+                }
+            }
+
+            return auraDeltaMap;
         }
     }
 }

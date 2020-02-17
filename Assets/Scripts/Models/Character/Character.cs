@@ -57,6 +57,10 @@ namespace Tactics.Models
             {
                 Forma forma = formaTransform.gameObject.GetComponent<Forma>();
                 forma.teamName = team.teamName;
+                if (forma.name == "BasicSwamp")
+                {
+                    forma.active = true;
+                }
                 formaSet.formas.Add(forma);
             }
         }

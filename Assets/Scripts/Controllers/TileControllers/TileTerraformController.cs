@@ -39,7 +39,11 @@ namespace Tactics.Controllers
         {
             if (this.tileTerraformView.tile == tileEventData.tile)
             {
-                this.TerraformTile(tileEventData.terraType);
+                this.TerraformTile(
+                    tileEventData.terraType,
+                    tileEventData.teamName,
+                    tileEventData.auraAmount
+                );
             }
         }
 
@@ -68,12 +72,13 @@ namespace Tactics.Controllers
             this.tileTerraformView.SetPreviewTerraformAuraAmount(0);
         }
 
-        private void TerraformTile(string terraType)
+        private void TerraformTile(string terraType, string teamName, int auraAmount)
         {
             this.tileTerraformView.tile.SetTerraType(terraType);
             this.tileTerraformView.tile.SetSprite(
                 this.tileTerraformView.tile.GetTerra().GetCurrentSprite()
             );
+            this.tileTerraformView.tile.GetAuraMap().AddToTeamAura(teamName, auraAmount);
         }
 
         public void AddTeamAura(Team team)

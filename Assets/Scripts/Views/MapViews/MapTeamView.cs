@@ -52,6 +52,11 @@ namespace Tactics.Views
             this.teamScoreMap.Add(teamName, 0);
         }
 
+        public void AddTeamScore(string teamName, int score)
+        {
+            this.teamScoreMap[teamName] += score;
+        }
+
     }
 }
 

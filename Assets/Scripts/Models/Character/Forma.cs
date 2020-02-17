@@ -28,7 +28,9 @@ namespace Tactics.Models
     public class Forma : MonoBehaviour
     {
         public bool castable = false;
+        public bool active = false;
         public string teamName;
+        public string name;
 
         public virtual int GetAuraAmount()
         {

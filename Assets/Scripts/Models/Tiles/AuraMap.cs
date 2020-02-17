@@ -60,7 +60,7 @@ namespace Tactics.Models
 
         // this is the simple case if we don't have
         // to worry about taking from other team auras
-        public void AddToTeamAura(int auraAmount, string teamName)
+        public void AddToTeamAura(string teamName, int auraAmount)
         {
             int adjustedAuraAmount = this.GetAdjustedAuraAmount(auraAmount);
 

@@ -19,9 +19,9 @@ namespace Tactics.Views
         /*-------------------------------------------------
         *               Relationship Variables
         --------------------------------------------------*/
-        private string previewTerraformTerraType;
-        private int previewTerraformAuraAmount;
-        private string previewTerraformTeamName;
+        public string previewTerraformTerraType;
+        public int previewTerraformAuraAmount;
+        public string previewTerraformTeamName;
 
 
         /*-------------------------------------------------

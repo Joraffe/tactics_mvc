@@ -27,11 +27,6 @@ namespace Tactics.Controllers
         --------------------------------------------------*/
     private void UpdateTerraform(UIEventData uiEventData)
         {
-            // this.terraformUI.DestroyBeforeTerraNumbers();
-            // this.terraformUI.AddBeforeTerraNumber(terraCountMap);
-
-            // this.terraformUI.DestroyAfterTerraNumbers();
-            // this.terraformUI.AddAfterTerraNumber(postTerraformTerraCountMap);
             this.RaiseUpdateTerraResultsUI(
                 uiEventData.terraCountMap,
                 uiEventData.postTerraformTerraCountMap

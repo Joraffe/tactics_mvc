@@ -85,7 +85,11 @@ namespace Tactics.Controllers
         {
             if (this.map.currentSelectedCharacter && !this.map.currentSelectedForma)
             {
-                SelectMapForma(mapEventData.forma);
+                Forma selectedCharacterForma = this.map.currentSelectedCharacter.GetCharacterFormaSet().GetActiveForma();
+                if (selectedCharacterForma == mapEventData.forma)
+                {
+                    SelectMapForma(mapEventData.forma);
+                }
             }
         }
 
@@ -156,9 +160,15 @@ namespace Tactics.Controllers
         private void CommitTerraform(List<Tile> terraformingTiles, Dictionary<string, int> terraCountMap)
         {
             this.map.UpdateTerraCountMap(terraformingTiles);
+            this.map.UpdateTeamAuraScore(terraformingTiles);
             foreach (Tile terraformingTile in terraformingTiles)
             {
-                RaiseTerraformTileEvent(terraformingTile, terraformingTile.GetPreviewTerraformTerraType());
+                RaiseTerraformTileEvent(
+                    terraformingTile,
+                    terraformingTile.GetPreviewTerraformTerraType(),
+                    terraformingTile.GetPreviewTerraformTeamName(),
+                    terraformingTile.GetPreviewTerrformAuraAmount()
+                );
             }
             ResetMapForma();
         }
@@ -254,11 +264,13 @@ namespace Tactics.Controllers
             this.hideTerraformUI.Raise(uiEventData);
         }
 
-        private void RaiseTerraformTileEvent(Tile tile, string terraType)
+        private void RaiseTerraformTileEvent(Tile tile, string terraType, string teamName, int auraAmount)
         {
             TileEventData tileEventData = new TileEventData();
             tileEventData.tile = tile;
             tileEventData.terraType = terraType;
+            tileEventData.teamName = teamName;
+            tileEventData.auraAmount = auraAmount;
 
             this.terraformTile.Raise(tileEventData);
         }

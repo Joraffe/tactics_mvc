@@ -17,5 +17,7 @@ namespace Tactics.Events
         public string terraType;
         public int previewAuraAmount;
         public string previewAuraTeam;
+        public string teamName;
+        public int auraAmount;
     }
 }
