@@ -10,5 +10,7 @@ namespace Tactics.Events
         public Tile targetTile;
 
         public Path tilePath;
+        public Tile tile;
+        public Team team;
     }
 }

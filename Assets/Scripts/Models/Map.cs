@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Tactics.Views;
 using UnityEngine;
 
 
@@ -22,6 +23,12 @@ namespace Tactics.Models
         public List<Tile> enemyStartTiles = new List<Tile>();
         public SpriteRenderer spriteRenderer;
 
+        /*-------------------------------------------------
+        *                 Heirarchy
+        --------------------------------------------------*/
+        public GameObject mapTeamGameObject;
+        public GameObject mapTilesGameObject;
+
         public void Awake()
         {
             this.terraCountMap = new Dictionary<string, int>{
@@ -34,6 +41,46 @@ namespace Tactics.Models
                 // { TerraTypes.Industrial, 0 },
                 { "total", 0 }
             };
+            this.SetUpMapTiles();
+            this.SetUpMapTeamView();
+            this.SetUpCamera();
+        }
+
+        public MapTeamView GetMapTeamView()
+        {
+            return this.mapTeamGameObject.GetComponent<MapTeamView>();
+        }
+
+        public Team GetActiveTeam()
+        {
+            return this.GetMapTeamView().GetActiveTeam();
+        }
+
+        private void SetUpMapTiles()
+        {
+            foreach (Transform columnTransform in this.mapTilesGameObject.transform)
+            {
+                foreach (Transform tileTransform in columnTransform)
+                {
+                    GameObject tileGameObject = tileTransform.gameObject;
+                    Tile mapTile = tileGameObject.GetComponent<Tile>();
+                    this.tiles[mapTile.XPosition, mapTile.YPosition] = mapTile;
+                    this.AddTileTerraCount(mapTile.XPosition, mapTile.YPosition);
+                }
+            } 
+        }
+
+        private void SetUpMapTeamView()
+        {
+            MapTeamView mapTeamView = this.GetMapTeamView();
+            mapTeamView.SetMap(this);
+        }
+
+        private void SetUpCamera()
+        {
+            // float orthoSize = this.map.spriteRenderer.bounds.size.x * Screen.height / Screen.width * 0.5f;
+            float orthoSize = this.spriteRenderer.bounds.size.y * 0.5f;
+            Camera.main.orthographicSize = orthoSize;
         }
 
         /*-------------------------------------------------
@@ -82,7 +129,7 @@ namespace Tactics.Models
         public void AddTileTerraCount(int xPosition, int yPosition)
         {
             Tile tile = this.tiles[xPosition, yPosition];
-            string terraType = tile.terra.type;
+            string terraType = tile.GetTerra().type;
             this.terraCountMap[terraType] += 1;
             this.terraCountMap["total"] += 1;
         }
@@ -94,10 +141,29 @@ namespace Tactics.Models
                 this.terraCountMap
             );
         }
+        public void UpdateTeamAuraScore(List<Tile> terraformingTiles)
+        {
+            Dictionary<Tile, Dictionary<string, int>> auraCountMap = this.GetCurrentAuraCountMap(terraformingTiles);
+            Dictionary<Tile, Dictionary<string, int>> postTerraformTerraCountMap = this.GetPostTerraformAuraCountMap(terraformingTiles);
+            Dictionary<string, int> teamAuraScoreMap = this.GetMapTeamView().GetTeamScoreMap();
+            Dictionary<string, int> auraDeltaMap = this.GetAuraDeltaMap(teamAuraScoreMap, auraCountMap, postTerraformTerraCountMap);
+
+            foreach (KeyValuePair<string, int> teamAuraDelta in auraDeltaMap)
+            {
+                string teamName = teamAuraDelta.Key;
+                int score = teamAuraDelta.Value;
+                this.GetMapTeamView().AddTeamScore(teamName, score);
+            }
+        }
 
         /*-------------------------------------------------
         *                     Getters
         --------------------------------------------------*/
+        public Tile GetTile(int XPosition, int YPosition)
+        {
+            return this.tiles[XPosition, YPosition];
+        }
+
         public Character GetCurrentSelectedCharacter()
         {
             return this.currentSelectedCharacter;
@@ -249,18 +315,83 @@ namespace Tactics.Models
         public Dictionary<string, int> GetPostTerraformTerraCountMap(List<Tile> terraformingTiles, Dictionary<string, int> terraCountMap)
         {
 
-            Dictionary<string, int> postTerraformTerraCountMap = new Dictionary<string, int>(terraCountMap);
+            Dictionary<string, int> postTerraformTerraCountMap = new Dictionary<string, int>();
+            foreach (KeyValuePair<string, int> terraCount in terraCountMap)
+            {
+                if (terraCount.Key != "total")
+                {
+                    postTerraformTerraCountMap.Add(terraCount.Key, terraCount.Value);
+                }
+            }
 
             foreach (Tile terraformingTile in terraformingTiles)
             {
-                string currentTerraType = terraformingTile.terra.type;
-                string nextTerraType = terraformingTile.previewTerraformType;
+                string currentTerraType = terraformingTile.GetTerra().type;
+                string nextTerraType = terraformingTile.GetPreviewTerraformTerraType();
 
                 postTerraformTerraCountMap[currentTerraType] -= 1;
                 postTerraformTerraCountMap[nextTerraType] += 1;
             }
 
             return postTerraformTerraCountMap;
+        }
+
+        public Dictionary<Tile, Dictionary<string, int>> GetCurrentAuraCountMap(List<Tile> terraformingTiles)
+        {
+            Dictionary<Tile, Dictionary<string, int>> auraCountMap = new Dictionary<Tile, Dictionary<string, int>>();
+            foreach (Tile terraformingTile in terraformingTiles)
+            {
+                TileTerraformView tileTerraformView = terraformingTile.GetTileTerraformView();
+                AuraMap tileAuraMap = tileTerraformView.auraMap;
+                auraCountMap.Add(terraformingTile, tileAuraMap.GetCurrentAuraCount());
+            }
+
+            return auraCountMap;
+        }
+
+        public Dictionary<Tile, Dictionary<string, int>> GetPostTerraformAuraCountMap(List<Tile> terraformingTiles)
+        {
+            Dictionary<Tile, Dictionary<string, int>> auraCountMap = new Dictionary<Tile, Dictionary<string, int>>();
+            foreach (Tile terraformingTile in terraformingTiles)
+            {
+                TileTerraformView tileTerraformView = terraformingTile.GetTileTerraformView();
+                AuraMap tileAuraMap = tileTerraformView.auraMap;
+                string previewTeam = tileTerraformView.GetPreviewTerraformTeamName();
+                int previewAura = tileTerraformView.GetPreviewTerraformAuraAmount();
+
+                auraCountMap.Add(terraformingTile, tileAuraMap.GetPreviewAuraCount(previewTeam, previewAura));
+            }
+
+            return auraCountMap;
+        }
+
+        public Dictionary<string, int> GetAuraDeltaMap(Dictionary<string, int> teamAuraScoreMap, Dictionary<Tile, Dictionary<string, int>> auraCountMap, Dictionary<Tile, Dictionary<string, int>> postTerraformAuraCountMap)
+        {
+            Dictionary<string, int> auraDeltaMap = new Dictionary<string, int>();
+
+            foreach (KeyValuePair<string, int> teamScore in teamAuraScoreMap)
+            {
+                auraDeltaMap.Add(teamScore.Key, 0);
+            }
+
+            foreach (KeyValuePair<Tile, Dictionary<string, int>> auraCount in auraCountMap)
+            {
+                Tile tile = auraCount.Key;
+                Dictionary<string, int> currentAuraValues = auraCount.Value;
+                Dictionary<string, int> postAuraValues = postTerraformAuraCountMap[tile];
+
+                foreach (KeyValuePair<string, int> teamAuraCount in currentAuraValues)
+                {
+                    string teamName = teamAuraCount.Key;
+                    int currentTeamAuraValueForTile = teamAuraCount.Value;
+                    int postTeamAuraValueForTile = postAuraValues[teamName];
+                    int teamAuraDeltaForTile = postTeamAuraValueForTile - currentTeamAuraValueForTile;
+
+                    auraDeltaMap[teamName] += teamAuraDeltaForTile;
+                }
+            }
+
+            return auraDeltaMap;
         }
     }
 }

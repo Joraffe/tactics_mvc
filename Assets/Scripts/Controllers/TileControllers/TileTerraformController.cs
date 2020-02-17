@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Tactics.Events;
 using Tactics.Models;
+using Tactics.Views;
 using UnityEngine;
 
 
@@ -9,35 +10,48 @@ namespace Tactics.Controllers
 {
     public class TileTerraformController : MonoBehaviour
     {
-        public Tile tile;
+        public TileTerraformView tileTerraformView;
 
         /*-------------------------------------------------
         *              Event Handlers
         --------------------------------------------------*/
-        public void OnSetPreviewTerraformType(TileEventData tileEventData)
+        public void OnPreviewTerraform(TileEventData tileEventData)
         {
-            if (this.tile == tileEventData.tile)
+            if (this.tileTerraformView.tile == tileEventData.tile)
             {
-                SetPreviewTerraformTypeForTile(
-                    tileEventData.tile,
-                    tileEventData.previewTerraformType
+                this.PreviewTerrform(
+                    tileEventData.previewTerraformType,
+                    tileEventData.previewAuraAmount,
+                    tileEventData.previewAuraTeam
                 );
             }
         }
 
-        public void OnClearPreviewTerraformType(TileEventData tileEventData)
+        public void OnClearTerraformPreview(TileEventData tileEventData)
         {
-            if (this.tile == tileEventData.tile)
+            if (this.tileTerraformView.tile == tileEventData.tile)
             {
-                ClearPreviewTerraformTypeForTile(tileEventData.tile);
+                this.ClearTerraformPreview();
             }
         }
 
         public void OnTerraformTile(TileEventData tileEventData)
         {
-            if (this.tile == tileEventData.tile)
+            if (this.tileTerraformView.tile == tileEventData.tile)
             {
-                TerraformTile(tileEventData.tile, tileEventData.terraType);
+                this.TerraformTile(
+                    tileEventData.terraType,
+                    tileEventData.teamName,
+                    tileEventData.auraAmount
+                );
+            }
+        }
+
+        public void OnAddTeamAura(TileEventData tileEventData)
+        {
+            if (this.tileTerraformView.tile == tileEventData.tile)
+            {
+                this.AddTeamAura(tileEventData.team);
             }
         }
 
@@ -45,20 +59,31 @@ namespace Tactics.Controllers
         /*-------------------------------------------------
         *                 Helpers
         --------------------------------------------------*/
-        private void SetPreviewTerraformTypeForTile(Tile tile, string previewTerraformType)
+        private void PreviewTerrform(string terraType, int auraAmount, string teamName)
         {
-            tile.SetPreviewTerraformType(previewTerraformType);
+            this.tileTerraformView.SetPreviewTerraformTerraType(terraType);
+            this.tileTerraformView.SetPreviewTerraformAuraAmount(auraAmount);
+            this.tileTerraformView.SetPreviewTerraformTeamName(teamName);
         }
 
-        private void ClearPreviewTerraformTypeForTile(Tile tile)
+        private void ClearTerraformPreview()
         {
-            tile.ClearPreviewTerraformType();
+            this.tileTerraformView.SetPreviewTerraformTerraType("");
+            this.tileTerraformView.SetPreviewTerraformAuraAmount(0);
         }
 
-        private void TerraformTile(Tile tile, string terraType)
+        private void TerraformTile(string terraType, string teamName, int auraAmount)
         {
-            tile.SetTerraType(terraType);
-            tile.SetSprite(tile.GetTerra().GetCurrentSprite());
+            this.tileTerraformView.tile.SetTerraType(terraType);
+            this.tileTerraformView.tile.SetSprite(
+                this.tileTerraformView.tile.GetTerra().GetCurrentSprite()
+            );
+            this.tileTerraformView.tile.GetAuraMap().AddToTeamAura(teamName, auraAmount);
+        }
+
+        public void AddTeamAura(Team team)
+        {
+            this.tileTerraformView.tile.GetAuraMap().AddTeamToMap(team);
         }
 
 

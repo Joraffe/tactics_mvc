@@ -12,18 +12,35 @@ namespace Tactics.Models
         public int relativeX;
         public int relativeY;
         public string terraType;
+        public string teamName;
+        public int auraAmount;
 
-        public FormaTile(int relativeX, int relativeY, string terraType)
+        public FormaTile(int relativeX, int relativeY, string terraType, string teamName, int auraAmount)
         {
             this.relativeX = relativeX;
             this.relativeY = relativeY;
             this.terraType = terraType;
+            this.teamName = teamName;
+            this.auraAmount = auraAmount;
         }
     }
 
     public class Forma : MonoBehaviour
     {
         public bool castable = false;
+        public bool active = false;
+        public string teamName;
+        public string name;
+
+        public virtual int GetAuraAmount()
+        {
+             throw new NotImplementedException();
+        }
+
+        public virtual string GetTerraType()
+        {
+            throw new NotImplementedException();
+        }
 
         public virtual List<FormaTile> GetUpFormaTiles()
         {
@@ -54,6 +71,5 @@ namespace Tactics.Models
         {
             this.castable = false;
         }
-
     }
 }

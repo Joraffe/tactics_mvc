@@ -13,19 +13,27 @@ namespace Tactics.Models
 
     public class Battle : MonoBehaviour
     {
-        public Map map;
-
-        public Team playerTeam;
-
-        public Team enemyTeam;
-
-        public string activeTeam;
-
         public string phase;
 
-        public void Start()
+        /*-------------------------------------------------
+        *                 Heirarchy
+        --------------------------------------------------*/
+        public GameObject mapGameObject;
+        public GameObject teamsGameObject;
+
+        public Teams GetTeams()
         {
-            this.SetPrepPhase();
+            return this.teamsGameObject.GetComponent<Teams>();
+        }
+
+        public Team GetTeam(string teamName)
+        {
+            return this.GetTeams().teamMap[teamName];
+        }
+
+        public Map GetMap()
+        {
+            return this.mapGameObject.GetComponent<Map>();
         }
 
         /*-------------------------------------------------
@@ -39,14 +47,6 @@ namespace Tactics.Models
         public void SetEngagePhase()
         {
             this.phase = PhaseTypes.Engage;
-        }
-
-        /*-------------------------------------------------
-        *                     Getters
-        --------------------------------------------------*/
-        public Team GetEnemyTeam()
-        {
-            return this.enemyTeam;
         }
     }
 }

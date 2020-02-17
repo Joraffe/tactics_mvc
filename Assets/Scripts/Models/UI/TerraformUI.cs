@@ -9,9 +9,11 @@ namespace Tactics.Models
 {
     public class TerraformUI : MonoBehaviour
     {
+        // 1.0 Terraform UI
         public GameObject beforeNumbersUIGameObject;
         public GameObject afterNumbersUIGameObject;
         public GameObject terraNumberPrefab;
+
 
         public void AddBeforeTerraNumber(Dictionary<string, int> terraCountMap)
         {
@@ -56,6 +58,8 @@ namespace Tactics.Models
                 Destroy(transform.gameObject);
             }
         }
+
+         
     }
 
 }

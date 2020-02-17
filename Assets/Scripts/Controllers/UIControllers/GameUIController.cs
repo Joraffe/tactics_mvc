@@ -44,10 +44,7 @@ namespace Tactics.Controllers
         public void OnShowTerraformUI(UIEventData uiEventData)
         {
             ShowTerraformUI();
-            UpdateTerraformUI(
-                uiEventData.terraCountMap,
-                uiEventData.postTerraformTerraCountMap
-            );
+            UpdateTerraformUI(uiEventData);
         }
 
         public void OnHideTerraformUI(UIEventData uiEventData)
@@ -123,9 +120,9 @@ namespace Tactics.Controllers
             }
         }
 
-        private void UpdateTerraformUI(Dictionary<string, int> terraCountMap, Dictionary<string, int> postTerraformTerraCountMap)
+        private void UpdateTerraformUI(UIEventData uiEventData)
         {
-            RaiseUpdateTerraformUIEvent(terraCountMap, postTerraformTerraCountMap);
+            RaiseUpdateTerraformUIEvent(uiEventData);
         }
 
         /*-------------------------------------------------
@@ -147,12 +144,8 @@ namespace Tactics.Controllers
             this.updateTerraUI.Raise(uiEventData);
         }
 
-        private void RaiseUpdateTerraformUIEvent(Dictionary<string, int> terraCountMap, Dictionary<string, int> postTerraformTerraCountMap)
+        private void RaiseUpdateTerraformUIEvent(UIEventData uiEventData)
         {
-            UIEventData uiEventData = new UIEventData();
-            uiEventData.terraCountMap = terraCountMap;
-            uiEventData.postTerraformTerraCountMap = postTerraformTerraCountMap;
-
             this.updateTerraformUI.Raise(uiEventData);
         }
     }

@@ -12,6 +12,9 @@ namespace Tactics.Models
         public int movementRange = 2;
         public int attackRange = 1;
 
+        public int startXPosition;
+        public int startYPosition;
+
 
         // Movement related
         public bool isMoving;
@@ -36,6 +39,42 @@ namespace Tactics.Models
         public Transform characterTransform;
         public Material greyscaleMaterial;
         public Material defaultMaterial;
+
+        /*-------------------------------------------------
+        *                 Heirarchy
+        --------------------------------------------------*/
+        public GameObject formaSetGameObject;
+
+        public FormaSet GetCharacterFormaSet()
+        {
+            return this.formaSetGameObject.GetComponent<FormaSet>();
+        }
+
+        public void SetUpCharacterFormaSet(Team team)
+        {
+            FormaSet formaSet = this.GetCharacterFormaSet();
+            foreach (Transform formaTransform in this.formaSetGameObject.transform)
+            {
+                Forma forma = formaTransform.gameObject.GetComponent<Forma>();
+                forma.teamName = team.teamName;
+                if (forma.name == "BasicSwamp")
+                {
+                    forma.active = true;
+                }
+                formaSet.formas.Add(forma);
+            }
+        }
+
+        /*-------------------------------------------------
+        *                     Initalization
+        --------------------------------------------------*/
+        public void SetUp(Team team, Tile tile)
+        {
+            this.team = team;
+            this.originTile = tile;
+            this.currentTile = tile;
+            this.SetUpCharacterFormaSet(team);
+        }
 
         /*-------------------------------------------------
         *                     Setters
@@ -149,12 +188,12 @@ namespace Tactics.Models
 
         public bool isOpposition(Character otherCharacter)
         {
-            return this.team.faction != otherCharacter.team.faction;
+            return this.team.teamName != otherCharacter.team.teamName;
         }
 
         public bool isAlly(Character otherCharacter)
         {
-            return this.team.faction == otherCharacter.team.faction;
+            return this.team.teamName == otherCharacter.team.teamName;
         }
 
         public bool HasReachedTargetPosition(Vector3 position)

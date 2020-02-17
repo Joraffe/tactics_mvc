@@ -4,6 +4,7 @@ using System.Linq;
 using Tactics.Algorithms;
 using Tactics.Models;
 using Tactics.Events;
+using Tactics.Views;
 using UnityEngine;
 
 
@@ -37,6 +38,9 @@ namespace Tactics.Controllers
         public MapEvent resetForma;
         public MapEvent previewTerraform;
         public MapEvent commitTerraform;
+
+        // Map Heirarchy SetUp Events
+        public MapEvent setUpMapTeam;
 
         public Map map;
 
@@ -163,7 +167,7 @@ namespace Tactics.Controllers
 
         public void OnShowPlayerDangerZone(MapEventData mapEventData)
         {
-            List<Character> enemies = mapEventData.team.members;
+            List<Character> enemies = mapEventData.team.GetMembers();
 
             ShowPlayerDangerZoneForEnemies(enemies);
         }

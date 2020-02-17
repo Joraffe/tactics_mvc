@@ -117,13 +117,6 @@ MonoBehaviour:
   imageGameObject: {fileID: 6388930035813187545}
   nameGameObject: {fileID: 6388930035613804991}
   currentTerraType: 
-  neutralTerra: {fileID: 21300000, guid: 05f1d06f1acf6457f917fbefd9b800df, type: 3}
-  swampTerra: {fileID: 21300000, guid: d0577dfd1837b45b2bfb8e1002f36ea6, type: 3}
-  desertTerra: {fileID: 21300000, guid: e9d100841b8324ab4b34273ef09f6852, type: 3}
-  forestTerra: {fileID: 21300000, guid: db0ff8344aacf4477bca9179a547563c, type: 3}
-  volcanicTerra: {fileID: 21300000, guid: 1331b3001c6e2481ca30d289642bceba, type: 3}
-  oceanicTerra: {fileID: 21300000, guid: db5a64f9da83a461eaa0ac779d6122ff, type: 3}
-  industrialTerra: {fileID: 21300000, guid: e5db0149ff00c419ca3deebfa2ae1d9b, type: 3}
 --- !u!114 &4113925579154978151
 MonoBehaviour:
   m_ObjectHideFlags: 0
