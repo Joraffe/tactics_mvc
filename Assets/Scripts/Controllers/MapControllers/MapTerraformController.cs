@@ -85,11 +85,7 @@ namespace Tactics.Controllers
         {
             if (this.map.currentSelectedCharacter && !this.map.currentSelectedForma)
             {
-                Forma selectedCharacterForma = this.map.currentSelectedCharacter.GetCharacterFormaSet().GetActiveForma();
-                if (selectedCharacterForma == mapEventData.forma)
-                {
-                    SelectMapForma(mapEventData.forma);
-                }
+                SelectMapForma(mapEventData.forma);
             }
         }
 

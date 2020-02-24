@@ -27,10 +27,11 @@ namespace Tactics.Models
 
     public class Forma : MonoBehaviour
     {
-        public bool castable = false;
-        public bool active = false;
+        public bool previewable = false;
         public string teamName;
-        public string name;
+        public string formaName;
+
+        public KeyCode keyCode;
 
         public virtual int GetAuraAmount()
         {
@@ -61,15 +62,14 @@ namespace Tactics.Models
         {
             throw new NotImplementedException();
         }
-
-        public void SetCastable()
+        public void SetPreviewAble()
         {
-            this.castable = true;
+            this.previewable = true;
         }
 
-        public void ResetCastable()
+        public void ResetPreviewable()
         {
-            this.castable = false;
+            this.previewable = false;
         }
     }
 }

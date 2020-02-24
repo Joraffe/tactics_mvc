@@ -97,6 +97,14 @@ namespace Tactics.Controllers
             }
         }
 
+        public void OnResetCharacter(CharacterEventData characterEventData)
+        {
+            if (this.character == characterEventData.character)
+            {
+                characterEventData.character.ResetActed();
+                characterEventData.character.SetSpriteMaterialDefault();
+            }
+        }
 
         /*-------------------------------------------------
         *                     Helpers

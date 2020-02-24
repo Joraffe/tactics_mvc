@@ -10,6 +10,7 @@ namespace Tactics.Models
         public GameObject characterUIGameObject;
         public GameObject terraUIGameObject;
         public GameObject terraformUIGameObject;
+        public GameObject teamTurnUIGameObject;
 
         public CharacterUI GetCharacterUI()
         {
@@ -25,6 +26,12 @@ namespace Tactics.Models
         {
             return this.terraformUIGameObject.GetComponent<TerraformUI>();
         }
+
+        public TeamTurnUI GetTeamTurnUI()
+        {
+            return this.teamTurnUIGameObject.GetComponent<TeamTurnUI>();
+        }
+
     }
 
 }

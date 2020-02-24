@@ -14,6 +14,8 @@ namespace Tactics.Controllers
         public UIEvent updateTerraformUI;
         public GameUI gameUI;
 
+        public Animation slideInAnimation;
+
 
 
         /*-------------------------------------------------
@@ -50,6 +52,25 @@ namespace Tactics.Controllers
         public void OnHideTerraformUI(UIEventData uiEventData)
         {
             HideTerraformUI();
+        }
+
+        public void OnShowTeamTurnUI(UIEventData uiEventData)
+        {
+            TeamTurnUI teamTurnUI = this.gameUI.GetTeamTurnUI();
+            
+            switch (teamTurnUI.currentPosition)
+            {
+                case "left":
+                    StartCoroutine(teamTurnUI.MoveLeftToRight());
+                    teamTurnUI.SetCurrentPosition("right");
+                    break;
+                case "right":
+                    StartCoroutine(teamTurnUI.MoveRightToLeft());
+                    teamTurnUI.SetCurrentPosition("left");
+                    break;
+                default:
+                  break;
+            }
         }
 
         /*-------------------------------------------------

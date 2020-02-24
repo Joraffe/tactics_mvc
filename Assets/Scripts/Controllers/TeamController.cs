@@ -8,6 +8,7 @@ namespace Tactics.Controllers
     public class TeamController : MonoBehaviour
     {
         public CharacterEvent completeCharacterAction;
+        public BattleEvent completeTeamTurn;
         public Team team;
 
         /*-------------------------------------------------
@@ -17,7 +18,11 @@ namespace Tactics.Controllers
         {
             if (this.team == teamEventData.team)
             {
-                CompleteTeamMemberAction(teamEventData.character);
+                this.CompleteTeamMemberAction(teamEventData.character);
+                if (this.team.HaveAllMembersActed())
+                {
+                    this.CompleteTeamTurn(this.team);
+                }
             }
         }
 
@@ -27,7 +32,12 @@ namespace Tactics.Controllers
         --------------------------------------------------*/
         private void CompleteTeamMemberAction(Character character)
         {
-            RaiseCompleteCharacterActionCharacterEvent(character);
+            this.RaiseCompleteCharacterActionCharacterEvent(character);
+        }
+
+        private void CompleteTeamTurn(Team team)
+        {
+            this.RaiseCompleteTeamTurnBattleEvent(this.team);
         }
 
 
@@ -40,6 +50,14 @@ namespace Tactics.Controllers
             characterEventData.character = character;
 
             this.completeCharacterAction.Raise(characterEventData);
+        }
+
+        private void RaiseCompleteTeamTurnBattleEvent(Team team)
+        {
+            BattleEventData battleEventData = new BattleEventData();
+            battleEventData.team = team;
+
+            this.completeTeamTurn.Raise(battleEventData);
         }
     }
 }

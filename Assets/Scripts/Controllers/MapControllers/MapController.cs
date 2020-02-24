@@ -25,6 +25,8 @@ namespace Tactics.Controllers
         public CharacterEvent previewCharacterCombat;
         public CharacterEvent clearCharacterCombat;
         public CharacterEvent undoCharacterMovement;
+        public CharacterEvent setPreviewableForma;
+        public CharacterEvent clearPreviewableForma;
 
         public UIEvent showCharacterUI;
         public UIEvent hideCharacterUI;
@@ -49,6 +51,12 @@ namespace Tactics.Controllers
         --------------------------------------------------*/
         public void OnCharacterClicked(MapEventData mapEventData)
         {
+            // If we're clicking a character on the opposite acive team
+            if (mapEventData.character.team != this.map.GetMapTeamView().GetActiveTeam())
+            {
+                return;
+            }
+
             // If we have no currently selected character on the map, show the available actions
             if (!this.map.currentSelectedCharacter)
             {
@@ -58,6 +66,7 @@ namespace Tactics.Controllers
                 ShowCharacterUI(mapEventData.character);
                 this.map.SetCurrentSelectedCharacter(mapEventData.character);
                 FocusCameraOnCharacter(mapEventData.character);
+                SetPreviewableCharacterForma(mapEventData.character);
             }
             // if we click the same character and they're previewing and they don't have a forma selected...
             else if (this.map.currentSelectedCharacter == mapEventData.character &&
@@ -191,10 +200,8 @@ namespace Tactics.Controllers
 
         private void CompleteCharacterTurn(Character character)
         {
-            this.map.ClearCurrentSelectedCharacter();
-            ClearAllTiles();
             CompleteTeamMemberAction(character);
-            HideCharacterUI();
+            ResetMap();
         }
         private void ClearAllTiles()
         {
@@ -481,6 +488,7 @@ namespace Tactics.Controllers
         private void ResetMapForma()
         {
             RaiseResetFormaMapEvent();
+            RaiseClearPreviewableFormaCharacterEvent();
         }
 
         private void PreviewTerraform(List<Tile> terraformingTiles, Dictionary<string, int> terraCountMap)
@@ -491,6 +499,11 @@ namespace Tactics.Controllers
         private void CommitTerraform(List<Tile> terraformingTiles, Dictionary<string, int> terraCountMap)
         {
             RaiseCommitTerraformMapEvent(terraformingTiles, terraCountMap);
+        }
+
+        private void SetPreviewableCharacterForma(Character character)
+        {
+            RaiseSetPreviewableFormaCharacterEvent(character);
         }
 
 
@@ -654,6 +667,21 @@ namespace Tactics.Controllers
             mapEventData.terraCountMap = terraCountMap;
 
             this.commitTerraform.Raise(mapEventData);
+        }
+
+        private void RaiseSetPreviewableFormaCharacterEvent(Character character)
+        {
+            CharacterEventData characterEventData = new CharacterEventData();
+            characterEventData.character = character;
+
+            this.setPreviewableForma.Raise(characterEventData);
+        }
+
+        private void RaiseClearPreviewableFormaCharacterEvent()
+        {
+            CharacterEventData characterEventData = new CharacterEventData();
+
+            this.clearPreviewableForma.Raise(characterEventData);
         }
     }
 }

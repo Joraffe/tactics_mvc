@@ -19,15 +19,18 @@ namespace Tactics.Controllers
             HandleFormaCancelInput();
         }
 
-        // Start is called before the first frame update
         /*-------------------------------------------------
         *                  Event Handlers
         --------------------------------------------------*/
+        // Internal for Update
         private void HandleFormaCastableInput()
         {
             if (Input.GetKey(KeyCode.Z))
             {
-                SelectFormaForMap(this.forma);
+                if (this.forma.previewable && this.forma.keyCode == KeyCode.Z)
+                {
+                    SelectFormaForMap(this.forma);
+                }
             }
         }
 
@@ -38,6 +41,7 @@ namespace Tactics.Controllers
                 ResetFormaForMap();
             }
         }
+
 
         /*-------------------------------------------------
         *                     Helpers

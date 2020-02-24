@@ -18,10 +18,24 @@ namespace Tactics.Controllers
 
         public UIEvent setAuraInfoTeamName;
         public UIEvent hideTerraformUI;
+        public UIEvent updateTeamTurnUI;
+        public UIEvent showTeamTurnUI;
 
         public CharacterEvent setUpCharacter;
+
+        public CharacterEvent resetCharacter;
         public TileEvent occupyTile;
         public Battle battle;
+
+        /*-------------------------------------------------
+        *                 Heirarchy
+        --------------------------------------------------*/
+        public GameObject battleTeamsGameObject;
+
+        public Teams GetTeams()
+        {
+            return this.battleTeamsGameObject.GetComponent<Teams>();
+        }
 
         /*-------------------------------------------------
         *                 Initialization
@@ -44,7 +58,10 @@ namespace Tactics.Controllers
 
             this.SetUpTeam(cakebin, map);
             this.SetUpTeam(enemies, map);
+
             this.RaiseSetActiveTeamMapEvent(cakebin);
+            this.EnqueueNextTeam(enemies);
+
             this.RaiseAddTeamAuraMapEvent(cakebin);
             this.RaiseAddTeamAuraMapEvent(enemies);
             this.RaiseSetAuraInfoTeamNameUIEvent(cakebin);
@@ -57,8 +74,8 @@ namespace Tactics.Controllers
             foreach (Character member in team.GetMembers())
             {
                 Tile startTile = map.GetTile(member.startXPosition, member.startYPosition);
-                RaiseSetUpCharacterEvent(member, team, startTile);
-                RaiseOccupyTileEvent(member, startTile);
+                this.RaiseSetUpCharacterEvent(member, team, startTile);
+                this.RaiseOccupyTileEvent(member, startTile);
             }
         }
 
@@ -67,22 +84,31 @@ namespace Tactics.Controllers
         --------------------------------------------------*/
         public void OnShowBattleDangerZone(BattleEventData battleEventData)
         {
-            ShowMapDangerZoneForPlayer();
+            this.ShowMapDangerZoneForPlayer();
         }
 
         public void OnHideBattleDangerZone(BattleEventData battleEventData)
         {
-            HideMapDangerZoneForPlayer();
+            this.HideMapDangerZoneForPlayer();
         }
 
         public void OnShowBattleArrangeTiles(BattleEventData battleEventData)
         {
-            ShowMapArrangeTiles();
+            this.ShowMapArrangeTiles();
         }
 
         public void OnHideBattleArrangeTiles(BattleEventData battleEventData)
         {
-            HideMapArrangeTiles();
+            this.HideMapArrangeTiles();
+        }
+
+        public void OnCompleteTeamTurn(BattleEventData battleEventData)
+        {
+            Team nextTeam = this.GetNextTeam();
+            this.ShowTeamTurnUI(nextTeam);
+            this.RaiseSetActiveTeamMapEvent(nextTeam);
+            this.ResetTeamMembers(battleEventData.team);
+            this.EnqueueNextTeam(battleEventData.team);
         }
 
         /*-------------------------------------------------
@@ -91,22 +117,46 @@ namespace Tactics.Controllers
 
         private void ShowMapArrangeTiles()
         {
-            RaiseShowPlayerArrangeTilesMapEvent();
+            this.RaiseShowPlayerArrangeTilesMapEvent();
         }
 
         private void HideMapArrangeTiles()
         {
-            RaiseHidePlayerArrangeTilesMapEvent();
+            this.RaiseHidePlayerArrangeTilesMapEvent();
         }
 
         private void ShowMapDangerZoneForPlayer()
         {
-            RaiseShowDangerZoneMapEvent();
+            this.RaiseShowDangerZoneMapEvent();
         }
 
         private void HideMapDangerZoneForPlayer()
         {
-            RaiseHideDangerZoneMapEvent();
+            this.RaiseHideDangerZoneMapEvent();
+        }
+
+        private void ShowTeamTurnUI(Team team)
+        {
+            this.RaiseUpdateTeamTurnUIEvent(team);
+            this.RaiseShowTeamTurnUIEvent(team);
+        }
+
+        private Team GetNextTeam()
+        {
+            return this.GetTeams().DequeueNextTeamTurn();
+        }
+
+        private void EnqueueNextTeam(Team team)
+        {
+            this.GetTeams().EnqueueNextTeamTurn(team);
+        }
+
+        private void ResetTeamMembers(Team team)
+        {
+            foreach (Character member in team.GetMembers())
+            {
+                this.RaiseResetTeamMemberCharacterEvent(member);
+            }
         }
 
 
@@ -190,6 +240,30 @@ namespace Tactics.Controllers
             UIEventData uiEventData = new UIEventData();
 
             this.hideTerraformUI.Raise(uiEventData);
+        }
+
+        private void RaiseResetTeamMemberCharacterEvent(Character character)
+        {
+            CharacterEventData characterEventData = new CharacterEventData();
+            characterEventData.character = character;
+
+            this.resetCharacter.Raise(characterEventData);
+        }
+
+        private void RaiseUpdateTeamTurnUIEvent(Team team)
+        {
+            UIEventData uiEventData = new UIEventData();
+            uiEventData.team = team;
+
+            this.updateTeamTurnUI.Raise(uiEventData);
+        }
+
+        private void RaiseShowTeamTurnUIEvent(Team team)
+        {
+            UIEventData uiEventData = new UIEventData();
+            uiEventData.team = team;
+
+            this.showTeamTurnUI.Raise(uiEventData);
         }
     }
 }

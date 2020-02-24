@@ -43,25 +43,30 @@ namespace Tactics.Models
         /*-------------------------------------------------
         *                 Heirarchy
         --------------------------------------------------*/
-        public GameObject formaSetGameObject;
+        public GameObject characterFormaSetGameObject;
+
+        public void Awake()
+        {
+            FormaSet characterFormaSet = this.GetCharacterFormaSet();
+            characterFormaSet.character = this;
+        }
 
         public FormaSet GetCharacterFormaSet()
         {
-            return this.formaSetGameObject.GetComponent<FormaSet>();
+            return this.characterFormaSetGameObject.GetComponent<FormaSet>();
         }
 
         public void SetUpCharacterFormaSet(Team team)
         {
             FormaSet formaSet = this.GetCharacterFormaSet();
-            foreach (Transform formaTransform in this.formaSetGameObject.transform)
+            foreach (Transform formaTransform in this.characterFormaSetGameObject.transform)
             {
                 Forma forma = formaTransform.gameObject.GetComponent<Forma>();
                 forma.teamName = team.teamName;
-                if (forma.name == "BasicSwamp")
+                if (forma.formaName == "BasicSwamp")
                 {
-                    forma.active = true;
+                    formaSet.formaKeyBindingMap.Add(forma.keyCode, forma);
                 }
-                formaSet.formas.Add(forma);
             }
         }
 

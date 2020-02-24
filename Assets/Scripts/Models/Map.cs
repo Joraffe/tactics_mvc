@@ -79,7 +79,7 @@ namespace Tactics.Models
         private void SetUpCamera()
         {
             // float orthoSize = this.map.spriteRenderer.bounds.size.x * Screen.height / Screen.width * 0.5f;
-            float orthoSize = this.spriteRenderer.bounds.size.y * 0.5f;
+            float orthoSize = this.spriteRenderer.bounds.size.y * 0.75f;
             Camera.main.orthographicSize = orthoSize;
         }
 
